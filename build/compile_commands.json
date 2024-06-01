@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/michal/QT_Apps/consoleOgienWoda/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -I/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/consoleOgienWoda.dir/consoleOgienWoda_autogen/mocs_compilation.cpp.o -c /home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/mocs_compilation.cpp",
+  "file": "/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/consoleOgienWoda.dir/consoleOgienWoda_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/michal/QT_Apps/consoleOgienWoda/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -I/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/consoleOgienWoda.dir/main.cpp.o -c /home/michal/QT_Apps/consoleOgienWoda/main.cpp",
+  "file": "/home/michal/QT_Apps/consoleOgienWoda/main.cpp",
+  "output": "CMakeFiles/consoleOgienWoda.dir/main.cpp.o"
+},
+{
+  "directory": "/home/michal/QT_Apps/consoleOgienWoda/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -I/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/consoleOgienWoda.dir/player.cpp.o -c /home/michal/QT_Apps/consoleOgienWoda/player.cpp",
+  "file": "/home/michal/QT_Apps/consoleOgienWoda/player.cpp",
+  "output": "CMakeFiles/consoleOgienWoda.dir/player.cpp.o"
+},
+{
+  "directory": "/home/michal/QT_Apps/consoleOgienWoda/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -I/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/consoleOgienWoda.dir/level.cpp.o -c /home/michal/QT_Apps/consoleOgienWoda/level.cpp",
+  "file": "/home/michal/QT_Apps/consoleOgienWoda/level.cpp",
+  "output": "CMakeFiles/consoleOgienWoda.dir/level.cpp.o"
+},
+{
+  "directory": "/home/michal/QT_Apps/consoleOgienWoda/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -I/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/consoleOgienWoda.dir/game.cpp.o -c /home/michal/QT_Apps/consoleOgienWoda/game.cpp",
+  "file": "/home/michal/QT_Apps/consoleOgienWoda/game.cpp",
+  "output": "CMakeFiles/consoleOgienWoda.dir/game.cpp.o"
+},
+{
+  "directory": "/home/michal/QT_Apps/consoleOgienWoda/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -I/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/consoleOgienWoda.dir/fireplayer.cpp.o -c /home/michal/QT_Apps/consoleOgienWoda/fireplayer.cpp",
+  "file": "/home/michal/QT_Apps/consoleOgienWoda/fireplayer.cpp",
+  "output": "CMakeFiles/consoleOgienWoda.dir/fireplayer.cpp.o"
+},
+{
+  "directory": "/home/michal/QT_Apps/consoleOgienWoda/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -I/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -g -std=gnu++17 -fPIC -o CMakeFiles/consoleOgienWoda.dir/waterplayer.cpp.o -c /home/michal/QT_Apps/consoleOgienWoda/waterplayer.cpp",
+  "file": "/home/michal/QT_Apps/consoleOgienWoda/waterplayer.cpp",
+  "output": "CMakeFiles/consoleOgienWoda.dir/waterplayer.cpp.o"
+}
+]

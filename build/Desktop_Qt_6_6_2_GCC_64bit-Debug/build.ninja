@@ -214,7 +214,7 @@ build consoleOgienWoda_autogen/timestamp consoleOgienWoda_autogen/mocs_compilati
 #############################################
 # Phony custom command for CMakeFiles/consoleOgienWoda_autogen_timestamp_deps
 
-build CMakeFiles/consoleOgienWoda_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/consoleOgienWoda_autogen_timestamp_deps: phony /usr/lib/libsfml-audio.so.2.6.1 /home/michal/Qt/6.6.2/gcc_64/./libexec/moc /home/michal/Qt/6.6.2/gcc_64/lib/libQt6Core.so.6.6.2 /usr/lib/libsfml-graphics.so.2.6.1
+build CMakeFiles/consoleOgienWoda_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/consoleOgienWoda_autogen_timestamp_deps: phony /home/michal/Qt/6.6.2/gcc_64/lib/libQt6Core.so.6.6.2 /home/michal/Qt/6.6.2/gcc_64/./libexec/moc /usr/lib/libsfml-graphics.so.2.6.1 /usr/lib/libsfml-audio.so.2.6.1
 
 
 #############################################

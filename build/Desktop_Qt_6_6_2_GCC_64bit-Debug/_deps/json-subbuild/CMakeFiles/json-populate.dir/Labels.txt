@@ -1,0 +1,14 @@
+# Target labels
+ json-populate
+# Source files and their labels
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/CMakeFiles/json-populate
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/CMakeFiles/json-populate.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/CMakeFiles/json-populate-complete.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-build.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-configure.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-download.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-install.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-mkdir.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-patch.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-test.rule
+/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-update.rule

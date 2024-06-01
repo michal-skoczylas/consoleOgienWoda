@@ -9,7 +9,7 @@
 class Game
 {
 public:
-    Game();
+    Game(int windowWidth,int windowHeight);
     void run();
 private:
     void processEvents();
