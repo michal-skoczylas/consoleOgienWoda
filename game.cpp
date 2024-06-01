@@ -1,8 +1,9 @@
 #include "game.h"
 #include "fireplayer.h"
 #include "waterplayer.h"
-Game::Game(int windowWidth,int windowHeight)
-    : window(sf::VideoMode(windowWidth,windowHeight), "Platformer Game"),
+
+Game::Game(int windowWidth, int windowHeight)
+    : window(sf::VideoMode(windowWidth, windowHeight), "Platformer Game"),
     player1(sf::Vector2f(50, 500), sf::Color::Red),
     player2(sf::Vector2f(100, 500), sf::Color::Blue),
     level() {
