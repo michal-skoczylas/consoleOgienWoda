@@ -10,6 +10,7 @@ public:
     sf::FloatRect getBounds() const;
     void handleCollision(const sf::RectangleShape& platform);
     void handleCollision(const sf::FloatRect& objectBounds);
+    void handleCollision(const sf::Sprite& sprite);
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
 protected:
