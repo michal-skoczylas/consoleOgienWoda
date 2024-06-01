@@ -32,12 +32,30 @@ void Level::draw(sf::RenderWindow& window){
 
 void Level::checkCollisions(Player& player) {
     sf::FloatRect playerBounds = player.getBounds();
+
+    // Sprawdź kolizje z platformami
     for (const auto& platform : platforms) {
         if (platform.getGlobalBounds().intersects(playerBounds)) {
             player.handleCollision(platform);
         }
     }
+
+    // Sprawdź kolizje z obiektami typu wall
+    for(const auto& wall : walls){
+        if(wall.getGlobalBounds().intersects(playerBounds)){
+            player.handleCollision(wall);
+        }
+    }
+
+    // Dodaj kod do sprawdzania kolizji z bokami obiektów
+    for (const auto& wall : walls) {
+        sf::FloatRect wallBounds = wall.getGlobalBounds();
+        if (wallBounds.intersects(playerBounds)) {
+            player.handleCollision(wallBounds);
+        }
+    }
 }
+
 
 void Level::loadFromFile(const std::string& filename) {
     std::ifstream file(filename);

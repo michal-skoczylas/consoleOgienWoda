@@ -64,18 +64,60 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states)const{
     target.draw(shape,states);
 }
 
-void Player::handleCollision(const sf::RectangleShape& platform) {
-    sf::FloatRect platformBounds = platform.getGlobalBounds();
+void Player::handleCollision(const sf::RectangleShape& object) {
+    sf::FloatRect objectBounds = object.getGlobalBounds();
     sf::FloatRect playerBounds = shape.getGlobalBounds();
 
-    // Check if player is falling and collides from above
-    if (playerBounds.top + playerBounds.height <= platformBounds.top + 10 &&
-        playerBounds.top + playerBounds.height > platformBounds.top &&
-        playerBounds.left + playerBounds.width > platformBounds.left &&
-        playerBounds.left < platformBounds.left + platformBounds.width) {
+    // Sprawdź, czy gracz koliduje z obiektem z góry
+    if (playerBounds.top + playerBounds.height <= objectBounds.top + 10 &&
+        playerBounds.top + playerBounds.height > objectBounds.top &&
+        playerBounds.left + playerBounds.width > objectBounds.left &&
+        playerBounds.left < objectBounds.left + objectBounds.width) {
 
-        shape.setPosition(playerBounds.left, platformBounds.top - playerBounds.height);
+        shape.setPosition(playerBounds.left, objectBounds.top - playerBounds.height);
         velocity.y = 0;
         onGround = true;
+    }
+    // Sprawdź, czy gracz koliduje z obiektem z boku (lewej strony)
+    else if (playerBounds.left + playerBounds.width > objectBounds.left &&
+             playerBounds.left + playerBounds.width < objectBounds.left + 10 &&
+             playerBounds.top + playerBounds.height > objectBounds.top &&
+             playerBounds.top < objectBounds.top + objectBounds.height) {
+
+        // Obsłuż kolizję z lewej strony, np. zatrzymaj ruch w prawo
+        velocity.x = 0;
+    }
+    // Sprawdź, czy gracz koliduje z obiektem z boku (prawej strony)
+    else if (playerBounds.left < objectBounds.left + objectBounds.width &&
+             playerBounds.left > objectBounds.left + objectBounds.width - 10 &&
+             playerBounds.top + playerBounds.height > objectBounds.top &&
+             playerBounds.top < objectBounds.top + objectBounds.height) {
+
+        // Obsłuż kolizję z prawej strony, np. zatrzymaj ruch w lewo
+        velocity.x = 0;
+    }
+}
+void Player::handleCollision(const sf::FloatRect& objectBounds) {
+    sf::FloatRect playerBounds = shape.getGlobalBounds();
+
+    // Sprawdź, czy gracz koliduje z obiektem z lewej strony
+    if (playerBounds.left + playerBounds.width > objectBounds.left &&
+        playerBounds.left + playerBounds.width < objectBounds.left + 10 &&
+        playerBounds.top + playerBounds.height > objectBounds.top &&
+        playerBounds.top < objectBounds.top + objectBounds.height) {
+
+        // Obsłuż kolizję z lewej strony, np. zatrzymaj ruch w prawo
+        shape.setPosition(objectBounds.left - playerBounds.width, playerBounds.top);
+        velocity.x = 0;
+    }
+    // Sprawdź, czy gracz koliduje z obiektem z prawej strony
+    else if (playerBounds.left < objectBounds.left + objectBounds.width &&
+             playerBounds.left > objectBounds.left + objectBounds.width - 10 &&
+             playerBounds.top + playerBounds.height > objectBounds.top &&
+             playerBounds.top < objectBounds.top + objectBounds.height) {
+
+        // Obsłuż kolizję z prawej strony, np. zatrzymaj ruch w lewo
+        shape.setPosition(objectBounds.left + objectBounds.width, playerBounds.top);
+        velocity.x = 0;
     }
 }
