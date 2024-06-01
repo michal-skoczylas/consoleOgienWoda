@@ -153,4 +153,12 @@ void Player::handleCollision(const sf::FloatRect& objectBounds) {
         // Obsłuż kolizję z prawej strony, np. zatrzymaj ruch w lewo
         velocity.x = 0;
     }
+    //Sprawdz kolizje od dołu
+    else if(playerBounds.top < spriteBounds.top + spriteBounds.height &&
+            playerBounds.top > spriteBounds.top + spriteBounds.height - 10 &&
+            playerBounds.left + playerBounds.width > spriteBounds.left &&
+            playerBounds.left < spriteBounds.left + spriteBounds.width){
+        shape.setPosition(playerBounds.left, spriteBounds.top + spriteBounds.height);
+        velocity.y = 0;
+    }
  }

@@ -16,8 +16,8 @@ void Level::draw(sf::RenderWindow& window) {
     }
     for (const auto& sprite : sprites) {
         window.draw(sprite);
-        std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
-        std::cerr << "Sprite drawn at position (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
+        // std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
+        // std::cerr << "Sprite drawn at position (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
     }
     std::cerr << "Level drawn" << std::endl;
 }
@@ -78,7 +78,7 @@ void Level::loadTextures(std::string texture_loader_filepath) {
             throw std::runtime_error("Failed to load texture from " + texturePath);
         }
 
-        std::cerr << "Loaded texture: " << texturePath << std::endl;
+        // std::cerr << "Loaded texture: " << texturePath << std::endl;
         textures.emplace_back(newTexture);
     }
 }
@@ -92,7 +92,7 @@ void Level::loadFromFile(const std::string& filename) {
     int mapWidth, mapHeight;
     int tileSizeX, tileSizeY;
     file >> mapWidth >> mapHeight >> tileSizeX >> tileSizeY;
-    std::cerr << "Map width: " << mapWidth << " Map height: " << mapHeight << " Tile size x: " << tileSizeX << " Tile size y: " << tileSizeY << std::endl;
+    // std::cerr << "Map width: " << mapWidth << " Map height: " << mapHeight << " Tile size x: " << tileSizeX << " Tile size y: " << tileSizeY << std::endl;
     std::cout << "Map width: " << mapWidth << " Map height: " << mapHeight << " Tile size x: " << tileSizeX << " Tile size y: " << tileSizeY << std::endl;
 
     std::map<std::pair<int, int>, char> tileMap;
@@ -112,7 +112,7 @@ void Level::loadFromFile(const std::string& filename) {
                               tileSizeY / static_cast<float>(textures[0].getSize().y));
                 wall.setPosition(x * tileSizeX, y * tileSizeY);
                 sprites.push_back(wall);
-                std::cerr << "Wall added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
+                // std::cerr << "Wall added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
                 break;
             }
             case '@': {
@@ -120,7 +120,7 @@ void Level::loadFromFile(const std::string& filename) {
                 coin.setFillColor(sf::Color::Yellow);
                 coin.setPosition(x * tileSizeX, y * tileSizeY);
                 walls.emplace_back(coin);
-                std::cerr << "Coin added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
+                // std::cerr << "Coin added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
                 break;
             }
             case '$': {
@@ -130,7 +130,7 @@ void Level::loadFromFile(const std::string& filename) {
                                tileSizeY / static_cast<float>(textures[1].getSize().y));
                 grass.setPosition(x * tileSizeX, y * tileSizeY);
                 sprites.push_back(grass);
-                std::cerr << "Grass added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
+                // std::cerr << "Grass added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
                 break;
             }
             default:
