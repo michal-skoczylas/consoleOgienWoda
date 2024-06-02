@@ -1,5 +1,3 @@
-assets/wall.png
-assets/grass.png
-assets/coin.png
-assets/lava.png
-assets/water.png
+assets\wall.png
+assets\grass.png
+assets\coin.png
