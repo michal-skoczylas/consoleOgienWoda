@@ -9,6 +9,7 @@ Game::Game(int windowWidth, int windowHeight)
     level() {
     window.setFramerateLimit(60);
     level.loadFromFile("/home/michal/QT_Apps/consoleOgienWoda/level1.txt");
+
 }
 
 void Game::run() {

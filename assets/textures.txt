@@ -1,3 +1,4 @@
 /home/michal/QT_Apps/consoleOgienWoda/assets/wall.png
 /home/michal/QT_Apps/consoleOgienWoda/assets/grass.png
 /home/michal/QT_Apps/consoleOgienWoda/assets/coin.png
+/home/michal/QT_Apps/consoleOgienWoda/assets/lava.png
