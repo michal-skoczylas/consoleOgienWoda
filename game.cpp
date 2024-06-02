@@ -1,6 +1,7 @@
 #include "game.h"
 #include "fireplayer.h"
 #include "waterplayer.h"
+#include "level.h"
 
 Game::Game(int windowWidth, int windowHeight)
     : window(sf::VideoMode(windowWidth, windowHeight), "Platformer Game"),
@@ -9,6 +10,12 @@ Game::Game(int windowWidth, int windowHeight)
     level() {
     window.setFramerateLimit(60);
     level.loadFromFile("D:/gitklony/consoleOgienWoda/level1.txt");
+    if (!backgroundTexture.loadFromFile("backgroundtheme.png")) {
+        // handle error
+    }
+
+    // Set the texture to the sprite
+    backgroundSprite.setTexture(backgroundTexture);
 }
 
 void Game::run() {
@@ -43,6 +50,7 @@ void Game::update(sf::Time deltaTime) {
 
 void Game::render() {
     window.clear();
+    window.draw(backgroundSprite);
     level.draw(window);
     window.draw(player1);
     window.draw(player2);

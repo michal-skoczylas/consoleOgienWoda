@@ -17,6 +17,8 @@ private:
     void render();
 
     sf::RenderWindow window;
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
     FirePlayer player1;
     WaterPlayer player2;
     Level level;
