@@ -21,6 +21,8 @@ private:
     sf::Sprite backgroundSprite;
     FirePlayer player1;
     WaterPlayer player2;
+    sf::Texture player1Texture;
+    sf::Texture player2Texture;
     Level level;
 
 };
