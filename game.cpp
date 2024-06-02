@@ -2,6 +2,7 @@
 #include "fireplayer.h"
 #include "waterplayer.h"
 #include "level.h"
+#include <iostream>
 
 Game::Game(int windowWidth, int windowHeight)
     : window(sf::VideoMode(windowWidth, windowHeight), "Platformer Game"),
@@ -10,12 +11,17 @@ Game::Game(int windowWidth, int windowHeight)
     level() {
     window.setFramerateLimit(60);
     level.loadFromFile("D:/gitklony/consoleOgienWoda/level1.txt");
-    if (!backgroundTexture.loadFromFile("backgroundtheme.png")) {
-        // handle error
+    if (!backgroundTexture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/backgroundtheme.png")) {
+        std::cout << "Failed to load background image" << std::endl;
     }
 
     // Set the texture to the sprite
     backgroundSprite.setTexture(backgroundTexture);
+
+    // Scale the sprite to match the size of the window
+    sf::Vector2u textureSize = backgroundTexture.getSize();
+    sf::Vector2u windowSize = window.getSize();
+    backgroundSprite.setScale((float) windowSize.x / textureSize.x, (float) windowSize.y / textureSize.y);
 }
 
 void Game::run() {
