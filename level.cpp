@@ -1,5 +1,4 @@
 #include "level.h"
-
 #include <fstream>
 #include <iostream>
 #include <map>

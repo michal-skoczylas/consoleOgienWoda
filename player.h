@@ -11,12 +11,21 @@ public:
     void handleCollision(const sf::RectangleShape& platform);
     void handleCollision(const sf::FloatRect& objectBounds);
     void handleCollision(const sf::Sprite& sprite);
+    void setTexture(const sf::Texture& texture, int frameWidth, int frameHeight);
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
 protected:
     sf::RectangleShape shape;
     sf::Vector2f velocity;
+    sf::Texture texture;
     bool onGround;
+
+    // Animation variables
+    int currentFrame = 0;
+    int totalFrames = 0;
+    float frameDuration = 0.1f; // Duration per frame in seconds
+    sf::Clock animationClock;
+    int rows, columns;
 };
 
 #endif // PLAYER_H

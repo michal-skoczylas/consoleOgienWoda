@@ -22,15 +22,34 @@ void Player::handleInput(){
     }
 }
 
-void Player::update(sf::Time deltaTime){
-    velocity.y+=981*deltaTime.asSeconds();//Grawitacja
-    shape.move(velocity*deltaTime.asSeconds());
+void Player::setTexture(const sf::Texture& texture, int rows, int columns) {
+    this->texture = texture;
+    this->rows = rows;
+    this->columns = columns;
 
-    if(shape.getPosition().y + shape.getSize().y > 600){
-        //Kolizja z ziemią
+    // Calculate the size of each frame
+    int frameWidth = texture.getSize().x / columns;
+    int frameHeight = texture.getSize().y / rows;
+
+    this->totalFrames = rows * columns;
+
+    // Set the first frame
+    sf::IntRect textureRect(0, 0, frameWidth, frameHeight);
+    shape.setTextureRect(textureRect);
+
+    shape.setTexture(&this->texture);
+}
+
+void Player::update(sf::Time deltaTime) {
+    // Update velocity and position
+    velocity.y += 981 * deltaTime.asSeconds(); // Gravity
+    shape.move(velocity * deltaTime.asSeconds());
+
+    if (shape.getPosition().y + shape.getSize().y > 600) {
+        // Collision with the ground
         shape.setPosition(shape.getPosition().x, 600 - shape.getSize().y);
-        velocity.y=0;
-        onGround=true;
+        velocity.y = 0;
+        onGround = true;
     }
 
     sf::Vector2f position = shape.getPosition();
@@ -54,9 +73,22 @@ void Player::update(sf::Time deltaTime){
     }
 
     shape.setPosition(position);
+
+    // Animation update
+    if (animationClock.getElapsedTime().asSeconds() >= frameDuration) {
+        // Move to the next frame
+        currentFrame = (currentFrame + 1) % totalFrames;
+        int column = currentFrame % columns;
+        int row = currentFrame / columns;
+        int frameWidth = texture.getSize().x / columns;
+        int frameHeight = texture.getSize().y / rows;
+        sf::IntRect textureRect(column * frameWidth, row * frameHeight, frameWidth, frameHeight);
+        shape.setTextureRect(textureRect);
+        animationClock.restart();
+    }
 }
 
-sf::FloatRect Player::getBounds() const{
+sf::FloatRect Player::getBounds() const {
     return shape.getGlobalBounds();
 }
 

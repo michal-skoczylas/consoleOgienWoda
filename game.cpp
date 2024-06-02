@@ -18,10 +18,18 @@ Game::Game(int windowWidth, int windowHeight)
     // Set the texture to the sprite
     backgroundSprite.setTexture(backgroundTexture);
 
+     if (!player1Texture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/Cupheadframes.png") ||
+        !player2Texture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/Cupheadframes.png")) {
+        std::cout << "Failed to load player images" << std::endl;
+    }
+    player1.setTexture(player1Texture,8 ,16);
+    player2.setTexture(player2Texture,8 ,16);
+
     // Scale the sprite to match the size of the window
     sf::Vector2u textureSize = backgroundTexture.getSize();
     sf::Vector2u windowSize = window.getSize();
     backgroundSprite.setScale((float) windowSize.x / textureSize.x, (float) windowSize.y / textureSize.y);
+
 }
 
 void Game::run() {
