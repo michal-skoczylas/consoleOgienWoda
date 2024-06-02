@@ -50,3 +50,12 @@
 3	14	1717277563011325797	/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/mocs_compilation.cpp	b4840c96d5c51fce
 14	993	1717277563024659131	CMakeFiles/consoleOgienWoda.dir/player.cpp.o	260dc2540042bd0
 993	1384	1717277564001325842	consoleOgienWoda	d8aaae28f90023ee
+117	222	1717329154360005185	consoleOgienWoda_autogen/timestamp	b4840c96d5c51fce
+117	222	1717329154360005185	consoleOgienWoda_autogen/mocs_compilation.cpp	b4840c96d5c51fce
+117	222	1717329154360005185	/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/timestamp	b4840c96d5c51fce
+117	222	1717329154360005185	/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/mocs_compilation.cpp	b4840c96d5c51fce
+222	1224	1717329154463338521	CMakeFiles/consoleOgienWoda.dir/main.cpp.o	73a49766dd0d6361
+223	1389	1717329154463338521	CMakeFiles/consoleOgienWoda.dir/player.cpp.o	260dc2540042bd0
+224	1454	1717329154466671855	CMakeFiles/consoleOgienWoda.dir/game.cpp.o	34ce2eb093129007
+223	1592	1717329154463338521	CMakeFiles/consoleOgienWoda.dir/level.cpp.o	e1fe15d9092069fc
+1592	1933	1717329155833338554	consoleOgienWoda	d8aaae28f90023ee

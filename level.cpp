@@ -133,6 +133,17 @@ void Level::loadFromFile(const std::string& filename) {
                 // std::cerr << "Grass added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
                 break;
             }
+            case 'o':
+            {
+             sf::Sprite goal;
+                goal.setTexture(textures[2]);
+                goal.setScale(tileSizeX / static_cast<float>(textures[2].getSize().x),
+                               tileSizeY / static_cast<float>(textures[2].getSize().y));
+                goal.setPosition(x * tileSizeX, y * tileSizeY);
+                sprites.push_back(goal);
+                goalTile = sf::Vector2f(x * tileSizeX, y * tileSizeY);
+                // std::cerr << "Goal added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;   
+            }
             default:
                 // Handle other tile types
                 break;

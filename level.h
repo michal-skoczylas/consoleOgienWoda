@@ -12,6 +12,7 @@ public:
     void loadFromFile(const std::string& filename);
     void loadTextures(std::string texture_loader_filepath);
     private:
+    sf::Vector2f goalTile;
     std::vector<sf::RectangleShape> platforms;
     std::vector<sf::RectangleShape> walls;
     std::vector<sf::Sprite> sprites;
