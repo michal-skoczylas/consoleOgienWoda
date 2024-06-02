@@ -40,17 +40,46 @@ void Player::setTexture(const sf::Texture& texture, int rows, int columns) {
     shape.setTexture(&this->texture);
 }
 
-void Player::update(sf::Time deltaTime) {
-    // Update velocity and position
+void Player::update(sf::Time deltaTime){
     velocity.y += 981 * deltaTime.asSeconds(); // Gravity
     shape.move(velocity * deltaTime.asSeconds());
 
-    if (shape.getPosition().y + shape.getSize().y > 600) {
-        // Collision with the ground
-        shape.setPosition(shape.getPosition().x, 600 - shape.getSize().y);
+    if(shape.getPosition().y + shape.getSize().y > 600){
+        // Collision with ground
         velocity.y = 0;
         onGround = true;
     }
+
+    // Animation update
+    float elapsedSeconds = animationClock.getElapsedTime().asSeconds();
+    if (elapsedSeconds >= frameDuration) {
+        // Move to the next frame
+        int row, column;
+        int frameWidth = texture.getSize().x / columns;
+        int frameHeight = texture.getSize().y / rows;
+        sf::IntRect textureRect;
+
+        if (velocity.x > 0) { // Player is moving right
+        currentFrame = (currentFrame + 1) % 11; // There are 11 frames for walking animation
+        row = 4; // 5th row (0-indexed) for walking right
+        column = (currentFrame % 11) + 4; // Columns 4-14 for walking right
+        shape.setScale(1.f, 1.f); // Reset the scale to default
+    } else if (velocity.x < 0) { // Player is moving left
+        currentFrame = (currentFrame + 1) % 11; // There are 11 frames for walking animation
+        row = 4; // 5th row (0-indexed) for walking right
+        column = (currentFrame % 11) + 4; // Columns 4-14 for walking right
+        shape.setScale(1.f, 1.f); // Flip the texture horizontally
+    } else { // Player is not moving
+        currentFrame = (currentFrame + 1) % 9; // Only 9 frames
+        row = 5; // 6th row (0-indexed)
+        column = currentFrame;
+        shape.setScale(1.f, 1.f); // Reset the scale to default
+    }
+
+    textureRect = sf::IntRect(column * frameWidth, row * frameHeight, frameWidth, frameHeight);
+    shape.setTextureRect(textureRect);
+    animationClock.restart();
+}
 
     sf::Vector2f position = shape.getPosition();
     sf::Vector2f size = shape.getSize();
@@ -69,24 +98,10 @@ void Player::update(sf::Time deltaTime) {
     } else if (position.y + size.y > 600) { // assuming window height is 600
         position.y = 600 - size.y;
         velocity.y = 0;
-        onGround = true;
     }
 
     shape.setPosition(position);
-
-    // Animation update
-    if (animationClock.getElapsedTime().asSeconds() >= frameDuration) {
-        // Move to the next frame
-        currentFrame = (currentFrame + 1) % totalFrames;
-        int column = currentFrame % columns;
-        int row = currentFrame / columns;
-        int frameWidth = texture.getSize().x / columns;
-        int frameHeight = texture.getSize().y / rows;
-        sf::IntRect textureRect(column * frameWidth, row * frameHeight, frameWidth, frameHeight);
-        shape.setTextureRect(textureRect);
-        animationClock.restart();
-    }
-}
+} 
 
 sf::FloatRect Player::getBounds() const {
     return shape.getGlobalBounds();
