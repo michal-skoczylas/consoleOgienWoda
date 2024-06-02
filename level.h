@@ -11,8 +11,9 @@ public:
     void checkCollisions(Player& player);
     void loadFromFile(const std::string& filename);
     void loadTextures(std::string texture_loader_filepath);
+    bool chekGoalReached(Player& player);
     private:
-    sf::Vector2f goalTile;
+    sf::Sprite goalTile;
     std::vector<sf::RectangleShape> platforms;
     std::vector<sf::RectangleShape> walls;
     std::vector<sf::Sprite> sprites;

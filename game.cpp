@@ -4,8 +4,8 @@
 
 Game::Game(int windowWidth, int windowHeight)
     : window(sf::VideoMode(windowWidth, windowHeight), "Platformer Game"),
-    player1(sf::Vector2f(50, 500), sf::Color::Red),
-    player2(sf::Vector2f(100, 500), sf::Color::Blue),
+    player1(sf::Vector2f(0, 0), sf::Color::Red),
+    player2(sf::Vector2f(0,0), sf::Color::Blue),
     level() {
     window.setFramerateLimit(60);
     level.loadFromFile("/home/michal/QT_Apps/consoleOgienWoda/level1.txt");
@@ -37,6 +37,8 @@ void Game::update(sf::Time deltaTime) {
     player2.update(deltaTime);
     level.checkCollisions(player1);
     level.checkCollisions(player2);
+    level.chekGoalReached(player1);
+    level.chekGoalReached(player2);
 }
 
 void Game::render() {

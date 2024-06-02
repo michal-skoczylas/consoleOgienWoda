@@ -19,7 +19,7 @@ void Level::draw(sf::RenderWindow& window) {
         // std::cout << "Sprite texture address: " << sprite.getTexture() << std::endl;
         // std::cerr << "Sprite drawn at position (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
     }
-    std::cerr << "Level drawn" << std::endl;
+    // std::cerr << "Level drawn" << std::endl;
 }
 
 void Level::checkCollisions(Player& player) {
@@ -57,6 +57,10 @@ void Level::checkCollisions(Player& player) {
     // Check side collisions with sprites
     for (const auto& sprite : sprites) {
         sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+
+       if(spriteBounds==goalTile.getGlobalBounds()){
+         continue;
+         }
         if (spriteBounds.intersects(playerBounds)) {
             player.handleCollision(spriteBounds);
         }
@@ -141,7 +145,7 @@ void Level::loadFromFile(const std::string& filename) {
                                tileSizeY / static_cast<float>(textures[2].getSize().y));
                 goal.setPosition(x * tileSizeX, y * tileSizeY);
                 sprites.push_back(goal);
-                goalTile = sf::Vector2f(x * tileSizeX, y * tileSizeY);
+                goalTile = goal;
                 // std::cerr << "Goal added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;   
             }
             default:
@@ -154,3 +158,11 @@ void Level::loadFromFile(const std::string& filename) {
     std::cerr << "Finished loading level" << std::endl;
     file.close();
 }
+ bool Level::chekGoalReached(Player& player){
+     sf::FloatRect playerBounds = player.getBounds();
+     if(playerBounds.intersects(goalTile.getGlobalBounds())){
+         std::cout<<"Goal reached"<<std::endl;
+         return true;
+     }
+     return false;
+ }
