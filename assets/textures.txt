@@ -1,3 +1,4 @@
 D:\gitklony\consoleOgienWoda\assets\wall.png
 D:\gitklony\consoleOgienWoda\assets\grass.png
 D:\gitklony\consoleOgienWoda\assets\coin.png
+D:\gitklony\consoleOgienWoda\assets\backgroundtheme.png
