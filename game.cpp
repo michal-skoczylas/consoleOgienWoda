@@ -8,7 +8,7 @@ Game::Game(int windowWidth, int windowHeight)
     player2(sf::Vector2f(0,0), sf::Color::Blue),
     level() {
     window.setFramerateLimit(60);
-    level.loadFromFile("/home/michal/QT_Apps/consoleOgienWoda/level1.txt");
+    level.loadFromFile("D:/gitklony/consoleOgienWoda/level1.txt");
 }
 
 void Game::run() {

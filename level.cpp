@@ -7,7 +7,7 @@
 #include <string>
 
 Level::Level() {
-    this->loadTextures("/home/michal/QT_Apps/consoleOgienWoda/assets/textures.txt");
+    this->loadTextures("D:/gitklony/consoleOgienWoda/assets/textures.txt");
 }
 
 void Level::draw(sf::RenderWindow& window) {
