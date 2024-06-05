@@ -4,3 +4,5 @@ D:\gitklony\consoleOgienWoda\assets\coin.png
 D:\gitklony\consoleOgienWoda\assets\backgroundtheme.png
 D:\gitklony\consoleOgienWoda\assets\Cupheadframes.png
 D:\gitklony\consoleOgienWoda\assets\Mugmanframes.png
+D:\gitklony\consoleOgienWoda\assets\water.png
+D:\gitklony\consoleOgienWoda\assets\lava.png
