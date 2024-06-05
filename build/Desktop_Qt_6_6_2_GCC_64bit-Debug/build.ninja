@@ -117,7 +117,7 @@ build consoleOgienWoda: CXX_EXECUTABLE_LINKER__consoleOgienWoda_Debug CMakeFiles
   FLAGS = -DQT_QML_DEBUG -g
   LINK_LIBRARIES = -Wl,-rpath,/home/michal/Qt/6.6.2/gcc_64/lib:  /home/michal/Qt/6.6.2/gcc_64/lib/libQt6Core.so.6.6.2  /usr/lib/libsfml-graphics.so.2.6.1  /usr/lib/libsfml-audio.so.2.6.1  /usr/lib/libsfml-window.so.2.6.1  /usr/lib/libsfml-system.so.2.6.1
   OBJECT_DIR = CMakeFiles/consoleOgienWoda.dir
-  POST_BUILD = :
+  POST_BUILD = cd /home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug && /home/michal/Qt/Tools/CMake/bin/cmake -E copy_directory /home/michal/QT_Apps/consoleOgienWoda/assets /home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/assets
   PRE_LINK = :
   TARGET_FILE = consoleOgienWoda
   TARGET_PDB = consoleOgienWoda.dbg

@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-eac97e9da75a958ec74e.json",
+					"jsonFile" : "directory-.-Debug-2e8be77524efa5737163.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "consoleOgienWoda::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-consoleOgienWoda-Debug-cd505fc30aab53fde27c.json",
+					"jsonFile" : "target-consoleOgienWoda-Debug-0b3433022b44665eb04a.json",
 					"name" : "consoleOgienWoda",
 					"projectIndex" : 0
 				},

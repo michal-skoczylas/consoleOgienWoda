@@ -37,7 +37,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 27,
+				"line" : 31,
 				"parent" : 0
 			},
 			{
@@ -86,7 +86,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++17"
+					"fragment" : "-DQT_QML_DEBUG -g -std=gnu++17 -fcolor-diagnostics"
 				},
 				{
 					"backtrace" : 3,
@@ -104,22 +104,22 @@
 			[
 				{
 					"backtrace" : 0,
-					"path" : "/home/michal/QT_Apps/consoleOgienWoda/build/consoleOgienWoda_autogen/include"
+					"path" : "/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/include"
 				},
 				{
 					"backtrace" : 3,
 					"isSystem" : true,
-					"path" : "/usr/include/qt"
+					"path" : "/home/michal/Qt/6.6.2/gcc_64/include/QtCore"
 				},
 				{
 					"backtrace" : 3,
 					"isSystem" : true,
-					"path" : "/usr/include/qt/QtCore"
+					"path" : "/home/michal/Qt/6.6.2/gcc_64/include"
 				},
 				{
 					"backtrace" : 3,
 					"isSystem" : true,
-					"path" : "/usr/lib/qt/mkspecs/linux-g++"
+					"path" : "/home/michal/Qt/6.6.2/gcc_64/mkspecs/linux-g++"
 				}
 			],
 			"language" : "CXX",
@@ -127,6 +127,7 @@
 			{
 				"backtraces" : 
 				[
+					3,
 					3
 				],
 				"standard" : "17"
@@ -173,7 +174,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g",
+				"fragment" : "-DQT_QML_DEBUG -g",
 				"role" : "flags"
 			},
 			{
@@ -181,8 +182,12 @@
 				"role" : "flags"
 			},
 			{
+				"fragment" : "-Wl,-rpath,/home/michal/Qt/6.6.2/gcc_64/lib:",
+				"role" : "libraries"
+			},
+			{
 				"backtrace" : 3,
-				"fragment" : "/usr/lib/libQt5Core.so.5.15.14",
+				"fragment" : "/home/michal/Qt/6.6.2/gcc_64/lib/libQt6Core.so.6.6.2",
 				"role" : "libraries"
 			},
 			{
@@ -262,7 +267,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/consoleOgienWoda_autogen/mocs_compilation.cpp",
+			"path" : "build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -329,13 +334,13 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/consoleOgienWoda_autogen/timestamp",
+			"path" : "build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/timestamp",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/consoleOgienWoda_autogen/timestamp.rule",
+			"path" : "build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/timestamp.rule",
 			"sourceGroupIndex" : 3
 		}
 	],

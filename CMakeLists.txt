@@ -22,6 +22,10 @@ add_executable(consoleOgienWoda
   waterplayer.h waterplayer.cpp
 )
 target_link_libraries(consoleOgienWoda Qt${QT_VERSION_MAJOR}::Core sfml-graphics sfml-audio)
+# Kopiowanie katalogu assets do katalogu wyjściowego
+add_custom_command(TARGET consoleOgienWoda POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:consoleOgienWoda>/assets)
 
 include(GNUInstallDirs)
 install(TARGETS consoleOgienWoda
