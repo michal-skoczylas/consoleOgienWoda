@@ -55,28 +55,31 @@ void Player::update(sf::Time deltaTime){
     if (elapsedSeconds >= frameDuration) {
         // Move to the next frame
         int row, column;
-        int frameWidth = texture.getSize().x / columns;
-        int frameHeight = texture.getSize().y / rows;
-        sf::IntRect textureRect;
+    int frameWidth = texture.getSize().x / 7; // Total width divided by number of columns
+    int frameHeight = texture.getSize().y / 5; // Total height divided by number of rows
+    sf::IntRect textureRect;
 
-        if (velocity.x > 0) { // Player is moving right
-        currentFrame = (currentFrame + 1) % 11; // There are 11 frames for walking animation
-        row = 4; // 5th row (0-indexed) for walking right
-        column = (currentFrame % 11) + 4; // Columns 4-14 for walking right
+    if (velocity.x > 0) { // Player is moving right
+        currentFrame = (currentFrame + 1) % 5; // There are 5 frames for walking right
+        row = 0; // 1st row (0-indexed) for walking right
+        column = currentFrame; // Columns 0-4 for walking right
         shape.setScale(1.f, 1.f); // Reset the scale to default
+        textureRect = sf::IntRect(column * frameWidth, row * frameHeight, frameWidth, frameHeight);
     } else if (velocity.x < 0) { // Player is moving left
-        currentFrame = (currentFrame + 1) % 11; // There are 11 frames for walking animation
-        row = 4; // 5th row (0-indexed) for walking right
-        column = (currentFrame % 11) + 4; // Columns 4-14 for walking right
-        shape.setScale(1.f, 1.f); // Flip the texture horizontally
-    } else { // Player is not moving
-        currentFrame = (currentFrame + 1) % 9; // Only 9 frames
-        row = 5; // 6th row (0-indexed)
-        column = currentFrame;
+    currentFrame = (currentFrame + 1) % 5; // There are 5 frames for walking left
+    row = 1; // 2nd row (0-indexed) for walking left
+    column = currentFrame; // Columns 0-4 for walking left
+    shape.setScale(1.f, 1.f); // Flip the texture horizontally
+    int offsetX = 14; // Adjust this value as needed
+    textureRect = sf::IntRect(column * frameWidth + offsetX, row * frameHeight, frameWidth, frameHeight);
+} else { // Player is not moving
+        currentFrame = (currentFrame + 1) % 6; // There are 6 frames for standing still
+        row = 4; // 5th row (0-indexed) for standing still
+        column = currentFrame; // Columns 0-5 for standing still
         shape.setScale(1.f, 1.f); // Reset the scale to default
+        textureRect = sf::IntRect(column * frameWidth, row * frameHeight, frameWidth, frameHeight);
     }
 
-    textureRect = sf::IntRect(column * frameWidth, row * frameHeight, frameWidth, frameHeight);
     shape.setTextureRect(textureRect);
     animationClock.restart();
 }

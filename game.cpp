@@ -18,8 +18,8 @@ Game::Game(int windowWidth, int windowHeight)
     // Set the texture to the sprite
     backgroundSprite.setTexture(backgroundTexture);
 
-     if (!player1Texture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/Cupheadframes.png") ||
-        !player2Texture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/Cupheadframes.png")) {
+     if (!player1Texture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/fire_boy.png") ||
+        !player2Texture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/water_girl.png")) {
         std::cout << "Failed to load player images" << std::endl;
     }
     player1.setTexture(player1Texture,8 ,16);
