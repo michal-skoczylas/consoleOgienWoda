@@ -5,6 +5,7 @@
 #include "level.h"
 #include "fireplayer.h"
 #include "waterplayer.h"
+#include <vector>
 
 class Game
 {
@@ -20,7 +21,7 @@ private:
     FirePlayer player1;
     WaterPlayer player2;
     Level level;
-
+    std::vector<Player*> players={&player1,&player2};
 };
 
 #endif // GAME_H

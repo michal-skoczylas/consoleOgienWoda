@@ -40,6 +40,7 @@ void Game::update(sf::Time deltaTime) {
     level.checkCollisions(player2);
     level.chekGoalReached(player1);
     level.chekGoalReached(player2);
+    level.checkEndGame(players);
 }
 
 void Game::render() {

@@ -162,3 +162,10 @@ void Player::handleCollision(const sf::FloatRect& objectBounds) {
         velocity.y = 0;
     }
  }
+void Player::setTargetReached() {
+    isTargetReached = true;
+}
+
+bool Player::getTargetReached() {
+    return isTargetReached;
+}

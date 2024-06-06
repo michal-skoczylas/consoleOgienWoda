@@ -12,6 +12,7 @@ public:
     void loadFromFile(const std::string& filename);
     void loadTextures(std::string texture_loader_filepath);
     bool chekGoalReached(Player& player);
+    void checkEndGame(std::vector<Player*> players);
     private:
     sf::Sprite goalTile;
     std::vector<sf::RectangleShape> platforms;

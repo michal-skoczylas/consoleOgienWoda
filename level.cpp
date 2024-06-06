@@ -183,8 +183,25 @@ void Level::loadFromFile(const std::string& filename) {
  bool Level::chekGoalReached(Player& player){
      sf::FloatRect playerBounds = player.getBounds();
      if(playerBounds.intersects(goalTile.getGlobalBounds())){
-         std::cout<<"Goal reached"<<std::endl;
+         //std::cout<<"Goal reached"<<std::endl;
+         player.setTargetReached();
          return true;
      }
      return false;
+ }
+ void Level::checkEndGame(std::vector<Player*> players){
+    if(players[0]->getTargetReached() && players[1]->getTargetReached()){
+        std::cout<<"Both players reached the goal"<<std::endl;
+    }
+    // else if(players[0]->getTargetReached()){
+    //     std::cout<<"Player 1 reached the goal"<<std::endl;
+    //     exit(0);
+    // }
+    // else if(players[1]->getTargetReached()){
+    //     std::cout<<"Player 2 reached the goal"<<std::endl;
+    //     exit(0);
+    // }
+    // else{
+    //     //std::cout<<"No player reached the goal"<<std::endl;
+    // }
  }
