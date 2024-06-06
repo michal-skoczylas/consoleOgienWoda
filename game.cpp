@@ -11,6 +11,7 @@ Game::Game(int windowWidth, int windowHeight)
     level() {
     window.setFramerateLimit(60);
     level.loadFromFile("D:/gitklony/consoleOgienWoda/level1.txt");
+<<<<<<< Updated upstream
     if (!backgroundTexture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/backgroundtheme.png")) {
         std::cout << "Failed to load background image" << std::endl;
     }
@@ -29,6 +30,8 @@ Game::Game(int windowWidth, int windowHeight)
     sf::Vector2u textureSize = backgroundTexture.getSize();
     sf::Vector2u windowSize = window.getSize();
     backgroundSprite.setScale((float) windowSize.x / textureSize.x, (float) windowSize.y / textureSize.y);
+=======
+>>>>>>> Stashed changes
 
 }
 
