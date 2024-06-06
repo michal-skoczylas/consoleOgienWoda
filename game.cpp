@@ -6,8 +6,8 @@
 
 Game::Game(int windowWidth, int windowHeight)
     : window(sf::VideoMode(windowWidth, windowHeight), "Platformer Game"),
-    player1(sf::Vector2f(0, 0), sf::Color::Red),
-    player2(sf::Vector2f(0,0), sf::Color::Blue),
+    player1(sf::Vector2f(0, 0), sf::Color::White),
+    player2(sf::Vector2f(0,0), sf::Color::White),
     level() {
     window.setFramerateLimit(60);
     level.loadFromFile("D:/klonygithub/consoleOgienWoda/level1.txt");
