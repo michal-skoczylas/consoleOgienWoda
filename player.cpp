@@ -64,14 +64,17 @@ void Player::update(sf::Time deltaTime){
         row = 0; // 1st row (0-indexed) for walking right
         column = currentFrame; // Columns 0-4 for walking right
         shape.setScale(1.f, 1.f); // Reset the scale to default
-        textureRect = sf::IntRect(column * frameWidth, row * frameHeight, frameWidth, frameHeight);
+        int offsetX = 0;
+    int offsetY = -20;// Adjust this value as needed
+    textureRect = sf::IntRect(column * frameWidth + offsetX, row * frameHeight + offsetY, frameWidth, frameHeight);
     } else if (velocity.x < 0) { // Player is moving left
     currentFrame = (currentFrame + 1) % 5; // There are 5 frames for walking left
     row = 1; // 2nd row (0-indexed) for walking left
     column = currentFrame; // Columns 0-4 for walking left
     shape.setScale(1.f, 1.f); // Flip the texture horizontally
-    int offsetX = 14; // Adjust this value as needed
-    textureRect = sf::IntRect(column * frameWidth + offsetX, row * frameHeight, frameWidth, frameHeight);
+    int offsetX = 14;
+    int offsetY = -20;// Adjust this value as needed
+    textureRect = sf::IntRect(column * frameWidth + offsetX, row * frameHeight + offsetY, frameWidth, frameHeight);
 } else { // Player is not moving
         currentFrame = (currentFrame + 1) % 6; // There are 6 frames for standing still
         row = 4; // 5th row (0-indexed) for standing still
