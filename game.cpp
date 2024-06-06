@@ -10,16 +10,16 @@ Game::Game(int windowWidth, int windowHeight)
     player2(sf::Vector2f(0,0), sf::Color::Blue),
     level() {
     window.setFramerateLimit(60);
-    level.loadFromFile("D:/gitklony/consoleOgienWoda/level1.txt");
-    if (!backgroundTexture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/backgroundtheme.png")) {
+    level.loadFromFile("D:/klonygithub/consoleOgienWoda/level1.txt");
+    if (!backgroundTexture.loadFromFile("D:/klonygithub/consoleOgienWoda/assets/backgroundtheme.png")) {
         std::cout << "Failed to load background image" << std::endl;
     }
 
     // Set the texture to the sprite
     backgroundSprite.setTexture(backgroundTexture);
 
-     if (!player1Texture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/fire_boy.png") ||
-        !player2Texture.loadFromFile("D:/gitklony/consoleOgienWoda/assets/water_girl.png")) {
+     if (!player1Texture.loadFromFile("D:/klonygithub/consoleOgienWoda/assets/fire_boy.png") ||
+        !player2Texture.loadFromFile("D:/klonygithub/consoleOgienWoda/assets/water_girl.png")) {
         std::cout << "Failed to load player images" << std::endl;
     }
     player1.setTexture(player1Texture,8 ,16);
