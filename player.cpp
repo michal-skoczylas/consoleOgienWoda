@@ -22,16 +22,70 @@ void Player::handleInput(){
     }
 }
 
+void Player::setTexture(const sf::Texture& texture, int rows, int columns) {
+    this->texture = texture;
+    this->rows = rows;
+    this->columns = columns;
+
+    // Calculate the size of each frame
+    int frameWidth = texture.getSize().x / columns;
+    int frameHeight = texture.getSize().y / rows;
+
+    this->totalFrames = rows * columns;
+
+    // Set the first frame
+    sf::IntRect textureRect(0, 0, frameWidth, frameHeight);
+    shape.setTextureRect(textureRect);
+
+    shape.setTexture(&this->texture);
+}
+
 void Player::update(sf::Time deltaTime){
-    velocity.y+=981*deltaTime.asSeconds();//Grawitacja
-    shape.move(velocity*deltaTime.asSeconds());
+    velocity.y += 981 * deltaTime.asSeconds(); // Gravity
+    shape.move(velocity * deltaTime.asSeconds());
 
     if(shape.getPosition().y + shape.getSize().y > 600){
-        //Kolizja z ziemią
-        shape.setPosition(shape.getPosition().x, 600 - shape.getSize().y);
-        velocity.y=0;
-        onGround=true;
+        // Collision with ground
+        velocity.y = 0;
+        onGround = true;
     }
+
+    // Animation update
+    float elapsedSeconds = animationClock.getElapsedTime().asSeconds();
+    if (elapsedSeconds >= frameDuration) {
+        // Move to the next frame
+        int row, column;
+    int frameWidth = texture.getSize().x / 7; // Total width divided by number of columns
+    int frameHeight = texture.getSize().y / 5; // Total height divided by number of rows
+    sf::IntRect textureRect;
+
+    if (velocity.x > 0) { // Player is moving right
+        currentFrame = (currentFrame + 1) % 5; // There are 5 frames for walking right
+        row = 0; // 1st row (0-indexed) for walking right
+        column = currentFrame; // Columns 0-4 for walking right
+        shape.setScale(1.f, 1.f); // Reset the scale to default
+        int offsetX = 0;
+    int offsetY = -20;// Adjust this value as needed
+    textureRect = sf::IntRect(column * frameWidth + offsetX, row * frameHeight + offsetY, frameWidth, frameHeight);
+    } else if (velocity.x < 0) { // Player is moving left
+    currentFrame = (currentFrame + 1) % 5; // There are 5 frames for walking left
+    row = 1; // 2nd row (0-indexed) for walking left
+    column = currentFrame; // Columns 0-4 for walking left
+    shape.setScale(1.f, 1.f); // Flip the texture horizontally
+    int offsetX = 14;
+    int offsetY = -20;// Adjust this value as needed
+    textureRect = sf::IntRect(column * frameWidth + offsetX, row * frameHeight + offsetY, frameWidth, frameHeight);
+} else { // Player is not moving
+        currentFrame = (currentFrame + 1) % 6; // There are 6 frames for standing still
+        row = 4; // 5th row (0-indexed) for standing still
+        column = currentFrame; // Columns 0-5 for standing still
+        shape.setScale(1.f, 1.f); // Reset the scale to default
+        textureRect = sf::IntRect(column * frameWidth, row * frameHeight, frameWidth, frameHeight);
+    }
+
+    shape.setTextureRect(textureRect);
+    animationClock.restart();
+}
 
     sf::Vector2f position = shape.getPosition();
     sf::Vector2f size = shape.getSize();
@@ -50,13 +104,12 @@ void Player::update(sf::Time deltaTime){
     } else if (position.y + size.y > 600) { // assuming window height is 600
         position.y = 600 - size.y;
         velocity.y = 0;
-        onGround = true;
     }
 
     shape.setPosition(position);
-}
+} 
 
-sf::FloatRect Player::getBounds() const{
+sf::FloatRect Player::getBounds() const {
     return shape.getGlobalBounds();
 }
 

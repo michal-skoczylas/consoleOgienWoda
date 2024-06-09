@@ -1,14 +1,35 @@
 #include "game.h"
 #include "fireplayer.h"
 #include "waterplayer.h"
+#include "level.h"
+#include <iostream>
 
 Game::Game(int windowWidth, int windowHeight)
     : window(sf::VideoMode(windowWidth, windowHeight), "Platformer Game"),
-    player1(sf::Vector2f(0, 0), sf::Color::Red),
-    player2(sf::Vector2f(0,0), sf::Color::Blue),
+    player1(sf::Vector2f(0, 0), sf::Color::White),
+    player2(sf::Vector2f(0,0), sf::Color::White),
     level() {
     window.setFramerateLimit(60);
-    level.loadFromFile("/home/michal/QT_Apps/consoleOgienWoda/level1.txt");
+    level.loadFromFile("level1.txt");
+    if (!backgroundTexture.loadFromFile("/assets/backgroundtheme.png")) {
+        std::cout << "Failed to load background image" << std::endl;
+    }
+
+    // Set the texture to the sprite
+    backgroundSprite.setTexture(backgroundTexture);
+
+     if (!player1Texture.loadFromFile("/assets/fire_boy.png") ||
+        !player2Texture.loadFromFile("/assets/water_girl.png")) {
+        std::cout << "Failed to load player images" << std::endl;
+    }
+    player1.setTexture(player1Texture,8 ,16);
+    player2.setTexture(player2Texture,8 ,16);
+
+    // Scale the sprite to match the size of the window
+    sf::Vector2u textureSize = backgroundTexture.getSize();
+    sf::Vector2u windowSize = window.getSize();
+    backgroundSprite.setScale((float) windowSize.x / textureSize.x, (float) windowSize.y / textureSize.y);
+
 
 }
 
@@ -45,6 +66,7 @@ void Game::update(sf::Time deltaTime) {
 
 void Game::render() {
     window.clear();
+    window.draw(backgroundSprite);
     level.draw(window);
     window.draw(player1);
     window.draw(player2);
