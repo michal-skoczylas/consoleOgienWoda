@@ -7,7 +7,7 @@ public:
     Player(sf::Vector2f position, sf::Color color);
     virtual void handleInput();
    virtual void update(sf::Time deltaTime);
-    sf::FloatRect getBounds() const;
+    virtual sf::FloatRect getBounds() const;
     virtual void handleCollision(const sf::RectangleShape& platform);
     virtual void handleCollision(const sf::FloatRect& objectBounds);
    virtual  void handleCollision(const sf::Sprite& sprite);

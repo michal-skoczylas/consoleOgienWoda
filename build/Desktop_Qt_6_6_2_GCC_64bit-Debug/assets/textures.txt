@@ -1,5 +1,10 @@
 assets/wall.png
 assets/grass.png
 assets/coin.png
-assets/lava.png
+assets/backgroundtheme.png
+assets/Cupheadframes.png
+assets/Mugmanframes.png
 assets/water.png
+assets/lava.png
+assets/water_girl.png
+assets/fire_boy.png

@@ -10,16 +10,16 @@ Game::Game(int windowWidth, int windowHeight)
     player2(sf::Vector2f(0,0), sf::Color::White),
     level() {
     window.setFramerateLimit(60);
-    level.loadFromFile("level1.txt");
-    if (!backgroundTexture.loadFromFile("/assets/backgroundtheme.png")) {
+    level.loadFromFile("assets/level1.txt");
+    if (!backgroundTexture.loadFromFile("assets/backgroundtheme.png")) {
         std::cout << "Failed to load background image" << std::endl;
     }
 
     // Set the texture to the sprite
     backgroundSprite.setTexture(backgroundTexture);
 
-     if (!player1Texture.loadFromFile("/assets/fire_boy.png") ||
-        !player2Texture.loadFromFile("/assets/water_girl.png")) {
+     if (!player1Texture.loadFromFile("assets/fire_boy.png") ||
+        !player2Texture.loadFromFile("assets/water_girl.png")) {
         std::cout << "Failed to load player images" << std::endl;
     }
     player1.setTexture(player1Texture,8 ,16);
