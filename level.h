@@ -13,6 +13,8 @@ public:
     void loadTextures(std::string texture_loader_filepath);
     bool chekGoalReached(Player& player);
     void checkEndGame(std::vector<Player*> players);
+    void setLevelFinished();
+    void endGame(); 
     private:
     sf::Sprite goalTile;
     std::vector<sf::RectangleShape> platforms;
@@ -22,6 +24,8 @@ public:
     sf::Vector2f goal;
     sf::Vector2f tileSize=sf::Vector2f(18,13.5);
     std::vector<sf::Texture> textures;
+    bool levelFinished=false;
+
 };
 
 #endif // LEVEL_H

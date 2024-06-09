@@ -207,9 +207,13 @@ bool Level::chekGoalReached(Player& player) {
   }
   return false;
 }
+//Spradza czy gra jest skonczona itd
 void Level::checkEndGame(std::vector<Player*> players) {
   if (players[0]->getTargetReached() && players[1]->getTargetReached()) {
-    std::cout << "Both players reached the goal" << std::endl;
+    setLevelFinished();
+    //Jezeli gra jest skonczona to odpala funkcje konczaca gre
+    endGame();
+
   }
   // else if(players[0]->getTargetReached()){
   //     std::cout<<"Player 1 reached the goal"<<std::endl;
@@ -222,4 +226,15 @@ void Level::checkEndGame(std::vector<Player*> players) {
   // else{
   //     //std::cout<<"No player reached the goal"<<std::endl;
   // }
+}
+void Level::setLevelFinished(){
+    levelFinished=true;
+}
+//Funkcja konczaca gre
+void Level::endGame(){
+    if(this->levelFinished){
+        std::cout<<"Gra skonczona"<<std::endl;
+        exit(0);
+
+    }
 }
