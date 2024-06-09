@@ -169,27 +169,6 @@ void Level::loadFromFile(const std::string& filename) {
                 break;
                 break;
             }
-            case 'l':
-            {
-                sf::Sprite lava;
-                lava.setTexture(textures[3]);
-                lava.setScale(tileSizeX / static_cast<float>(textures[3].getSize().x),
-                               tileSizeY / static_cast<float>(textures[3].getSize().y));
-                lava.setPosition(x * tileSizeX, y * tileSizeY);
-                sprites.push_back(lava);
-                // std::cerr << "Lava added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
-                break;
-            }
-            case 'w':{
-                sf::Sprite water;
-                water.setTexture(textures[4]);
-                water.setScale(tileSizeX / static_cast<float>(textures[4].getSize().x),
-                               tileSizeY / static_cast<float>(textures[4].getSize().y));
-                water.setPosition(x * tileSizeX, y * tileSizeY);
-                sprites.push_back(water);
-                // std::cerr << "Water added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
-                break;
-            }
             default:
                 // Handle other tile types
                 break;
