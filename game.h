@@ -10,8 +10,9 @@
 class Game
 {
 public:
-    Game(int windowWidth,int windowHeight);
+    Game(int windowWidth,int windowHeight,std::string levelPath);
     void run();
+    void selectLevel(std::string arglevelPath);
 private:
     void processEvents();
     void update(sf::Time deltaTime);
@@ -26,6 +27,7 @@ private:
     sf::Texture player2Texture;
     Level level;
     std::vector<Player*> players={&player1,&player2};
+     std::string levelPath;
 };
 
 #endif // GAME_H

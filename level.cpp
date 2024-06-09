@@ -195,7 +195,7 @@ void Level::loadFromFile(const std::string& filename) {
     }
     y++;
   }
-  std::cerr << "Finished loading level" << std::endl;
+  std::cerr << "Finished loading level" << filename<<std::endl;
   file.close();
 }
 bool Level::chekGoalReached(Player& player) {
