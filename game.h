@@ -10,7 +10,7 @@
 class Game
 {
 public:
-    Game(int windowWidth,int windowHeight,std::string levelPath);
+    Game(int windowWidth,int windowHeight);
     void run();
     void selectLevel(std::string arglevelPath);
 private:

@@ -92,7 +92,7 @@ void Level::loadTextures(std::string texture_loader_filepath) {
   }
 }
 
-void Level::loadFromFile(const std::string& filename) {
+void Level::loadFromFile( std::string& filename) {
   std::ifstream file(filename);
   if (!file.is_open()) {
     throw std::runtime_error("Failed to open level file");

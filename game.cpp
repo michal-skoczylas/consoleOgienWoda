@@ -4,14 +4,14 @@
 #include "level.h"
 #include <iostream>
 
-Game::Game(int windowWidth, int windowHeight, std::string levelPath)
+Game::Game(int windowWidth, int windowHeight)
     : window(sf::VideoMode(windowWidth, windowHeight), "Platformer Game"),
     player1(sf::Vector2f(0, 0), sf::Color::White),
     player2(sf::Vector2f(0,0), sf::Color::White),
     level() {
     window.setFramerateLimit(60);
-    selectLevel(levelPath);
-    level.loadFromFile(levelPath);
+    //this->selectLevel(levelPath);
+    //level.loadFromFile(levelPath);
     if (!backgroundTexture.loadFromFile("assets/backgroundtheme.png")) {
         std::cout << "Failed to load background image" << std::endl;
     }
@@ -42,6 +42,7 @@ void Game::run() {
         update(deltaTime);
         render();
     }
+    
 }
 
 void Game::processEvents() {
@@ -75,4 +76,5 @@ void Game::render() {
 }
 void Game::selectLevel(std::string arglevelPath){
     this->levelPath=arglevelPath;
+    level.loadFromFile(arglevelPath);
 }
