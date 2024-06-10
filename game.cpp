@@ -35,15 +35,15 @@ Game::Game(int windowWidth, int windowHeight)
                             (float)windowSize.y / textureSize.y);
 
   // Set the end game text
-  if (!endGameFont.loadFromFile("assets/arial.ttf")) {
+  if (!endGameFont.loadFromFile("assets/Robus.otf")) {
     std::cout << "Failed to load font" << std::endl;
   } else {
     endGameText.setFont(endGameFont);
   }
 
   endGameText.setString("Game Finished");
-  endGameText.setCharacterSize(50);
-  endGameText.setFillColor(sf::Color::Red);
+  endGameText.setCharacterSize(150);
+  endGameText.setFillColor(sf::Color::Magenta);
   endGameText.setPosition(
       window.getSize().x / 2 - endGameText.getGlobalBounds().width / 2,
       window.getSize().y / 2 - endGameText.getGlobalBounds().height / 2);
