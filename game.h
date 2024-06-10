@@ -28,6 +28,8 @@ private:
     Level level;
     std::vector<Player*> players={&player1,&player2};
      std::string levelPath;
+     sf::Text endGameText;
+     sf::Font endGameFont;
 };
 
 #endif // GAME_H

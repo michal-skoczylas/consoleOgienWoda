@@ -14,6 +14,7 @@ public:
     bool chekGoalReached(Player& player);
     void checkEndGame(std::vector<Player*> players);
     void setLevelFinished();
+    bool getLevelFinished();
     void endGame(); 
     private:
     sf::Sprite goalTile;
