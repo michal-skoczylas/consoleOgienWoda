@@ -51,6 +51,14 @@ void Level::checkCollisions(Player& player) {
     if(spriteBounds==startingTile.getGlobalBounds()){
       continue;
     }
+    //Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
+    if(spriteBounds==fireStartingTile.getGlobalBounds()){
+      continue;
+    }
+    if(spriteBounds==waterStartingTile.getGlobalBounds()){
+      continue;
+    }
+
     //Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
       player.handleCollision(sprite);
@@ -66,6 +74,13 @@ void Level::checkCollisions(Player& player) {
     }
 
     if(spriteBounds==startingTile.getGlobalBounds()){
+      continue;
+    }
+    //Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
+    if(spriteBounds==fireStartingTile.getGlobalBounds()){
+      continue;
+    }
+    if(spriteBounds==waterStartingTile.getGlobalBounds()){
       continue;
     }
     if (spriteBounds.intersects(playerBounds)) {
@@ -204,6 +219,31 @@ void Level::loadFromFile( std::string& filename) {
           // std::cerr << "Water added at (" << x * tileSizeX << ", " << y *
           // tileSizeY << ")" << std::endl;
           break;
+        }
+        //Punkty startowe dla graczy gdyby mieli zaczynac w innych miejscach
+        case '1':{
+          sf::Sprite fireStartingTile;
+          fireStartingTile.setTexture(textures[11]);
+          fireStartingTile.setScale(
+              tileSizeX / static_cast<float>(textures[11].getSize().x),
+              tileSizeY / static_cast<float>(textures[11].getSize().y));
+          fireStartingTile.setPosition(x * tileSizeX, y * tileSizeY);
+          sprites.push_back(fireStartingTile);
+          fireStartingPosition = fireStartingTile.getPosition();
+          this->fireStartingTile = fireStartingTile;
+          break;
+        }
+        case '2':
+        {
+          sf::Sprite waterStartingTile;
+          waterStartingTile.setTexture(textures[12]);
+          waterStartingTile.setScale(
+              tileSizeX / static_cast<float>(textures[12].getSize().x),
+              tileSizeY / static_cast<float>(textures[12].getSize().y));
+          waterStartingTile.setPosition(x * tileSizeX, y * tileSizeY);
+          sprites.push_back(waterStartingTile);
+          waterStartingPosition = waterStartingTile.getPosition();
+          this->waterStartingTile = waterStartingTile;
           break;
         }
         default:
@@ -260,4 +300,12 @@ bool Level::getLevelFinished(){
 //getter do pozycji startowej graczy
 sf::Vector2f Level::getStartingPosition(){
     return this->startingPosition;
+}
+//getter do pozycji startowej gracza fire
+sf::Vector2f Level::getFireStartingPosition(){
+    return this->fireStartingPosition;
+}
+//getter do pozycji startowej gracza water
+sf::Vector2f Level::getWaterStartingPosition(){
+    return this->waterStartingPosition;
 }

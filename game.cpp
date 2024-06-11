@@ -99,4 +99,12 @@ void Game::selectLevel(std::string arglevelPath) {
  //dodanie wektora 0,-25 powoduje ze postacie nie zapadaja sie pod ziemie po zrespieniu
 player1.setStartingPosition(level.getStartingPosition()+sf::Vector2f(0,-25));
 player2.setStartingPosition(level.getStartingPosition()+sf::Vector2f(0,-25));
+//
+ if(level.getFireStartingPosition()!=sf::Vector2f(0,0)){
+player1.setStartingPosition(level.getFireStartingPosition()+sf::Vector2f(0,-25));
+ 
+ }
+ if(level.getWaterStartingPosition()!=sf::Vector2f(0,0)){
+player2.setStartingPosition(level.getWaterStartingPosition()+sf::Vector2f(0,-25));
+ }
 }

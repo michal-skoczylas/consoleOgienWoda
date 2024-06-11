@@ -17,9 +17,10 @@ public:
     bool getLevelFinished();
     void endGame(); 
     sf::Vector2f getStartingPosition();
+sf::Vector2f getFireStartingPosition();
+sf::Vector2f getWaterStartingPosition();
     private:
     sf::Sprite goalTile;
-    sf::Sprite startingTile;
     std::vector<sf::RectangleShape> platforms;
     std::vector<sf::RectangleShape> walls;
     std::vector<sf::Sprite> sprites;
@@ -28,8 +29,14 @@ public:
     sf::Vector2f tileSize=sf::Vector2f(18,13.5);
     std::vector<sf::Texture> textures;
     bool levelFinished=false;
+    //Pozycje startowe graczy dla obu takie same
     sf::Vector2f startingPosition;
-
+    sf::Sprite startingTile;
+    //Pozycje startowe dla graczy inne
+    sf::Vector2f fireStartingPosition;
+    sf::Vector2f waterStartingPosition;
+    sf::Sprite fireStartingTile;
+    sf::Sprite waterStartingTile;
 };
 
 #endif // LEVEL_H
