@@ -26,6 +26,7 @@ public:
     sf::Vector2f tileSize=sf::Vector2f(18,13.5);
     std::vector<sf::Texture> textures;
     bool levelFinished=false;
+    sf::Vector2f startingPosition;
 
 };
 

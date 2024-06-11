@@ -163,6 +163,20 @@ void Level::loadFromFile( std::string& filename) {
           // tileSizeY << ")" << std::endl;
           break;
         }
+        case 's':
+        {
+          sf::Sprite start;
+          start.setTexture(textures[3]);
+          start.setScale(
+              tileSizeX / static_cast<float>(textures[3].getSize().x),
+              tileSizeY / static_cast<float>(textures[3].getSize().y));
+          start.setPosition(x * tileSizeX, y * tileSizeY);
+          sprites.push_back(start);
+          startingPosition = start.getPosition();
+          // std::cerr << "Start added at (" << x * tileSizeX << ", " << y *
+          // tileSizeY << ")" << std::endl;
+          break;
+        }
         case 'l': {
           sf::Sprite lava;
           lava.setTexture(textures[6]);
