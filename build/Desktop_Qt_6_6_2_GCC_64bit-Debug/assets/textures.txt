@@ -4,10 +4,10 @@ assets/coin.png
 assets/backgroundtheme.png
 assets/Cupheadframes.png
 assets/Mugmanframes.png
-assets/water.png
 assets/lava.png
+assets/water.png
 assets/water_girl.png
 assets/fire_boy.png
 assets/doors.png
-assets/lavadoor.png
+assets/LavaSplash.png
 assets/waterdoor.png

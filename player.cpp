@@ -214,6 +214,8 @@ void Player::handleCollision(const sf::FloatRect& objectBounds) {
         shape.setPosition(playerBounds.left, spriteBounds.top + spriteBounds.height);
         velocity.y = 0;
     }
+    handleLavaCollision(sprite);
+    handleWaterCollision(sprite);
  }
 void Player::setTargetReached() {
     isTargetReached = true;
@@ -224,5 +226,16 @@ bool Player::getTargetReached() {
 }
 void Player::setStartingPosition(sf::Vector2f startingPosition) {
     shape.setPosition(startingPosition);
+    this->startingPosition = startingPosition;
 
+}
+void Player::handleLavaCollision(const sf::Sprite& sprite) {
+ //Implementacja w klasach dziedziczacych   
+} 
+void Player::handleWaterCollision(const sf::Sprite& sprite) {
+  //Implementacja w klasach dziedziczacych  
+}
+//Funkcja sprawiajaca ze gracz po zetknieciu z nie ta plafrotma co moze cofa sie na poczatek poziomu
+void Player::dead(){
+    shape.setPosition(startingPosition);
 }

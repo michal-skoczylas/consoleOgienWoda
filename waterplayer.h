@@ -11,6 +11,8 @@ public:
     void handleCollision(const sf::Sprite& sprite) override;
     void handleCollision(const sf::RectangleShape& platform) override;
     void handleCollision(const sf::FloatRect& objectBounds) override;
+    void handleLavaCollision(const sf::Sprite& sprite) override;
+    void handleWaterCollision(const sf::Sprite& sprite) override;
 };
 
 #endif // WATERPLAYER_H

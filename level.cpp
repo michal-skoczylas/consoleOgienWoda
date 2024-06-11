@@ -58,7 +58,16 @@ void Level::checkCollisions(Player& player) {
     if(spriteBounds==waterStartingTile.getGlobalBounds()){
       continue;
     }
-
+for(const auto& lavaSprite: lavaSprites){
+    if(lavaSprite.getGlobalBounds().intersects(playerBounds)){
+      player.handleLavaCollision(lavaSprite);
+    }
+  }
+  for(const auto& waterSprite: waterSprites){
+    if(waterSprite.getGlobalBounds().intersects(playerBounds)){
+      player.handleWaterCollision(waterSprite);
+    }
+  }
     //Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
       player.handleCollision(sprite);
@@ -87,6 +96,7 @@ void Level::checkCollisions(Player& player) {
       player.handleCollision(spriteBounds);
     }
   }
+  
 }
 
 void Level::loadTextures(std::string texture_loader_filepath) {
@@ -204,6 +214,8 @@ void Level::loadFromFile( std::string& filename) {
               tileSizeY / static_cast<float>(textures[6].getSize().y));
           lava.setPosition(x * tileSizeX, y * tileSizeY);
           sprites.push_back(lava);
+          //Dodanie do wektora spriteow law zeby potem mozna bylo sprawdzic czy woda nie wchodzi do lawy
+          lavaSprites.push_back(lava);
           // std::cerr << "Lava added at (" << x * tileSizeX << ", " << y *
           // tileSizeY << ")" << std::endl;
           break;
@@ -216,6 +228,8 @@ void Level::loadFromFile( std::string& filename) {
               tileSizeY / static_cast<float>(textures[7].getSize().y));
           water.setPosition(x * tileSizeX, y * tileSizeY);
           sprites.push_back(water);
+          //Dodanie do wektora spriteow water zeby potem mozna bylo sprawdzic czy goein nie wchodzi do wody
+          waterSprites.push_back(water);
           // std::cerr << "Water added at (" << x * tileSizeX << ", " << y *
           // tileSizeY << ")" << std::endl;
           break;

@@ -16,6 +16,9 @@ public:
     void setTargetReached();
     bool getTargetReached();
     void setStartingPosition(sf::Vector2f startingPosition);
+    virtual void handleLavaCollision(const sf::Sprite& sprite);
+    virtual void handleWaterCollision(const sf::Sprite& sprite);
+    void dead();
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
 protected:
@@ -23,6 +26,7 @@ protected:
     sf::Vector2f velocity;
     sf::Texture texture;
     bool onGround;
+    sf::Vector2f startingPosition;
     
 
     // Animation variables
