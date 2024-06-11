@@ -222,3 +222,7 @@ void Player::setTargetReached() {
 bool Player::getTargetReached() {
     return isTargetReached;
 }
+void Player::setStartingPosition(sf::Vector2f startingPosition) {
+    shape.setPosition(startingPosition);
+
+}

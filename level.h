@@ -16,8 +16,10 @@ public:
     void setLevelFinished();
     bool getLevelFinished();
     void endGame(); 
+    sf::Vector2f getStartingPosition();
     private:
     sf::Sprite goalTile;
+    sf::Sprite startingTile;
     std::vector<sf::RectangleShape> platforms;
     std::vector<sf::RectangleShape> walls;
     std::vector<sf::Sprite> sprites;

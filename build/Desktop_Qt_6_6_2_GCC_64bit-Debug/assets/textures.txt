@@ -8,3 +8,4 @@ assets/water.png
 assets/lava.png
 assets/water_girl.png
 assets/fire_boy.png
+assets/doors.png

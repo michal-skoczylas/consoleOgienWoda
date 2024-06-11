@@ -15,6 +15,7 @@ public:
     sf::Vector2f position;
     void setTargetReached();
     bool getTargetReached();
+    void setStartingPosition(sf::Vector2f startingPosition);
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
 protected:

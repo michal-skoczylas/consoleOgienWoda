@@ -25,12 +25,6 @@ void Level::draw(sf::RenderWindow& window) {
 void Level::checkCollisions(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
 
-  // Check collisions with platforms
-  for (const auto& platform : platforms) {
-    if (platform.getGlobalBounds().intersects(playerBounds)) {
-      player.handleCollision(platform);
-    }
-  }
 
   // Check collisions with walls
   for (const auto& wall : walls) {
@@ -50,10 +44,14 @@ void Level::checkCollisions(Player& player) {
   // Check collisions with sprites
   for (const auto& sprite : sprites) {
     sf::FloatRect spriteBounds = sprite.getGlobalBounds();
-
+  //Wylaczenie kolizji dla goalTile i startingTile
     if (spriteBounds == goalTile.getGlobalBounds()) {
       continue;
     }
+    if(spriteBounds==startingTile.getGlobalBounds()){
+      continue;
+    }
+    //Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
       player.handleCollision(sprite);
     }
@@ -62,8 +60,12 @@ void Level::checkCollisions(Player& player) {
   // Check side collisions with sprites
   for (const auto& sprite : sprites) {
     sf::FloatRect spriteBounds = sprite.getGlobalBounds();
-
+   //Wylaczenie kolizji dla goalTile i startingTile 
     if (spriteBounds == goalTile.getGlobalBounds()) {
+      continue;
+    }
+
+    if(spriteBounds==startingTile.getGlobalBounds()){
       continue;
     }
     if (spriteBounds.intersects(playerBounds)) {
@@ -165,14 +167,16 @@ void Level::loadFromFile( std::string& filename) {
         }
         case 's':
         {
+          //Starting position tile, textura to drzwi
           sf::Sprite start;
-          start.setTexture(textures[3]);
+          start.setTexture(textures[10]);
           start.setScale(
-              tileSizeX / static_cast<float>(textures[3].getSize().x),
-              tileSizeY / static_cast<float>(textures[3].getSize().y));
+              tileSizeX / static_cast<float>(textures[10].getSize().x),
+              tileSizeY / static_cast<float>(textures[10].getSize().y));
           start.setPosition(x * tileSizeX, y * tileSizeY);
           sprites.push_back(start);
           startingPosition = start.getPosition();
+          startingTile = start;
           // std::cerr << "Start added at (" << x * tileSizeX << ", " << y *
           // tileSizeY << ")" << std::endl;
           break;
@@ -252,4 +256,8 @@ void Level::endGame(){
 }
 bool Level::getLevelFinished(){
     return levelFinished;
+}
+//getter do pozycji startowej graczy
+sf::Vector2f Level::getStartingPosition(){
+    return this->startingPosition;
 }
