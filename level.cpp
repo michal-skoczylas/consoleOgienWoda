@@ -68,6 +68,11 @@ for(const auto& lavaSprite: lavaSprites){
       player.handleWaterCollision(waterSprite);
     }
   }
+  for(const auto& acidSprite: acidSprites){
+    if(acidSprite.getGlobalBounds().intersects(playerBounds)){
+      player.handleAcidCollision(acidSprite);
+    }
+  }
     //Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
       player.handleCollision(sprite);
@@ -259,6 +264,21 @@ void Level::loadFromFile( std::string& filename) {
           waterStartingPosition = waterStartingTile.getPosition();
           this->waterStartingTile = waterStartingTile;
           break;
+        }
+        //Tile z kwasem w ktorym gracze giną
+        case 'a':
+        {
+          sf::Sprite acid; 
+          acid.setTexture(textures[13]);
+          acid.setScale(
+              tileSizeX / static_cast<float>(textures[13].getSize().x),
+              tileSizeY / static_cast<float>(textures[13].getSize().y));
+          acid.setPosition(x * tileSizeX, y * tileSizeY);
+          sprites.push_back(acid);
+          acidSprites.push_back(acid);
+          // std::cerr << "Acid added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
+          break;
+
         }
         default:
           // Handle other tile types

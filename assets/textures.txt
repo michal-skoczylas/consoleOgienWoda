@@ -11,3 +11,4 @@ assets/fire_boy.png
 assets/doors.png
 assets/LavaSplash.png
 assets/waterdoor.png
+assets/acid.png

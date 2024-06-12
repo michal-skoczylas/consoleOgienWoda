@@ -250,3 +250,14 @@ void Player::setDeathSound(const std::string& soundPath) {
     }
     deathSound.setBuffer(deathBuffer);
 }
+void Player::handleAcidCollision(const sf::Sprite& sprite){
+     sf::FloatRect playerBounds = shape.getGlobalBounds();
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    if (playerBounds.intersects(spriteBounds)) {
+        // Collision occurred
+        // Handle lava collision
+    setDeathSound("assets/death.wav");
+    deathSound.play();
+        dead();
+    }
+}

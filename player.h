@@ -19,6 +19,7 @@ public:
     void setStartingPosition(sf::Vector2f startingPosition);
     virtual void handleLavaCollision(const sf::Sprite& sprite);
     virtual void handleWaterCollision(const sf::Sprite& sprite);
+    void handleAcidCollision(const sf::Sprite& sprite);
     void dead();
     void setDeathSound(const std::string& soundPath);
 private:
