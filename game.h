@@ -19,6 +19,7 @@ class Game {
   void processEvents();
   void update(sf::Time deltaTime);
   void render();
+  void setupTimer();
 
   sf::RenderWindow window;
   sf::Texture backgroundTexture;

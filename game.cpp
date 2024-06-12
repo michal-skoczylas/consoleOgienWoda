@@ -14,13 +14,19 @@ Game::Game(int windowWidth, int windowHeight)
   window.setFramerateLimit(60);
   // this->selectLevel(levelPath);
   // level.loadFromFile(levelPath);
+  // Load background texture
   if (!backgroundTexture.loadFromFile("assets/backgroundtheme.png")) {
-    std::cout << "Failed to load background image" << std::endl;
+    std::cerr << "Failed to load background image" << std::endl;
+  } else {
+    backgroundSprite.setTexture(backgroundTexture);
+    // Scale the sprite to match the size of the window
+    sf::Vector2u textureSize = backgroundTexture.getSize();
+    sf::Vector2u windowSize = window.getSize();
+    backgroundSprite.setScale(
+      static_cast<float>(windowSize.x) / textureSize.x,
+      static_cast<float>(windowSize.y) / textureSize.y
+    );
   }
-  // Ustawienie endGameSound
-
-  // Set the texture to the sprite
-  backgroundSprite.setTexture(backgroundTexture);
 
   if (!player1Texture.loadFromFile("assets/fire_boy.png") ||
       !player2Texture.loadFromFile("assets/water_girl.png")) {
@@ -35,102 +41,121 @@ Game::Game(int windowWidth, int windowHeight)
   backgroundSprite.setScale((float)windowSize.x / textureSize.x,
                             (float)windowSize.y / textureSize.y);
 
-  // Set the end game text
+  // Load end game text
   if (!endGameFont.loadFromFile("assets/Robus.otf")) {
-    std::cout << "Failed to load font" << std::endl;
+    std::cerr << "Failed to load font" << std::endl;
   } else {
     endGameText.setFont(endGameFont);
-  }
-
-  endGameText.setString("Game Finished");
-  endGameText.setCharacterSize(150);
-  endGameText.setFillColor(sf::Color::White);
-  endGameText.setPosition(
+    endGameText.setString("Game Finished");
+    endGameText.setCharacterSize(150);
+    endGameText.setFillColor(sf::Color::White);
+    endGameText.setPosition(
       window.getSize().x / 2 - endGameText.getGlobalBounds().width / 2,
-      window.getSize().y / 2 - endGameText.getGlobalBounds().height / 2);
-  endGameText.setStyle(sf::Text::Bold);
-  if (!endGameSoundBuffer.loadFromFile("assets/levelEnd.mp3")) {
-    std::cout << "Failed to load end game sound" << std::endl;
+      window.getSize().y / 2 - endGameText.getGlobalBounds().height / 2
+    );
+    endGameText.setStyle(sf::Text::Bold);
   }
-  // else{
-  //   std::cerr<<"Loaded end game sound"<<std::endl;
-  // }
-  endGameSound.setBuffer(endGameSoundBuffer);
+  // Load end game sound
+  if (!endGameSoundBuffer.loadFromFile("assets/levelEnd.mp3")) {
+    std::cerr << "Failed to load end game sound" << std::endl;
+  } else {
+    endGameSound.setBuffer(endGameSoundBuffer);
+  }
 
-  if (!timerFont.loadFromFile("assets/arial.ttf")) {
-    std::cout << "Failed to load timer font" << std::endl;
-} else {
-    timerText.setFont(timerFont);
+  // Set up timer
+  setupTimer();
 }
 
-timerText.setString("0:00");
-timerText.setCharacterSize(30);
-timerText.setFillColor(sf::Color::Black);
-timerText.setPosition(window.getSize().x - timerText.getGlobalBounds().width, 0);
+// Set up the timer text and background
+  void Game::setupTimer() {
+  if (!timerFont.loadFromFile("assets/arial.ttf")) {
+    std::cerr << "Failed to load timer font" << std::endl;
+  } else {
+    // Set up the timer text
+    timerText.setFont(timerFont);
+    timerText.setString("0:00:000");
+    timerText.setCharacterSize(30);
+    timerText.setFillColor(sf::Color::White);
+    timerText.setPosition(window.getSize().x - timerText.getGlobalBounds().width, 0);
+  }
 
-sf::RectangleShape timerBackground;
-timerBackground.setFillColor(sf::Color::Black);  // Change this to the color you want
-timerBackground.setOutlineThickness(0.1);  // Increase the outline thickness
-timerBackground.setOutlineColor(sf::Color::White);  // Set the outline color to a contrasting color
+  // Set up the timer background
+  timerBackground.setFillColor(sf::Color::Black);  // Background color
+  timerBackground.setOutlineThickness(1);  // Outline thickness
+  timerBackground.setOutlineColor(sf::Color::White);  // Outline color
+  timerBackground.setSize(sf::Vector2f(timerText.getGlobalBounds().width + 15, timerText.getGlobalBounds().height + 10));  // Background size
+  timerBackground.setPosition(timerText.getPosition().x - 5, timerText.getPosition().y - 5);  // Background position
 }
 
 void Game::run() {
-    sf::Clock clock;
-    while (window.isOpen()) {
-        processEvents();
-        sf::Time deltaTime = clock.restart();
-        update(deltaTime);
+  sf::Clock clock;
+  while (window.isOpen()) {
+    processEvents();
+    sf::Time deltaTime = clock.restart();
+    update(deltaTime);
 
-        // Update the timerText string before rendering
-        sf::Time elapsed = gameClock.getElapsedTime();
-        int minutes = elapsed.asSeconds() / 60;
-        int seconds = (int)elapsed.asSeconds() % 60;
-        int milliseconds = elapsed.asMilliseconds() % 1000;  // Get the remaining milliseconds
-        timerText.setString(std::to_string(minutes) + ":" + 
-                            (seconds < 10 ? "0" : "") + std::to_string(seconds) + ":" + 
-                            (milliseconds < 100 ? (milliseconds < 10 ? "00" : "0") : "") + std::to_string(milliseconds));
+    // Update the timerText string before rendering
+    sf::Time elapsed = gameClock.getElapsedTime();
+    int minutes = static_cast<int>(elapsed.asSeconds()) / 60;
+    int seconds = static_cast<int>(elapsed.asSeconds()) % 60;
+    int milliseconds = elapsed.asMilliseconds() % 1000;
 
-        // Update the position of the timerText
-        timerText.setPosition(window.getSize().x - timerText.getGlobalBounds().width, 0);
-        timerBackground.setSize(sf::Vector2f(timerText.getGlobalBounds().width + 15, timerText.getGlobalBounds().height + 10));  // Increase the size as needed
-        timerBackground.setPosition(timerText.getPosition().x - 2, timerText.getPosition().y+2);  // Subtract 10 (or any other amount) from the x-coordinate
+    // Update the timer text
+    timerText.setString(
+      std::to_string(minutes) + ":" + 
+      (seconds < 10 ? "0" : "") + std::to_string(seconds) + ":" + 
+      (milliseconds < 100 ? "0" : "") + (milliseconds < 10 ? "0" : "") + std::to_string(milliseconds)
+    );
 
+    // Update the position and size of the timer background
+    timerText.setPosition(window.getSize().x - timerText.getGlobalBounds().width - 10, 10);
+    timerBackground.setSize(sf::Vector2f(timerText.getGlobalBounds().width + 10, timerText.getGlobalBounds().height + 5));
+    timerBackground.setPosition(timerText.getPosition().x - 5, timerText.getPosition().y+5);
 
-        render();
-    }
+    // Render the game
+    render();
+  }
 }
 
 void Game::processEvents() {
   sf::Event event;
   while (window.pollEvent(event)) {
-    if (event.type == sf::Event::Closed) window.close();
+    if (event.type == sf::Event::Closed) {
+      window.close();
+    } 
   }
 
+  // Handle player input
   player1.handleInput();
   player2.handleInput();
 }
 
 void Game::update(sf::Time deltaTime) {
+  // Update the players and check for collisions
   player1.update(deltaTime);
   player2.update(deltaTime);
   level.checkCollisions(player1);
   level.checkCollisions(player2);
   level.chekGoalReached(player1);
   level.chekGoalReached(player2);
+  // Check if the level is finished
   level.checkEndGame(players);
 }
 
 void Game::render() {
+  // Clear the window
   window.clear();
+  // Draw the game elements
   window.draw(backgroundSprite);
   level.draw(window);
   window.draw(timerBackground);
   window.draw(timerText);
   window.draw(player1);
   window.draw(player2);
+  // Draw the end game text if the level is finished
   if (level.getLevelFinished()) {
-        window.draw(endGameText);
-    if (endGameSoundPlayed == false) {
+    window.draw(endGameText);
+    if (!endGameSoundPlayed) {
       endGameSound.play();
       endGameSoundPlayed = true;
     }
