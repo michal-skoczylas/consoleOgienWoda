@@ -240,6 +240,8 @@ void WaterPlayer::handleLavaCollision(const sf::Sprite& sprite){
     if (playerBounds.intersects(spriteBounds)) {
         // Collision occurred
         // Handle lava collision
+    setDeathSound("assets/death.wav");
+    deathSound.play();
         dead();
     }
 }

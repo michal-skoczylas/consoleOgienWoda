@@ -247,6 +247,8 @@ void FirePlayer::handleWaterCollision(const sf::Sprite& sprite){
     if (playerBounds.intersects(spriteBounds)) {
         // Collision occurred
         // Handle water collision
+    setDeathSound("assets/death.wav");
+    deathSound.play();
         dead();
     }
 }

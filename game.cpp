@@ -17,6 +17,7 @@ Game::Game(int windowWidth, int windowHeight)
   if (!backgroundTexture.loadFromFile("assets/backgroundtheme.png")) {
     std::cout << "Failed to load background image" << std::endl;
   }
+  // Ustawienie endGameSound
 
   // Set the texture to the sprite
   backgroundSprite.setTexture(backgroundTexture);
@@ -43,11 +44,18 @@ Game::Game(int windowWidth, int windowHeight)
 
   endGameText.setString("Game Finished");
   endGameText.setCharacterSize(150);
-  endGameText.setFillColor(sf::Color::Magenta);
+  endGameText.setFillColor(sf::Color::White);
   endGameText.setPosition(
       window.getSize().x / 2 - endGameText.getGlobalBounds().width / 2,
       window.getSize().y / 2 - endGameText.getGlobalBounds().height / 2);
   endGameText.setStyle(sf::Text::Bold);
+  if (!endGameSoundBuffer.loadFromFile("assets/levelEnd.mp3")) {
+    std::cout << "Failed to load end game sound" << std::endl;
+  }
+  // else{
+  //   std::cerr<<"Loaded end game sound"<<std::endl;
+  // }
+  endGameSound.setBuffer(endGameSoundBuffer);
 }
 
 void Game::run() {
@@ -87,7 +95,11 @@ void Game::render() {
   window.draw(player1);
   window.draw(player2);
   if (level.getLevelFinished()) {
-    window.draw(endGameText);
+        window.draw(endGameText);
+    if (endGameSoundPlayed == false) {
+      endGameSound.play();
+      endGameSoundPlayed = true;
+    }
   }
   window.display();
 }
@@ -95,16 +107,20 @@ void Game::selectLevel(std::string arglevelPath) {
   this->levelPath = arglevelPath;
   level.loadFromFile(arglevelPath);
 
- //setup player starting positions
- //dodanie wektora 0,-25 powoduje ze postacie nie zapadaja sie pod ziemie po zrespieniu
-player1.setStartingPosition(level.getStartingPosition()+sf::Vector2f(0,-25));
-player2.setStartingPosition(level.getStartingPosition()+sf::Vector2f(0,-25));
-//
- if(level.getFireStartingPosition()!=sf::Vector2f(0,0)){
-player1.setStartingPosition(level.getFireStartingPosition()+sf::Vector2f(0,-25));
- 
- }
- if(level.getWaterStartingPosition()!=sf::Vector2f(0,0)){
-player2.setStartingPosition(level.getWaterStartingPosition()+sf::Vector2f(0,-25));
- }
+  // setup player starting positions
+  // dodanie wektora 0,-25 powoduje ze postacie nie zapadaja sie pod ziemie po
+  // zrespieniu
+  player1.setStartingPosition(level.getStartingPosition() +
+                              sf::Vector2f(0, -25));
+  player2.setStartingPosition(level.getStartingPosition() +
+                              sf::Vector2f(0, -25));
+  //
+  if (level.getFireStartingPosition() != sf::Vector2f(0, 0)) {
+    player1.setStartingPosition(level.getFireStartingPosition() +
+                                sf::Vector2f(0, -25));
+  }
+  if (level.getWaterStartingPosition() != sf::Vector2f(0, 0)) {
+    player2.setStartingPosition(level.getWaterStartingPosition() +
+                                sf::Vector2f(0, -25));
+  }
 }

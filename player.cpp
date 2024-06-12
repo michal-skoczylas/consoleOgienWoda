@@ -1,9 +1,11 @@
 #include "player.h"
+#include <iostream>
 
 Player::Player(sf::Vector2f position, sf::Color color) :velocity(0,0),onGround(false){
     shape.setSize(sf::Vector2f(50,50));
     shape.setPosition(position);
     shape.setFillColor(color);
+   
 }
 
 void Player::handleInput(){
@@ -237,5 +239,14 @@ void Player::handleWaterCollision(const sf::Sprite& sprite) {
 }
 //Funkcja sprawiajaca ze gracz po zetknieciu z nie ta plafrotma co moze cofa sie na poczatek poziomu
 void Player::dead(){
+    setDeathSound("assets/death.wav");
+    deathSound.play();
     shape.setPosition(startingPosition);
+    
+}
+void Player::setDeathSound(const std::string& soundPath) {
+    if (!deathBuffer.loadFromFile(soundPath)) {
+        std::cerr << "Could not load death sound" << std::endl;
+    }
+    deathSound.setBuffer(deathBuffer);
 }

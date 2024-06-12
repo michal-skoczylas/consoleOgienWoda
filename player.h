@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 class Player: public sf::Drawable
 {
 public:
@@ -19,6 +20,7 @@ public:
     virtual void handleLavaCollision(const sf::Sprite& sprite);
     virtual void handleWaterCollision(const sf::Sprite& sprite);
     void dead();
+    void setDeathSound(const std::string& soundPath);
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
 protected:
@@ -27,6 +29,8 @@ protected:
     sf::Texture texture;
     bool onGround;
     sf::Vector2f startingPosition;
+    sf::SoundBuffer deathBuffer;
+    sf::Sound deathSound;
     
 
     // Animation variables
