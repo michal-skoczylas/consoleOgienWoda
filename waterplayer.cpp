@@ -234,3 +234,23 @@ void WaterPlayer::handleCollision(const sf::FloatRect& objectBounds){
         }
     }
 }
+void WaterPlayer::handleLavaCollision(const sf::Sprite& sprite){
+    sf::FloatRect playerBounds = shape.getGlobalBounds();
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    if (playerBounds.intersects(spriteBounds)) {
+        // Collision occurred
+        // Handle lava collision
+    setDeathSound("assets/death.wav");
+    deathSound.play();
+        dead();
+    }
+}
+void WaterPlayer::handleWaterCollision(const sf::Sprite& sprite){
+    sf::FloatRect playerBounds = shape.getGlobalBounds();
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    if (playerBounds.intersects(spriteBounds)) {
+        // Collision occurred
+        // Handle water collision
+        handleCollision(sprite);
+    }
+}

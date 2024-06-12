@@ -1,9 +1,11 @@
 #include "player.h"
+#include <iostream>
 
 Player::Player(sf::Vector2f position, sf::Color color) :velocity(0,0),onGround(false){
     shape.setSize(sf::Vector2f(50,50));
     shape.setPosition(position);
     shape.setFillColor(color);
+   
 }
 
 void Player::handleInput(){
@@ -214,4 +216,48 @@ void Player::handleCollision(const sf::FloatRect& objectBounds) {
         shape.setPosition(playerBounds.left, spriteBounds.top + spriteBounds.height);
         velocity.y = 0;
     }
+    handleLavaCollision(sprite);
+    handleWaterCollision(sprite);
  }
+void Player::setTargetReached() {
+    isTargetReached = true;
+}
+
+bool Player::getTargetReached() {
+    return isTargetReached;
+}
+void Player::setStartingPosition(sf::Vector2f startingPosition) {
+    shape.setPosition(startingPosition);
+    this->startingPosition = startingPosition;
+
+}
+void Player::handleLavaCollision(const sf::Sprite& sprite) {
+ //Implementacja w klasach dziedziczacych   
+} 
+void Player::handleWaterCollision(const sf::Sprite& sprite) {
+  //Implementacja w klasach dziedziczacych  
+}
+//Funkcja sprawiajaca ze gracz po zetknieciu z nie ta plafrotma co moze cofa sie na poczatek poziomu
+void Player::dead(){
+    setDeathSound("assets/death.wav");
+    deathSound.play();
+    shape.setPosition(startingPosition);
+    
+}
+void Player::setDeathSound(const std::string& soundPath) {
+    if (!deathBuffer.loadFromFile(soundPath)) {
+        std::cerr << "Could not load death sound" << std::endl;
+    }
+    deathSound.setBuffer(deathBuffer);
+}
+void Player::handleAcidCollision(const sf::Sprite& sprite){
+     sf::FloatRect playerBounds = shape.getGlobalBounds();
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    if (playerBounds.intersects(spriteBounds)) {
+        // Collision occurred
+        // Handle lava collision
+    setDeathSound("assets/death.wav");
+    deathSound.play();
+        dead();
+    }
+}

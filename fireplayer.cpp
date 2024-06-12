@@ -232,3 +232,23 @@ void FirePlayer::handleCollision(const sf::FloatRect& objectBounds){
         }
     }
 }
+void FirePlayer::handleLavaCollision(const sf::Sprite& sprite){
+    sf::FloatRect playerBounds = shape.getGlobalBounds();
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    if (playerBounds.intersects(spriteBounds)) {
+        // Collision occurred
+        // Handle lava collision
+        handleCollision(sprite);
+    }
+}
+void FirePlayer::handleWaterCollision(const sf::Sprite& sprite){
+    sf::FloatRect playerBounds = shape.getGlobalBounds();
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    if (playerBounds.intersects(spriteBounds)) {
+        // Collision occurred
+        // Handle water collision
+    setDeathSound("assets/death.wav");
+    deathSound.play();
+        dead();
+    }
+}
