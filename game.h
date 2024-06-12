@@ -35,6 +35,10 @@ class Game {
   sf::SoundBuffer endGameSoundBuffer;
   sf::Sound endGameSound;
   bool endGameSoundPlayed = false;
+  sf::Clock gameClock;
+  sf::Text timerText;
+  sf::Font timerFont;
+  sf::RectangleShape timerBackground;
 };
 
 #endif  // GAME_H

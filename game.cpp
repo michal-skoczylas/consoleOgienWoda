@@ -56,16 +56,48 @@ Game::Game(int windowWidth, int windowHeight)
   //   std::cerr<<"Loaded end game sound"<<std::endl;
   // }
   endGameSound.setBuffer(endGameSoundBuffer);
+
+  if (!timerFont.loadFromFile("assets/arial.ttf")) {
+    std::cout << "Failed to load timer font" << std::endl;
+} else {
+    timerText.setFont(timerFont);
+}
+
+timerText.setString("0:00");
+timerText.setCharacterSize(30);
+timerText.setFillColor(sf::Color::Black);
+timerText.setPosition(window.getSize().x - timerText.getGlobalBounds().width, 0);
+
+sf::RectangleShape timerBackground;
+timerBackground.setFillColor(sf::Color::Black);  // Change this to the color you want
+timerBackground.setOutlineThickness(0.1);  // Increase the outline thickness
+timerBackground.setOutlineColor(sf::Color::White);  // Set the outline color to a contrasting color
 }
 
 void Game::run() {
-  sf::Clock clock;
-  while (window.isOpen()) {
-    processEvents();
-    sf::Time deltaTime = clock.restart();
-    update(deltaTime);
-    render();
-  }
+    sf::Clock clock;
+    while (window.isOpen()) {
+        processEvents();
+        sf::Time deltaTime = clock.restart();
+        update(deltaTime);
+
+        // Update the timerText string before rendering
+        sf::Time elapsed = gameClock.getElapsedTime();
+        int minutes = elapsed.asSeconds() / 60;
+        int seconds = (int)elapsed.asSeconds() % 60;
+        int milliseconds = elapsed.asMilliseconds() % 1000;  // Get the remaining milliseconds
+        timerText.setString(std::to_string(minutes) + ":" + 
+                            (seconds < 10 ? "0" : "") + std::to_string(seconds) + ":" + 
+                            (milliseconds < 100 ? (milliseconds < 10 ? "00" : "0") : "") + std::to_string(milliseconds));
+
+        // Update the position of the timerText
+        timerText.setPosition(window.getSize().x - timerText.getGlobalBounds().width, 0);
+        timerBackground.setSize(sf::Vector2f(timerText.getGlobalBounds().width + 15, timerText.getGlobalBounds().height + 10));  // Increase the size as needed
+        timerBackground.setPosition(timerText.getPosition().x - 2, timerText.getPosition().y+2);  // Subtract 10 (or any other amount) from the x-coordinate
+
+
+        render();
+    }
 }
 
 void Game::processEvents() {
@@ -92,6 +124,8 @@ void Game::render() {
   window.clear();
   window.draw(backgroundSprite);
   level.draw(window);
+  window.draw(timerBackground);
+  window.draw(timerText);
   window.draw(player1);
   window.draw(player2);
   if (level.getLevelFinished()) {
