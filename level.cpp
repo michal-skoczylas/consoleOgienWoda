@@ -296,7 +296,7 @@ void Level::loadFromFile( std::string& filename) {
     }
     y++;
   }
-  std::cerr << "Finished loading level" << filename<<std::endl;
+  std::cerr << "Finished loading level " << filename<<std::endl;
   file.close();
 }
 bool Level::chekGoalReached(Player& player) {
@@ -359,24 +359,20 @@ std::string Level::getLevelPath(){
 
 void Level::saveBestTime() {
     std::string levelFilePath = this->getLevelPath();
-    std::cerr << "Original level path: " << levelFilePath << std::endl;
 
     // Extract the base filename from the level path
     std::filesystem::path levelPath(levelFilePath);
     std::string filename = levelPath.filename().string();
-    std::cout << this->arglevelPath << std::endl;
+    
+    // std::cout << this->arglevelPath << std::endl;
+
     std::string timeFileName = arglevelPath.substr(arglevelPath.find_last_of("level") + 1);
      timeFileName = timeFileName[0];
-    // Replace "level" with "Time" in the filename
-    std::cout<< timeFileName << std::endl; // Assuming the filename starts with "level"
+    // std::cout << timeFileName << std::endl; // Assuming the filename starts with "level" and is followed by a number
 
-    // Form the new file path
-    std::filesystem::path timeFilePath = "D:\\klonygithub\\consoleOgienWoda\\assets\\Time" + timeFileName +".txt";
-    std::cerr << "Transformed file path: " << timeFilePath << std::endl;
 
-  // arglevelPath == "assets/level" + n +".txt"
-    // Construct the time file path
-    timeFilePath = "assets/" timeFileName + ".txt";
+  //Poprwana wersja zapisu czasu do plików z czasami
+    std::string timeFilePath = "assets/Time" + timeFileName + ".txt";
 
     
 
@@ -384,7 +380,7 @@ void Level::saveBestTime() {
     std::ofstream file;
     file.open(timeFilePath, std::ios::app);
     if (!file.is_open()) {
-        throw std::runtime_error("Failed to open best times file: " + timeFilePath.string());
+        throw std::runtime_error("Failed to open best times file: " + timeFilePath);
     }
 
     // Write the new time to the file
@@ -392,22 +388,10 @@ void Level::saveBestTime() {
     std::cerr << "Time to be saved: " << newTime << std::endl;
     file << newTime << std::endl;
     if (!file) {
-        throw std::runtime_error("Failed to write to best times file: " + timeFilePath.string());
+        throw std::runtime_error("Failed to write to best times file: " + timeFilePath);
     }
     file.close();
     std::cerr << "Time successfully saved" << std::endl;
-}
-
-std::string Level::constructTimeFilePath(const std::string& levelPath) {
-    // Extract the level number from the level path
-    std::string levelNumber = levelPath.substr(levelPath.find_last_of("level") + 5);
-    std::cout<<"Level number: "<<levelNumber<<std::endl;
-
-    // Construct the time file path
-    std::string timeFilePath = "D:\\klonygithub\\consoleOgienWoda\\assets\\Time" + levelNumber + ".txt";
-
-    return timeFilePath;
-    std::cout << "Time file path: " << timeFilePath << std::endl;
 }
 
 void Level::setFinalTime(std::string time){

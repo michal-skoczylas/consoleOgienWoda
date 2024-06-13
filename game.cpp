@@ -131,7 +131,8 @@ void Game::run() {
       gameFinished = true;
       std::cout << "Game finished in " << finalTime << std::endl;
          level.saveBestTime();
-         std::cout<<"Best time: "<<level.getFinalTime()<<std::endl;
+         // Print the best time
+         //std::cout<<"Best time: "<<level.getFinalTime()<<std::endl;
     }
   }
 }
