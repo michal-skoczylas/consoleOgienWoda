@@ -1,0 +1,14 @@
+# ninja log v6
+3	344	1718297113487923347	consoleOgienWoda_autogen/timestamp	b4840c96d5c51fce
+3	344	1718297113487923347	consoleOgienWoda_autogen/mocs_compilation.cpp	b4840c96d5c51fce
+3	344	1718297113487923347	/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/timestamp	b4840c96d5c51fce
+3	344	1718297113487923347	/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Debug/consoleOgienWoda_autogen/mocs_compilation.cpp	b4840c96d5c51fce
+350	1437	1718297113497923347	CMakeFiles/consoleOgienWoda.dir/waterplayer.cpp.o	5add97ec58c45a04
+344	1554	1718297113494590014	CMakeFiles/consoleOgienWoda.dir/player.cpp.o	a8ba5194008f9670
+346	1837	1718297113494590014	CMakeFiles/consoleOgienWoda.dir/fireplayer.cpp.o	8bc32faa704737f4
+345	1839	1718297113494590014	CMakeFiles/consoleOgienWoda.dir/game.cpp.o	49ce919f97916df3
+344	2152	1718297113494590014	CMakeFiles/consoleOgienWoda.dir/level.cpp.o	c064201ead3ec74
+344	3494	1718297113491256681	CMakeFiles/consoleOgienWoda.dir/consoleOgienWoda_autogen/mocs_compilation.cpp.o	7cd91c27bc0b6401
+344	3650	1718297113491256681	CMakeFiles/consoleOgienWoda.dir/main.cpp.o	8199ade444388fc
+351	3881	1718297113497923347	CMakeFiles/consoleOgienWoda.dir/mainwindow.cpp.o	1d1522bde3f894f1
+3882	4305	1718297117031256553	consoleOgienWoda	a312a4c168ab15ac
