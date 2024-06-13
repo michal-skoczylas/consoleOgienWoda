@@ -375,7 +375,9 @@ void Level::saveBestTime() {
     std::cerr << "Transformed file path: " << timeFilePath << std::endl;
 
   // arglevelPath == "assets/level" + n +".txt"
-  
+    // Construct the time file path
+    timeFilePath = "assets/" timeFileName + ".txt";
+
     
 
     // Open the file for appending
