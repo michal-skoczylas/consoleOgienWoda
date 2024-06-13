@@ -16,6 +16,12 @@ public:
     void setLevelFinished();
     bool getLevelFinished();
     void endGame(); 
+    void saveBestTime();
+    void setFinalTime(std::string time);
+        std::string getLevelPath();
+
+    std::string  getFinalTime();
+    std::string getLevelPath() const { return levelPath; }
     sf::Vector2f getStartingPosition();
 sf::Vector2f getFireStartingPosition();
 sf::Vector2f getWaterStartingPosition();
@@ -40,6 +46,9 @@ sf::Vector2f getWaterStartingPosition();
     sf::Vector2f waterStartingPosition;
     sf::Sprite fireStartingTile;
     sf::Sprite waterStartingTile;
+    std::string levelPath;
+    std::string getFinalTime() const;
+    std::string finalTime;
 };
 
 #endif // LEVEL_H

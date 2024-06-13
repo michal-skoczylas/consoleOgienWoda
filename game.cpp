@@ -124,11 +124,14 @@ void Game::run() {
 
     // Check if the game has finished
     // Replace 'checkGameFinished()' with the appropriate method in your code
-     if (level.getLevelFinished() && !gameFinished) {
+    if (level.getLevelFinished() && !gameFinished) {
       // If the game has just finished, store the final time
       finalTime = timerText.getString();
+      level.setFinalTime(finalTime);
       gameFinished = true;
       std::cout << "Game finished in " << finalTime << std::endl;
+         level.saveBestTime();
+         std::cout<<"Best time: "<<level.getFinalTime()<<std::endl;
     }
   }
 }

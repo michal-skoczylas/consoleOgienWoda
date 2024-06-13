@@ -5,6 +5,15 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <filesystem>
+#include "level.h"
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
+#include <sstream>
+#include <vector>
+#include <SFML/Graphics.hpp>
 
 Level::Level() { this->loadTextures("assets/textures.txt"); }
 
@@ -342,4 +351,54 @@ sf::Vector2f Level::getFireStartingPosition(){
 //getter do pozycji startowej gracza water
 sf::Vector2f Level::getWaterStartingPosition(){
     return this->waterStartingPosition;
+}
+
+std::string Level::getLevelPath(){
+    return this->levelPath;
+}
+
+void Level::saveBestTime() {
+    std::string levelFilePath = this->getLevelPath();
+    std::cerr << "Original level path: " << levelFilePath << std::endl;
+
+    // Extract the base filename from the level path
+    std::filesystem::path levelPath(levelFilePath);
+    std::string filename = levelPath.filename().string();
+
+    // Replace "level" with "Time" in the filename
+    std::string timeFilename = "Time" + '3'; // Assuming the filename starts with "level"
+
+    // Form the new file path
+    std::filesystem::path timeFilePath = "D:\\klonygithub\\consoleOgienWoda\\assets\\Time3.txt";
+    std::cerr << "Transformed file path: " << timeFilePath << std::endl;
+
+    // Ensure the directory exists
+    std::filesystem::path directory = timeFilePath.parent_path();
+    if (!std::filesystem::exists(directory)) {
+        std::filesystem::create_directories(directory);
+    }
+
+    // Open the file for appending
+    std::ofstream file;
+    file.open(timeFilePath, std::ios::app);
+    if (!file.is_open()) {
+        throw std::runtime_error("Failed to open best times file: " + timeFilePath.string());
+    }
+
+    // Write the new time to the file
+    std::string newTime = this->getFinalTime();
+    std::cerr << "Time to be saved: " << newTime << std::endl;
+    file << newTime << std::endl;
+    if (!file) {
+        throw std::runtime_error("Failed to write to best times file: " + timeFilePath.string());
+    }
+    file.close();
+    std::cerr << "Time successfully saved" << std::endl;
+}
+
+void Level::setFinalTime(std::string time){
+    this->finalTime=time;
+}
+std::string Level::getFinalTime(){
+    return this->finalTime;
 }
