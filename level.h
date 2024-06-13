@@ -15,11 +15,17 @@ public:
     void checkEndGame(std::vector<Player*> players);
     void setLevelFinished();
     bool getLevelFinished();
+    void setFinalTime(std::string time);
+    std::string  getFinalTime();
     void endGame(); 
+    void saveBestTime();
+  
+    std::string getLevelPath();
     sf::Vector2f getStartingPosition();
 sf::Vector2f getFireStartingPosition();
 sf::Vector2f getWaterStartingPosition();
     private:
+    std::string levelPath;
     sf::Sprite goalTile;
     std::vector<sf::RectangleShape> platforms;
     std::vector<sf::RectangleShape> walls;
@@ -40,6 +46,8 @@ sf::Vector2f getWaterStartingPosition();
     sf::Vector2f waterStartingPosition;
     sf::Sprite fireStartingTile;
     sf::Sprite waterStartingTile;
+    //best time
+    std::string finalTime;
 };
 
 #endif // LEVEL_H

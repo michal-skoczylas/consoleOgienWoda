@@ -65,6 +65,21 @@ void Game::run() {
     sf::Time deltaTime = clock.restart();
     update(deltaTime);
     render();
+<<<<<<< Updated upstream
+=======
+
+    // Check if the game has finished
+    // Replace 'checkGameFinished()' with the appropriate method in your code
+     if (level.getLevelFinished() && !gameFinished) {
+      // If the game has just finished, store the final time
+      finalTime = timerText.getString();
+      level.setFinalTime(finalTime);
+      gameFinished = true;
+      std::cout << "Game finished in " << finalTime << std::endl;
+         level.saveBestTime();
+         std::cout<<"Best time: "<<level.getFinalTime()<<std::endl;
+    }
+>>>>>>> Stashed changes
   }
 }
 
@@ -99,6 +114,7 @@ void Game::render() {
     if (endGameSoundPlayed == false) {
       endGameSound.play();
       endGameSoundPlayed = true;
+   
     }
   }
   window.display();
