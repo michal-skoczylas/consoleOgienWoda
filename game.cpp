@@ -184,7 +184,7 @@ void Game::render() {
 void Game::selectLevel(std::string arglevelPath) {
   this->levelPath = arglevelPath;
   level.loadFromFile(arglevelPath);
-
+  level.arglevelPath = arglevelPath;;
   // setup player starting positions
   // dodanie wektora 0,-25 powoduje ze postacie nie zapadaja sie pod ziemie po
   // zrespieniu

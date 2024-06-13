@@ -364,19 +364,19 @@ void Level::saveBestTime() {
     // Extract the base filename from the level path
     std::filesystem::path levelPath(levelFilePath);
     std::string filename = levelPath.filename().string();
-
+    std::cout << this->arglevelPath << std::endl;
+    std::string timeFileName = arglevelPath.substr(arglevelPath.find_last_of("level") + 1);
+     timeFileName = timeFileName[0];
     // Replace "level" with "Time" in the filename
-    std::string timeFilename = "Time" + '3'; // Assuming the filename starts with "level"
+    std::cout<< timeFileName << std::endl; // Assuming the filename starts with "level"
 
     // Form the new file path
-    std::filesystem::path timeFilePath = "D:\\klonygithub\\consoleOgienWoda\\assets\\Time3.txt";
+    std::filesystem::path timeFilePath = "D:\\klonygithub\\consoleOgienWoda\\assets\\Time" + timeFileName +".txt";
     std::cerr << "Transformed file path: " << timeFilePath << std::endl;
 
-    // Ensure the directory exists
-    std::filesystem::path directory = timeFilePath.parent_path();
-    if (!std::filesystem::exists(directory)) {
-        std::filesystem::create_directories(directory);
-    }
+  // arglevelPath == "assets/level" + n +".txt"
+  
+    
 
     // Open the file for appending
     std::ofstream file;
@@ -394,6 +394,18 @@ void Level::saveBestTime() {
     }
     file.close();
     std::cerr << "Time successfully saved" << std::endl;
+}
+
+std::string Level::constructTimeFilePath(const std::string& levelPath) {
+    // Extract the level number from the level path
+    std::string levelNumber = levelPath.substr(levelPath.find_last_of("level") + 5);
+    std::cout<<"Level number: "<<levelNumber<<std::endl;
+
+    // Construct the time file path
+    std::string timeFilePath = "D:\\klonygithub\\consoleOgienWoda\\assets\\Time" + levelNumber + ".txt";
+
+    return timeFilePath;
+    std::cout << "Time file path: " << timeFilePath << std::endl;
 }
 
 void Level::setFinalTime(std::string time){

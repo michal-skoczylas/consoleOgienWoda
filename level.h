@@ -19,7 +19,8 @@ public:
     void saveBestTime();
     void setFinalTime(std::string time);
         std::string getLevelPath();
-
+        std::string constructTimeFilePath(const std::string& levelPath);
+    std::string arglevelPath;
     std::string  getFinalTime();
     std::string getLevelPath() const { return levelPath; }
     sf::Vector2f getStartingPosition();
