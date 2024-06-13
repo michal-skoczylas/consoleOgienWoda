@@ -2,7 +2,7 @@
 
 int main() {
     Game game(800, 600);
-    game.selectLevel("assets/level3.txt");
+    game.selectLevel("assets/level1.txt");
     game.run();
     return 0;
 }
