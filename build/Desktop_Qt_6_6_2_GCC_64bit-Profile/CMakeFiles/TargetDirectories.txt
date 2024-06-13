@@ -1,9 +1,0 @@
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/consoleOgienWoda.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/edit_cache.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/rebuild_cache.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/list_install_components.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/install.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/install/local.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/install/strip.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/consoleOgienWoda_autogen_timestamp_deps.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/Desktop_Qt_6_6_2_GCC_64bit-Profile/CMakeFiles/consoleOgienWoda_autogen.dir

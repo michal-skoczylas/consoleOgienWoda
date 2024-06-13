@@ -1,9 +1,0 @@
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/consoleOgienWoda.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/edit_cache.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/rebuild_cache.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/list_install_components.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/install.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/install/local.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/install/strip.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/consoleOgienWoda_autogen_timestamp_deps.dir
-/home/michal/QT_Apps/consoleOgienWoda/build/CMakeFiles/consoleOgienWoda_autogen.dir
