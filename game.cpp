@@ -89,23 +89,27 @@ Game::Game(int windowWidth, int windowHeight)
 
 void Game::run() {
   sf::Clock clock;
+  bool gameFinished = false; // Add a flag to track if the game has finished
   while (window.isOpen()) {
     processEvents();
     sf::Time deltaTime = clock.restart();
     update(deltaTime);
 
-    // Update the timerText string before rendering
-    sf::Time elapsed = gameClock.getElapsedTime();
-    int minutes = static_cast<int>(elapsed.asSeconds()) / 60;
-    int seconds = static_cast<int>(elapsed.asSeconds()) % 60;
-    int milliseconds = elapsed.asMilliseconds() % 1000;
+    // Only update the timer if the game is not finished
+    if (!gameFinished) {
+      // Update the timerText string before rendering
+      sf::Time elapsed = gameClock.getElapsedTime();
+      int minutes = static_cast<int>(elapsed.asSeconds()) / 60;
+      int seconds = static_cast<int>(elapsed.asSeconds()) % 60;
+      int milliseconds = elapsed.asMilliseconds() % 1000;
 
-    // Update the timer text
-    timerText.setString(
-      std::to_string(minutes) + ":" + 
-      (seconds < 10 ? "0" : "") + std::to_string(seconds) + ":" + 
-      (milliseconds < 100 ? "0" : "") + (milliseconds < 10 ? "0" : "") + std::to_string(milliseconds)
-    );
+      // Update the timer text
+      timerText.setString(
+        std::to_string(minutes) + ":" + 
+        (seconds < 10 ? "0" : "") + std::to_string(seconds) + ":" + 
+        (milliseconds < 100 ? "0" : "") + (milliseconds < 10 ? "0" : "") + std::to_string(milliseconds)
+      );
+    }
 
     // Update the position and size of the timer background
     timerText.setPosition(window.getSize().x - timerText.getGlobalBounds().width - 10, 10);
@@ -114,6 +118,10 @@ void Game::run() {
 
     // Render the game
     render();
+
+    // Check if the game has finished
+    // Replace 'checkGameFinished()' with the appropriate method in your code
+    gameFinished = level.getLevelFinished();
   }
 }
 
