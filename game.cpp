@@ -96,7 +96,7 @@ void Game::run() {
     update(deltaTime);
 
     // Only update the timer if the game is not finished
-    if (!gameFinished) {
+     if (!gameFinished) {
       // Update the timerText string before rendering
       sf::Time elapsed = gameClock.getElapsedTime();
       int minutes = static_cast<int>(elapsed.asSeconds()) / 60;
@@ -109,6 +109,9 @@ void Game::run() {
         (seconds < 10 ? "0" : "") + std::to_string(seconds) + ":" + 
         (milliseconds < 100 ? "0" : "") + (milliseconds < 10 ? "0" : "") + std::to_string(milliseconds)
       );
+    } else {
+      // If the game has finished, display the final time
+      timerText.setString(finalTime);
     }
 
     // Update the position and size of the timer background
@@ -121,7 +124,12 @@ void Game::run() {
 
     // Check if the game has finished
     // Replace 'checkGameFinished()' with the appropriate method in your code
-    gameFinished = level.getLevelFinished();
+     if (level.getLevelFinished() && !gameFinished) {
+      // If the game has just finished, store the final time
+      finalTime = timerText.getString();
+      gameFinished = true;
+      std::cout << "Game finished in " << finalTime << std::endl;
+    }
   }
 }
 

@@ -40,6 +40,7 @@ class Game {
   sf::Text timerText;
   sf::Font timerFont;
   sf::RectangleShape timerBackground;
+  std::string finalTime;
 };
 
 #endif  // GAME_H
