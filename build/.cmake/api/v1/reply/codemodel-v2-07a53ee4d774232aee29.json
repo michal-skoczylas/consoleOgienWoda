@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-c4a030a2d5afa2d2c34b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "consoleOgienWoda",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "consoleOgienWoda::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-consoleOgienWoda-Debug-923c592f84d4dab21eda.json",
+					"name" : "consoleOgienWoda",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "consoleOgienWoda_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-consoleOgienWoda_autogen-Debug-02652b6e309c907e3a00.json",
+					"name" : "consoleOgienWoda_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "consoleOgienWoda_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-consoleOgienWoda_autogen_timestamp_deps-Debug-3ff7997ad11e3ad9b835.json",
+					"name" : "consoleOgienWoda_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/michal/QT_Apps/consoleOgienWoda/build",
+		"source" : "/home/michal/QT_Apps/consoleOgienWoda"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
