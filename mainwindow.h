@@ -19,6 +19,8 @@ private slots:
 
     void on_runPushButton_clicked();
 
+    void on_authors_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

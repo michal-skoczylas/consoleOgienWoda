@@ -51,3 +51,12 @@ void MainWindow::levelSetup(const QString &levelFilePath){
         }
     }
 }
+
+void MainWindow::on_authors_pushButton_clicked()
+{
+    QMessageBox msg;
+    msg.setText("Autorzy: Michał Skoczylas, Jan Rębacz");
+    msg.setWindowTitle("Autorzy projektu");
+    msg.exec();
+}
+

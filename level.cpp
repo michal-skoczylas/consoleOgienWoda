@@ -419,7 +419,7 @@ void Level::saveBestTime() {
 
   // arglevelPath == "assets/level" + n +".txt"
     // Construct the time file path
-    timeFilePath = "assets/" + timeFileName + ".txt";
+    // timeFilePath = "assets/" + timeFileName + ".txt";
   //Poprwana wersja zapisu czasu do plików z czasami
     std::string timeFilePath = "assets/Time" + timeFileName + ".txt";
 
