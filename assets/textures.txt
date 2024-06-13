@@ -12,3 +12,4 @@ assets/doors.png
 assets/LavaSplash.png
 assets/waterdoor.png
 assets/acid.png
+assets/slippery_wall.png

@@ -289,6 +289,21 @@ void Level::loadFromFile( std::string& filename) {
           break;
 
         }
+
+        case 'k':
+        {
+          sf::Sprite slippery_wall;
+          slippery_wall.setTexture(textures[14]);
+          slippery_wall.setScale(
+              tileSizeX / static_cast<float>(textures[14].getSize().x),
+              tileSizeY / static_cast<float>(textures[14].getSize().y));
+          slippery_wall.setPosition(x * tileSizeX, y * tileSizeY);
+          sprites.push_back(slippery_wall);
+          slippery_wallsSprites.push_back(slippery_wall);
+          // std::cerr << "Slippery wall added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
+          break;
+          
+        }
         default:
           // Handle other tile types
           break;

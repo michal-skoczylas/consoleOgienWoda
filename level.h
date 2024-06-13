@@ -34,6 +34,7 @@ sf::Vector2f getWaterStartingPosition();
     std::vector<sf::Sprite> lavaSprites;
     std::vector <sf::Sprite> waterSprites;
     std::vector<sf::Sprite> acidSprites;
+    std::vector<sf::Sprite> slippery_wallsSprites;
     sf::Vector2f playerStart;
     sf::Vector2f goal;
     sf::Vector2f tileSize=sf::Vector2f(18,13.5);
