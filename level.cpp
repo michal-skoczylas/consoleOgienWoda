@@ -57,6 +57,9 @@ void Level::checkCollisions(Player& player) {
     if (spriteBounds == goalTile.getGlobalBounds()) {
       continue;
     }
+    if (spriteBounds == gemTile.getGlobalBounds()) {
+      continue;
+    }
     if(spriteBounds==startingTile.getGlobalBounds()){
       continue;
     }
@@ -97,6 +100,9 @@ for(const auto& lavaSprite: lavaSprites){
     }
 
     if(spriteBounds==startingTile.getGlobalBounds()){
+      continue;
+    }
+    if(spriteBounds==gemTile.getGlobalBounds()){
       continue;
     }
     //Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
@@ -304,6 +310,19 @@ void Level::loadFromFile( std::string& filename) {
           break;
           
         }
+        case 'g':
+        {
+          sf::Sprite gem;
+          gem.setTexture(textures[15]); 
+          gem.setScale(
+              tileSizeX / static_cast<float>(textures[15].getSize().x),
+              tileSizeY / static_cast<float>(textures[15].getSize().y));
+          gem.setPosition(x * tileSizeX, y * tileSizeY);
+          sprites.push_back(gem);
+          gemSprites.push_back(gem);
+          gemTile = gem;
+          break;
+        }
         default:
           // Handle other tile types
           break;
@@ -323,6 +342,18 @@ bool Level::chekGoalReached(Player& player) {
   }
   return false;
 }
+
+bool Level::checkGemReached(Player& player) {
+  sf::FloatRect playerBounds = player.getBounds();
+  if (playerBounds.intersects(gemTile.getGlobalBounds())) {
+    // std::cout<<"Gem reached"<<std::endl;
+    //player.setTargetReached();
+    return true;
+  }
+  return false;
+}
+
+
 //Spradza czy gra jest skonczona itd
 void Level::checkEndGame(std::vector<Player*> players) {
   if (players[0]->getTargetReached() && players[1]->getTargetReached()) {

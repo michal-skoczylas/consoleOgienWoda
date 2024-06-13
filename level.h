@@ -12,6 +12,7 @@ public:
     void loadFromFile( std::string& filename);
     void loadTextures(std::string texture_loader_filepath);
     bool chekGoalReached(Player& player);
+    bool checkGemReached(Player& player);
     void checkEndGame(std::vector<Player*> players);
     void setLevelFinished();
     bool getLevelFinished();
@@ -28,6 +29,7 @@ sf::Vector2f getFireStartingPosition();
 sf::Vector2f getWaterStartingPosition();
     private:
     sf::Sprite goalTile;
+    sf::Sprite gemTile;
     std::vector<sf::RectangleShape> platforms;
     std::vector<sf::RectangleShape> walls;
     std::vector<sf::Sprite> sprites;
@@ -35,8 +37,10 @@ sf::Vector2f getWaterStartingPosition();
     std::vector <sf::Sprite> waterSprites;
     std::vector<sf::Sprite> acidSprites;
     std::vector<sf::Sprite> slippery_wallsSprites;
+    std::vector<sf::Sprite> gemSprites;
     sf::Vector2f playerStart;
     sf::Vector2f goal;
+    sf::Vector2f gem;
     sf::Vector2f tileSize=sf::Vector2f(18,13.5);
     std::vector<sf::Texture> textures;
     bool levelFinished=false;
