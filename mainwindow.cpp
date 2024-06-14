@@ -60,3 +60,22 @@ void MainWindow::on_authors_pushButton_clicked()
     msg.exec();
 }
 
+void MainWindow::on_instructions_pushButton_clicked()
+{
+    QMessageBox msg;
+    msg.setText("Instrukcja: \n"
+                "1. Wybierz poziom z listy rozwijanej\n"
+                "2. Kliknij przycisk 'Uruchom'\n"
+                "3. Sterowanie:\n"
+                "   - Gracz 1: W - skok, A - ruch w lewo, D - ruch w prawo\n"
+                "   - Gracz 2: Strzałka w górę - skok, Strzałka w lewo - ruch w lewo, Strzałka w prawo - ruch w prawo\n"
+                "4. Celem gry jest dotarcie obu graczy do końca poziomu oznaczonego monetą\n"
+                "   - Gracz 1: Czerwony może stawać na blokach lawy, ale musi uważać na bloki wody, w których zgaśnie i pojawi się z powrotem na starcie\n"
+                "   - Gracz 2: Niebieski może stawać na blokach wody, ale musi uważać na bloki ognia, w których zmieni się w parę i pojawi się z powrotem na starcie\n"
+                "   - Żaden z Graczy nie może stawać na zielonym bloku kwasu, ponieważ rozpuści się i wróci na start\n"
+                "5. Powodzenia!");
+    msg.setWindowTitle("Instrukcja");
+    msg.exec();
+}
+
+
