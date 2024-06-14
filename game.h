@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp> 
 #include <vector>
 
 #include "SFML/Audio.hpp"
@@ -22,6 +23,7 @@ class Game {
   void setupTimer();
   sf::Clock finishClock;
   bool FinishClockStarted = false;
+  sf::Music backgroundMusic;
 
   sf::RenderWindow window;
   sf::Texture backgroundTexture;

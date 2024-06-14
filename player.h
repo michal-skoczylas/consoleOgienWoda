@@ -48,6 +48,9 @@ float speedBoost=0;
   sf::Clock animationClock;
   int rows, columns;
   bool isTargetReached = false;
+  sf::SoundBuffer jumpBuffer;
+  sf::Sound jumpSound;
+
 
 };
 

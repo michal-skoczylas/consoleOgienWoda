@@ -26,6 +26,7 @@ void Player::handleInput() {
   if (onGround && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
     velocity.y = -400;
     onGround = false;
+    
   }
 }
 
@@ -111,7 +112,7 @@ void Player::update(sf::Time deltaTime) {
   if (position.x < 0) {
     position.x = 0;
     velocity.x = 0;
-  } else if (position.x + size.x > 800) {  // assuming window width is 800
+  } else if (position.x + size.x > 800) {  
     position.x = 800 - size.x;
     velocity.x = 0;
   }
@@ -119,7 +120,7 @@ void Player::update(sf::Time deltaTime) {
   if (position.y < 0) {
     position.y = 0;
     velocity.y = 0;
-  } else if (position.y + size.y > 600) {  // assuming window height is 600
+  } else if (position.y + size.y > 600) { 
     position.y = 600 - size.y;
     velocity.y = 0;
   }

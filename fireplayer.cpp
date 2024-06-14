@@ -3,6 +3,11 @@
 #include <iostream>
 
 FirePlayer::FirePlayer(sf::Vector2f position, sf::Color color=sf::Color::Red):Player(position,color) {
+    //Ustawienie dzweikow postaci
+    if(!jumpBuffer.loadFromFile("assets/jump_sound.mp3")){
+        std::cerr << "Failed to load jump sound" << std::endl;
+    }
+    jumpSound.setBuffer(jumpBuffer);
 
 }
 
@@ -22,6 +27,7 @@ void FirePlayer::handleInput(){
   if (onGround && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
     velocity.y = -400;
     onGround = false;
+    jumpSound.play();   
   }
 }
 
