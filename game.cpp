@@ -250,3 +250,6 @@ if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
     std::cout << "Failed to save completed level" << std::endl;
   }
 }
+Game::~Game(){
+    emit gameClosed();
+}

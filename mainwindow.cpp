@@ -5,6 +5,7 @@
 #include "game.h"
 #include "QString"
 #include <QMessageBox>
+#include <iostream>
 #include <QRegularExpression>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,9 +34,15 @@ void MainWindow::on_runPushButton_clicked()
     std::string stringSelectedLevel = selectedLevel.toStdString();
 
     //Uruchomienie gry
-    Game game(800,600);
-    game.selectLevel(stringSelectedLevel);
-    game.run();
+    // Game game(800,600);
+    // game.selectLevel(stringSelectedLevel);
+    // game.run();
+    game = new Game(800,600);
+    connect(game, SIGNAL(gameClosed()), this, SLOT(onGameClosed()));
+    game->selectLevel(stringSelectedLevel);
+    game->run();
+
+    delete game;
 }
 
 void MainWindow::levelSetup(const QString &levelFilePath){
@@ -177,3 +184,8 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
+void MainWindow::onGameClosed(){
+    std::cerr<<"Odebrano"<<std::endl;
+    levelSetup("assets/levels.txt");
+
+}

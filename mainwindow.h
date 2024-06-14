@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QFile>
 #include <QString>
-
+#include "game.h"
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +17,10 @@ public:
     ~MainWindow();
     void levelSetup(const QString &levelFilePath);
     QString findShortestTime(const QString &TimeFilePath);
+signals:
+    void gameClosed();
+public slots:
+    void onGameClosed();
 
 private slots:
     // Funkcje obsługujące przyciski
@@ -32,6 +36,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    Game *game;
 };
 
 #endif // MAINWINDOW_H

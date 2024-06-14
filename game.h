@@ -3,20 +3,24 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp> 
 #include <vector>
-
 #include "SFML/Audio.hpp"
 #include "fireplayer.h"
 #include "level.h"
 #include "player.h"
 #include "waterplayer.h"
+#include <QObject>
 
-class Game {
+class Game:public QObject {
+    Q_OBJECT
+signals:
+    void gameClosed();
  public:
   // Constructor
   Game(int windowWidth, int windowHeight);
   void run();
   void selectLevel(std::string arglevelPath);
   void saveCompleted();
+  ~Game();
  private:
   void processEvents();
   void update(sf::Time deltaTime);
