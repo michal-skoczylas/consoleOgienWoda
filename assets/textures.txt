@@ -15,3 +15,5 @@ assets/acid.png
 assets/slippery_wall.png
 assets/gem.png
 assets/mud.png
+assets/button.png
+assets/receiver.png

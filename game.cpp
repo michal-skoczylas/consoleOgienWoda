@@ -1,5 +1,5 @@
 #include "game.h"
-
+#include <vector>
 #include <iostream>
 
 #include "fireplayer.h"
@@ -7,7 +7,7 @@
 #include "waterplayer.h"
 
 Game::Game(int windowWidth, int windowHeight)
-    : window(sf::VideoMode(windowWidth, windowHeight), "Platformer Game"),
+    : window(sf::VideoMode(windowWidth, windowHeight), "Ogień i Woda"),
       player1(sf::Vector2f(0, 0), sf::Color::White),
       player2(sf::Vector2f(0, 0), sf::Color::White),
       level() {
@@ -27,6 +27,10 @@ Game::Game(int windowWidth, int windowHeight)
       static_cast<float>(windowSize.y) / textureSize.y
     );
   }
+  std::vector<Player*>players;
+  players.push_back(&player1);
+  players.push_back(&player2);
+
 
   if (!player1Texture.loadFromFile("assets/fire_boy.png") ||
       !player2Texture.loadFromFile("assets/water_girl.png")) {
@@ -158,8 +162,9 @@ void Game::update(sf::Time deltaTime) {
   // Update the players and check for collisions
   player1.update(deltaTime);
   player2.update(deltaTime);
-  level.checkCollisions(player1);
-  level.checkCollisions(player2);
+  // level.checkCollisions(player1);
+  // level.checkCollisions(player2);
+  level.checkCollisions(players);
   level.chekGoalReached(player1);
   level.chekGoalReached(player2);
   // Check if the level is finished

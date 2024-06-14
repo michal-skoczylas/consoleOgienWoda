@@ -23,15 +23,20 @@ void Level::draw(sf::RenderWindow& window) {
     if(isGem(sprite)&&getGemCollected()){
         continue;
     }
+    if(isReceiver(sprite)&&isButtonPressed){
+      spritesToRemove.emplace_back(sprite);
+        continue;
+    }
     window.draw(sprite);
     // std::cout << "Sprite texture address: " << sprite.getTexture() <<
     // std::endl; std::cerr << "Sprite drawn at position (" <<
     // sprite.getPosition().x << ", " << sprite.getPosition().y << ")" <<
     // std::endl;
   }
+ 
   // std::cerr << "Level drawn" << std::endl;
 }
-
+//TODO zamienic funkcje zeby przyjmowala wektor graczy
 void Level::checkCollisions(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
     playerBounds.left-=0.3f;
@@ -57,28 +62,39 @@ void Level::checkCollisions(Player& player) {
   for (const auto& sprite : sprites) {
     sf::FloatRect spriteBounds = sprite.getGlobalBounds();
     // Wylaczenie kolizji dla goalTile i startingTile
-    if (spriteBounds == goalTile.getGlobalBounds()) {
-      continue;
-    }
-    if (spriteBounds == gemTile.getGlobalBounds()) {
-      continue;
-    }
-    if (spriteBounds == startingTile.getGlobalBounds()) {
-      continue;
-    }
-    // Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
-    if (spriteBounds == fireStartingTile.getGlobalBounds()) {
-      continue;
-    }
-    if (spriteBounds == waterStartingTile.getGlobalBounds()) {
-      continue;
-    }
+   if (spriteBounds == goalTile.getGlobalBounds() ||
+            spriteBounds == gemTile.getGlobalBounds() ||
+            spriteBounds == startingTile.getGlobalBounds() ||
+            spriteBounds == fireStartingTile.getGlobalBounds() ||
+            spriteBounds == waterStartingTile.getGlobalBounds() ||
+            spriteBounds == buttonTile.getGlobalBounds()) {
+            continue;
+        } 
     // Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
         player.handleCollision(sprite);
         player.normalSpeedSetter();
 
     }
+     if (!isButtonPressed) {
+            for (const auto& receiverSprite : receiverSprites) {
+              if(isButtonPressed){
+                continue;
+              }
+                if (receiverSprite.getGlobalBounds().intersects(playerBounds)) {
+                    player.handleCollision(receiverSprite);
+                }
+            }
+        }
+    // for(auto &receiverSprite : receiverSprites) {
+    //   if(isButtonPressed) {
+    //     continue;  // Jeśli isButtonPressed jest true, pomiń ten sprite
+    //   }
+
+    //   if(receiverSprite.getGlobalBounds().intersects(playerBounds)) {
+    //     player.handleCollision(receiverSprite);
+    //   }
+    // }
     for (const auto& lavaSprite : lavaSprites) {
       if (lavaSprite.getGlobalBounds().intersects(playerBounds)) {
         player.handleLavaCollision(lavaSprite);
@@ -118,38 +134,66 @@ void Level::checkCollisions(Player& player) {
          }
         }
     }
-    // Sprawdzenie kolizji od gory
+    //Sprawdzenie czy ktorys z graczy znajduje sie na przycisku
+    for(auto &buttonSprite : buttonSprites){
+        if(buttonSprite.getGlobalBounds().intersects(playerBounds)){
+            isButtonPressed=true;
+        }
+        else{
+            isButtonPressed=false;
+
+        }
+    }
+    for(auto &receiverSprites : receiverSprites){
+        if(receiverSprites.getGlobalBounds().intersects(playerBounds)){
+            if(!isButtonPressed){
+                player.handleCollision(receiverSprites);
+            }
+            else{
+              continue;
+            }
+        }
+    } // Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
-      player.handleCollision(sprite);
-    }
-  }
+        player.handleCollision(sprite);
+        player.normalSpeedSetter();
 
+    
+    // Sprawdzenie kolizji od gory
+    // if (sprite.getGlobalBounds().intersects(playerBounds)) {
+    //   player.handleCollision(sprite);
+    // }
+  }
+  }
   // Check side collisions with sprites
-  for (const auto& sprite : sprites) {
-    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
-    // Wylaczenie kolizji dla goalTile i startingTile
-    if (spriteBounds == goalTile.getGlobalBounds()) {
-      continue;
-    }
+  // for (const auto& sprite : sprites) {
+  //   sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+  //   // Wylaczenie kolizji dla goalTile i startingTile
+  //   if (spriteBounds == goalTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+    
+  //   if (spriteBounds == startingTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+  //   if (spriteBounds == gemTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+  //   // Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
+  //   if (spriteBounds == fireStartingTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+  //   if (spriteBounds == waterStartingTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+  //   if(spriteBounds == buttonTile.getGlobalBounds()){
+  //       continue;
+  //   }
+  //   if (spriteBounds.intersects(playerBounds)) {
+  //     player.handleCollision(spriteBounds);
 
-    if (spriteBounds == startingTile.getGlobalBounds()) {
-      continue;
-    }
-    if (spriteBounds == gemTile.getGlobalBounds()) {
-      continue;
-    }
-    // Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
-    if (spriteBounds == fireStartingTile.getGlobalBounds()) {
-      continue;
-    }
-    if (spriteBounds == waterStartingTile.getGlobalBounds()) {
-      continue;
-    }
-    if (spriteBounds.intersects(playerBounds)) {
-      player.handleCollision(spriteBounds);
-
-    }
-  }
+  //   }
+  // }
 }
 
 void Level::loadTextures(std::string texture_loader_filepath) {
@@ -370,9 +414,39 @@ void Level::loadFromFile(std::string& filename) {
             break;
 
         }
+        case 'b':
+        {
+          //Przycisk na ktorym jeden gracz bedzie musial stanac zeby drugi mogl przejsc
+          sf::Sprite button;
+          button.setTexture(textures[17]);
+          button.setScale(
+              tileSizeX / static_cast<float>(textures[17].getSize().x),
+              tileSizeY / static_cast<float>(textures[17].getSize().y));
+          button.setPosition(x * tileSizeX, y * tileSizeY);
+          sprites.push_back(button);
+          buttonSprites.push_back(button);
+          buttonTile = button;
+          break;
+      
+        }
+        case 'r':
+        {
+          //Odbiornik ktory po przycisnieciu przycisku bedzie znikal
+          sf::Sprite receiver;
+          receiver.setTexture(textures[18]);
+          receiver.setScale(
+              tileSizeX / static_cast<float>(textures[18].getSize().x),
+              tileSizeY / static_cast<float>(textures[18].getSize().y));
+          receiver.setPosition(x * tileSizeX, y * tileSizeY);
+          sprites.push_back(receiver);
+          receiverSprites.push_back(receiver);
+          receiverTile = receiver;
+          break;
+        }
         default:
           // Handle other tile types
           break;
+
       }
     }
     y++;
@@ -491,4 +565,180 @@ bool Level::isGem(const sf::Sprite& sprite) {
 
   // Sprawdź czy wtekstury są takie same
   return spriteTexture == gemTexture; 
+}
+bool Level::isReceiver(const sf::Sprite& sprite) {
+  // Pobierz teksturę sprite'a
+  const sf::Texture* spriteTexture = sprite.getTexture(); 
+
+  // Pobierz teksturę receivera
+  sf::Texture* receiverTexture = &textures[18]; 
+
+  // Sprawdź czy wtekstury są takie same
+  return spriteTexture == receiverTexture; 
+}
+void Level::checkCollisions(const std::vector<Player*>& players) {
+  for (auto& playerPtr : players) {
+    Player& player = *playerPtr;
+
+  sf::FloatRect playerBounds = player.getBounds();
+    playerBounds.left-=0.3f;
+  playerBounds.top-=0.3f;
+    playerBounds.width-=0.3f;
+  playerBounds.height-=0.3f;
+  // Check collisions with walls
+  for (const auto& wall : walls) {
+    if (wall.getGlobalBounds().intersects(playerBounds)) {
+      player.handleCollision(wall);
+    }
+  }
+
+  // Check side collisions with walls
+  for (const auto& wall : walls) {
+    sf::FloatRect wallBounds = wall.getGlobalBounds();
+    if (wallBounds.intersects(playerBounds)) {
+      player.handleCollision(wallBounds);
+    }
+  }
+  // Check collisions with sprites
+  for (const auto& sprite : sprites) {
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    // Wylaczenie kolizji dla goalTile i startingTile
+   if (spriteBounds == goalTile.getGlobalBounds() ||
+            spriteBounds == gemTile.getGlobalBounds() ||
+            spriteBounds == startingTile.getGlobalBounds() ||
+            spriteBounds == fireStartingTile.getGlobalBounds() ||
+            spriteBounds == waterStartingTile.getGlobalBounds() ||
+            spriteBounds == buttonTile.getGlobalBounds()) {
+            continue;
+        } 
+        if(spriteBounds == receiverTile.getGlobalBounds()&&isButtonPressed){
+            continue;
+        }
+    // Sprawdzenie kolizji od gory
+        if (!isButtonPressed) {
+            for (const auto& receiverSprite : receiverSprites) {
+              if(isButtonPressed){
+                continue;
+              }
+                if (receiverSprite.getGlobalBounds().intersects(playerBounds)) {
+                    player.handleCollision(receiverSprite);
+                }
+            }
+        }
+    // for(auto &receiverSprite : receiverSprites) {
+    //   if(isButtonPressed) {
+    //     continue;  // Jeśli isButtonPressed jest true, pomiń ten sprite
+    //   }
+
+    //   if(receiverSprite.getGlobalBounds().intersects(playerBounds)) {
+    //     player.handleCollision(receiverSprite);
+    //   }
+    // }
+    for (const auto& lavaSprite : lavaSprites) {
+      if (lavaSprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleLavaCollision(lavaSprite);
+          player.normalSpeedSetter();
+      }
+    }
+    for (const auto& waterSprite : waterSprites) {
+      if (waterSprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleWaterCollision(waterSprite);
+          player.normalSpeedSetter();
+      }
+    }
+    for (const auto& acidSprite : acidSprites) {
+      if (acidSprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleAcidCollision(acidSprite);
+          player.normalSpeedSetter();
+      }
+    }
+    for (const auto& slippery_wallsSprite : slippery_wallsSprites) {
+      if (slippery_wallsSprite.getGlobalBounds().intersects(playerBounds)) {
+      
+        player.handleSlipperyWallCollision(slippery_wallsSprite);
+      }
+
+    }
+    for(auto & mudSprite : mudSprites){
+        if(mudSprite.getGlobalBounds().intersects(playerBounds)){
+            player.handleMudCollision(mudSprite);
+        }
+    }
+    for(auto & gemSprite : gemSprites){
+        if(gemSprite.getGlobalBounds().intersects(playerBounds)){
+          if(!getGemCollected()){
+          gemSprite.setColor(sf::Color(255,255,255,0));
+          gemCollected=true;
+          std::cout<<"Gem collected"<<std::endl;
+         }
+        }
+    }
+    //Sprawdzenie czy ktorys z graczy znajduje sie na przycisku
+    for(auto &buttonSprite : buttonSprites){
+        if(buttonSprite.getGlobalBounds().intersects(playerBounds)){
+            isButtonPressed=true;
+        }
+        // else{
+        //     isButtonPressed=false;
+
+        // }
+    }
+    for(auto &receiverSprites : receiverSprites){
+        if(receiverSprites.getGlobalBounds().intersects(playerBounds)){
+            if(!isButtonPressed){
+                player.handleCollision(receiverSprites);
+            }
+            else{
+              continue;
+            }
+        }
+     // Sprawdzenie kolizji od gory
+  //   if (sprite.getGlobalBounds().intersects(playerBounds)) {
+  //       player.handleCollision(sprite);
+  //       player.normalSpeedSetter();
+
+    
+  //   // Sprawdzenie kolizji od gory
+  //   // if (sprite.getGlobalBounds().intersects(playerBounds)) {
+  //   //   player.handleCollision(sprite);
+  //   // }
+  // }
+  }
+  // Check side collisions with sprites
+  // for (const auto& sprite : sprites) {
+  //   sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+  //   // Wylaczenie kolizji dla goalTile i startingTile
+  //   if (spriteBounds == goalTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+    
+  //   if (spriteBounds == startingTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+  //   if (spriteBounds == gemTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+  //   // Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
+  //   if (spriteBounds == fireStartingTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+  //   if (spriteBounds == waterStartingTile.getGlobalBounds()) {
+  //     continue;
+  //   }
+  //   if(spriteBounds == buttonTile.getGlobalBounds()){
+  //       continue;
+  //   }
+  //   if (spriteBounds.intersects(playerBounds)) {
+  //     player.handleCollision(spriteBounds);
+
+  //   }
+  // }
+ if (sprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleCollision(sprite);
+        player.normalSpeedSetter();
+
+    }
+
+  }
+}
 }
