@@ -100,9 +100,18 @@ void Level::checkCollisions(Player& player) {
       }
 
     }
-    for(const auto & mudSprite : mudSprites){
+    for(auto & mudSprite : mudSprites){
         if(mudSprite.getGlobalBounds().intersects(playerBounds)){
             player.handleMudCollision(mudSprite);
+        }
+    }
+    for(auto & gemSprite : gemSprites){
+        if(gemSprite.getGlobalBounds().intersects(playerBounds)){
+          if(!getGemCollected()){
+          gemSprite.setColor(sf::Color(255,255,255,0));
+          gemCollected=true;
+          std::cout<<"Gem collected"<<std::endl;
+         }
         }
     }
     // Sprawdzenie kolizji od gory
@@ -329,6 +338,9 @@ void Level::loadFromFile(std::string& filename) {
           break;
         }
         case 'g': {
+          if(gemCollected){
+              break;
+          }
           sf::Sprite gem;
           gem.setTexture(textures[15]);
           gem.setScale(
@@ -465,3 +477,4 @@ void Level::saveBestTime() {
 
 void Level::setFinalTime(std::string time) { this->finalTime = time; }
 std::string Level::getFinalTime() { return this->finalTime; }
+bool Level::getGemCollected() { return gemCollected; }

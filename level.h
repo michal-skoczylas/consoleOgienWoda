@@ -27,6 +27,7 @@ public:
     sf::Vector2f getStartingPosition();
 sf::Vector2f getFireStartingPosition();
 sf::Vector2f getWaterStartingPosition();
+bool getGemCollected();
     private:
     sf::Sprite goalTile;
     sf::Sprite gemTile;
@@ -45,6 +46,7 @@ sf::Vector2f getWaterStartingPosition();
     sf::Vector2f tileSize=sf::Vector2f(18,13.5);
     std::vector<sf::Texture> textures;
     bool levelFinished=false;
+    bool gemCollected=false;
     //Pozycje startowe graczy dla obu takie same
     sf::Vector2f startingPosition;
     sf::Sprite startingTile;

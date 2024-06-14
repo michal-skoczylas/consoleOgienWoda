@@ -98,12 +98,16 @@ void Game::run() {
     // Only update the timer if the game is not finished
      if (!gameFinished) {
       // Update the timerText string before rendering
+      sf::Time bonusTime;
+      if(level.getGemCollected()){
+        bonusTime = sf::seconds(5);
+      }
       sf::Time elapsed = gameClock.getElapsedTime();
+      elapsed-=bonusTime;
       int minutes = static_cast<int>(elapsed.asSeconds()) / 60;
       int seconds = static_cast<int>(elapsed.asSeconds()) % 60;
       int milliseconds = elapsed.asMilliseconds() % 1000;
-
-      // Update the timer text
+     // Update the timer text
       timerText.setString(
         std::to_string(minutes) + ":" + 
         (seconds < 10 ? "0" : "") + std::to_string(seconds) + ":" + 

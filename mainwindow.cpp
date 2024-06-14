@@ -76,6 +76,7 @@ void MainWindow::on_instructions_pushButton_clicked()
                 "   - Gracz 1: Czerwony może stawać na blokach lawy, ale musi uważać na bloki wody, w których zgaśnie i pojawi się z powrotem na starcie\n"
                 "   - Gracz 2: Niebieski może stawać na blokach wody, ale musi uważać na bloki ognia, w których zmieni się w parę i pojawi się z powrotem na starcie\n"
                 "   - Żaden z Graczy nie może stawać na zielonym bloku kwasu, ponieważ rozpuści się i wróci na start\n"
+                "   - Gracze mogą być spowalniani lub przyśpieszani na blokach śliskich i z błotem\n"
                 "5. Powodzenia!");
     msg.setWindowTitle("Instrukcja");
     msg.exec();
