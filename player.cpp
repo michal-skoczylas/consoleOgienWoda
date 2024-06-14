@@ -10,10 +10,16 @@ Player::Player(sf::Vector2f position, sf::Color color)
 }
 
 void Player::handleInput() {
+
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+
     velocity.x = -200;
+
   } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    velocity.x = 200;
+
+
+      velocity.x = 200;
+
   } else {
     velocity.x = 0;
   }
@@ -42,6 +48,7 @@ void Player::setTexture(const sf::Texture& texture, int rows, int columns) {
 }
 
 void Player::update(sf::Time deltaTime) {
+    std::cout<<speedBoost<<std::endl;
   velocity.y += 981 * deltaTime.asSeconds();  // Gravity
   shape.move(velocity * deltaTime.asSeconds());
 
@@ -252,12 +259,30 @@ void Player::handleAcidCollision(const sf::Sprite& sprite) {
   sf::FloatRect spriteBounds = sprite.getGlobalBounds();
   if (playerBounds.intersects(spriteBounds)) {
     // Collision occurred
-    // Handle lava collision
+    // Handle acid collision
     setDeathSound("assets/death.wav");
     deathSound.play();
     dead();
   }
 }
-void Player::handleSlipperyWallCollision(const sf::Sprite& Sprite) {
-    velocity.x=velocity.x*2;
+void Player::handleSlipperyWallCollision(const sf::Sprite& sprite) {
+    sf::FloatRect playerBounds = shape.getGlobalBounds();
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    sf::FloatRect bufferedPlayerBounds = playerBounds;
+    //Zbuforowane zeby nie powodowalo bledow
+    bufferedPlayerBounds.left -= 0.1f;
+    bufferedPlayerBounds.top -= 0.1f;
+    bufferedPlayerBounds.width += 0.2f;
+    bufferedPlayerBounds.height += 0.2f;
+
+    if (bufferedPlayerBounds.intersects(spriteBounds)) {
+        speedBoost = 200;
+    } else {
+        speedBoost = 0;
+    }
+    handleCollision(sprite);
+
+}
+void Player::normalSpeedSetter(){
+    speedBoost = 0;
 }

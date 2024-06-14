@@ -1,21 +1,24 @@
 #include "waterplayer.h"
-
+#include <iostream>
 WaterPlayer::WaterPlayer(sf::Vector2f position, sf::Color color = sf::Color::Blue):Player(position,color) {
 
 }
 void WaterPlayer::handleInput(){
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        velocity.x = -200;
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        velocity.x = 200;
-    } else {
-        velocity.x = 0;
-    }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 
-    if (onGround && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        velocity.y = -400;
-        onGround = false;
-    }
+    velocity.x = -200;
+
+  } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+
+      velocity.x = 200;
+
+  } else {
+    velocity.x = 0;
+  }
+  if (onGround && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    velocity.y = -400;
+    onGround = false;
+  }
 }
 
 void WaterPlayer::update(sf::Time deltaTime){
@@ -254,3 +257,4 @@ void WaterPlayer::handleWaterCollision(const sf::Sprite& sprite){
         handleCollision(sprite);
     }
 }
+

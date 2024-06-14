@@ -19,9 +19,12 @@ class Player : public sf::Drawable {
   virtual void handleLavaCollision(const sf::Sprite& sprite);
   virtual void handleWaterCollision(const sf::Sprite& sprite);
   void handleAcidCollision(const sf::Sprite& sprite);
-  void handleSlipperyWallCollision(const sf::Sprite& sprite);
+void handleSlipperyWallCollision(const sf::Sprite& sprite);
   void dead();
+float speedBoost=0;
+  bool getSlipperyWall();
   void setDeathSound(const std::string& soundPath);
+  void normalSpeedSetter();
 
  private:
   virtual void draw(sf::RenderTarget& target,
@@ -30,12 +33,13 @@ class Player : public sf::Drawable {
  protected:
   sf::RectangleShape shape;
   sf::Vector2f velocity;
+  sf::Vector2f slipperyVelocity;
   sf::Texture texture;
   bool onGround;
   sf::Vector2f startingPosition;
   sf::SoundBuffer deathBuffer;
   sf::Sound deathSound;
-
+ bool isOnSlipperyWall = false; 
   // Animation variables
   int currentFrame = 0;
   int totalFrames = 0;

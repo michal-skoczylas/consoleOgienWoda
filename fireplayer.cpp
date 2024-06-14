@@ -1,28 +1,35 @@
 #include "fireplayer.h"
 
+#include <iostream>
+
 FirePlayer::FirePlayer(sf::Vector2f position, sf::Color color=sf::Color::Red):Player(position,color) {
 
 }
 
 void FirePlayer::handleInput(){
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-        velocity.x=-200;
+    
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+  
+    velocity.x = -200-speedBoost;
+ }
+   else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    
+      velocity.x = 200+speedBoost;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-        velocity.x=200;
-    }
-    else{
-        velocity.x=0;
-    }
-    if(onGround && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-        velocity.y=-400;
-        onGround=false;
-    }
+   else {
+    velocity.x = 0;
+  }
+  if (onGround && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    velocity.y = -400;
+    onGround = false;
+  }
 }
 
 void FirePlayer::update(sf::Time deltaTime){
+
     velocity.y += 981 * deltaTime.asSeconds(); // Gravity
     shape.move(velocity * deltaTime.asSeconds());
+    
 
     if(shape.getPosition().y + shape.getSize().y > 600){
         // Collision with ground
@@ -251,4 +258,9 @@ void FirePlayer::handleWaterCollision(const sf::Sprite& sprite){
     deathSound.play();
         dead();
     }
+}
+
+
+void FirePlayer::setSlipperyWall(bool slipperyWall){
+    isOnSlipperyWall = slipperyWall;
 }

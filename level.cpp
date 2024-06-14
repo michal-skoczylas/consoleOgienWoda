@@ -30,7 +30,10 @@ void Level::draw(sf::RenderWindow& window) {
 
 void Level::checkCollisions(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
-
+    playerBounds.left-=0.3f;
+  playerBounds.top-=0.3f;
+    playerBounds.width-=0.3f;
+  playerBounds.height-=0.3f;
   // Check collisions with walls
   for (const auto& wall : walls) {
     if (wall.getGlobalBounds().intersects(playerBounds)) {
@@ -66,25 +69,36 @@ void Level::checkCollisions(Player& player) {
     if (spriteBounds == waterStartingTile.getGlobalBounds()) {
       continue;
     }
+    // Sprawdzenie kolizji od gory
+    if (sprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleCollision(sprite);
+        player.normalSpeedSetter();
+
+    }
     for (const auto& lavaSprite : lavaSprites) {
       if (lavaSprite.getGlobalBounds().intersects(playerBounds)) {
         player.handleLavaCollision(lavaSprite);
+          player.normalSpeedSetter();
       }
     }
     for (const auto& waterSprite : waterSprites) {
       if (waterSprite.getGlobalBounds().intersects(playerBounds)) {
         player.handleWaterCollision(waterSprite);
+          player.normalSpeedSetter();
       }
     }
     for (const auto& acidSprite : acidSprites) {
       if (acidSprite.getGlobalBounds().intersects(playerBounds)) {
         player.handleAcidCollision(acidSprite);
+          player.normalSpeedSetter();
       }
     }
     for (const auto& slippery_wallsSprite : slippery_wallsSprites) {
       if (slippery_wallsSprite.getGlobalBounds().intersects(playerBounds)) {
+      
         player.handleSlipperyWallCollision(slippery_wallsSprite);
       }
+
     }
     // Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
@@ -115,6 +129,7 @@ void Level::checkCollisions(Player& player) {
     }
     if (spriteBounds.intersects(playerBounds)) {
       player.handleCollision(spriteBounds);
+
     }
   }
 }

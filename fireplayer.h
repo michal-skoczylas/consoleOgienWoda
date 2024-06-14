@@ -13,7 +13,8 @@ public:
     void handleCollision(const sf::FloatRect& objectBounds) override;
     void handleLavaCollision(const sf::Sprite& sprite) override;
     void handleWaterCollision(const sf::Sprite& sprite) override;
-
+    bool isOnSlipperyWall = false;
+  void setSlipperyWall(bool slipperyWall);
 };
 
 #endif // FIREPLAYER_H
