@@ -1,19 +1,16 @@
 #include "level.h"
 
+#include <SFML/Graphics.hpp>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <sstream>
-#include <string>
-#include <filesystem>
-#include "level.h"
-#include <filesystem>
-#include <fstream>
-#include <iostream>
 #include <stdexcept>
-#include <sstream>
+#include <string>
 #include <vector>
-#include <SFML/Graphics.hpp>
+
+#include "level.h"
 
 Level::Level() { this->loadTextures("assets/textures.txt"); }
 
@@ -34,7 +31,6 @@ void Level::draw(sf::RenderWindow& window) {
 void Level::checkCollisions(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
 
-
   // Check collisions with walls
   for (const auto& wall : walls) {
     if (wall.getGlobalBounds().intersects(playerBounds)) {
@@ -53,39 +49,44 @@ void Level::checkCollisions(Player& player) {
   // Check collisions with sprites
   for (const auto& sprite : sprites) {
     sf::FloatRect spriteBounds = sprite.getGlobalBounds();
-  //Wylaczenie kolizji dla goalTile i startingTile
+    // Wylaczenie kolizji dla goalTile i startingTile
     if (spriteBounds == goalTile.getGlobalBounds()) {
       continue;
     }
     if (spriteBounds == gemTile.getGlobalBounds()) {
       continue;
     }
-    if(spriteBounds==startingTile.getGlobalBounds()){
+    if (spriteBounds == startingTile.getGlobalBounds()) {
       continue;
     }
-    //Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
-    if(spriteBounds==fireStartingTile.getGlobalBounds()){
+    // Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
+    if (spriteBounds == fireStartingTile.getGlobalBounds()) {
       continue;
     }
-    if(spriteBounds==waterStartingTile.getGlobalBounds()){
+    if (spriteBounds == waterStartingTile.getGlobalBounds()) {
       continue;
     }
-for(const auto& lavaSprite: lavaSprites){
-    if(lavaSprite.getGlobalBounds().intersects(playerBounds)){
-      player.handleLavaCollision(lavaSprite);
+    for (const auto& lavaSprite : lavaSprites) {
+      if (lavaSprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleLavaCollision(lavaSprite);
+      }
     }
-  }
-  for(const auto& waterSprite: waterSprites){
-    if(waterSprite.getGlobalBounds().intersects(playerBounds)){
-      player.handleWaterCollision(waterSprite);
+    for (const auto& waterSprite : waterSprites) {
+      if (waterSprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleWaterCollision(waterSprite);
+      }
     }
-  }
-  for(const auto& acidSprite: acidSprites){
-    if(acidSprite.getGlobalBounds().intersects(playerBounds)){
-      player.handleAcidCollision(acidSprite);
+    for (const auto& acidSprite : acidSprites) {
+      if (acidSprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleAcidCollision(acidSprite);
+      }
     }
-  }
-    //Sprawdzenie kolizji od gory
+    for (const auto& slippery_wallsSprite : slippery_wallsSprites) {
+      if (slippery_wallsSprite.getGlobalBounds().intersects(playerBounds)) {
+        player.handleSlipperyWallCollision(slippery_wallsSprite);
+      }
+    }
+    // Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
       player.handleCollision(sprite);
     }
@@ -94,29 +95,28 @@ for(const auto& lavaSprite: lavaSprites){
   // Check side collisions with sprites
   for (const auto& sprite : sprites) {
     sf::FloatRect spriteBounds = sprite.getGlobalBounds();
-   //Wylaczenie kolizji dla goalTile i startingTile 
+    // Wylaczenie kolizji dla goalTile i startingTile
     if (spriteBounds == goalTile.getGlobalBounds()) {
       continue;
     }
 
-    if(spriteBounds==startingTile.getGlobalBounds()){
+    if (spriteBounds == startingTile.getGlobalBounds()) {
       continue;
     }
-    if(spriteBounds==gemTile.getGlobalBounds()){
+    if (spriteBounds == gemTile.getGlobalBounds()) {
       continue;
     }
-    //Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
-    if(spriteBounds==fireStartingTile.getGlobalBounds()){
+    // Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
+    if (spriteBounds == fireStartingTile.getGlobalBounds()) {
       continue;
     }
-    if(spriteBounds==waterStartingTile.getGlobalBounds()){
+    if (spriteBounds == waterStartingTile.getGlobalBounds()) {
       continue;
     }
     if (spriteBounds.intersects(playerBounds)) {
       player.handleCollision(spriteBounds);
     }
   }
-  
 }
 
 void Level::loadTextures(std::string texture_loader_filepath) {
@@ -139,7 +139,7 @@ void Level::loadTextures(std::string texture_loader_filepath) {
   }
 }
 
-void Level::loadFromFile( std::string& filename) {
+void Level::loadFromFile(std::string& filename) {
   std::ifstream file(filename);
   if (!file.is_open()) {
     throw std::runtime_error("Failed to open level file");
@@ -210,9 +210,8 @@ void Level::loadFromFile( std::string& filename) {
           // tileSizeY << ")" << std::endl;
           break;
         }
-        case 's':
-        {
-          //Starting position tile, textura to drzwi
+        case 's': {
+          // Starting position tile, textura to drzwi
           sf::Sprite start;
           start.setTexture(textures[10]);
           start.setScale(
@@ -234,7 +233,8 @@ void Level::loadFromFile( std::string& filename) {
               tileSizeY / static_cast<float>(textures[6].getSize().y));
           lava.setPosition(x * tileSizeX, y * tileSizeY);
           sprites.push_back(lava);
-          //Dodanie do wektora spriteow law zeby potem mozna bylo sprawdzic czy woda nie wchodzi do lawy
+          // Dodanie do wektora spriteow law zeby potem mozna bylo sprawdzic czy
+          // woda nie wchodzi do lawy
           lavaSprites.push_back(lava);
           // std::cerr << "Lava added at (" << x * tileSizeX << ", " << y *
           // tileSizeY << ")" << std::endl;
@@ -248,14 +248,15 @@ void Level::loadFromFile( std::string& filename) {
               tileSizeY / static_cast<float>(textures[7].getSize().y));
           water.setPosition(x * tileSizeX, y * tileSizeY);
           sprites.push_back(water);
-          //Dodanie do wektora spriteow water zeby potem mozna bylo sprawdzic czy goein nie wchodzi do wody
+          // Dodanie do wektora spriteow water zeby potem mozna bylo sprawdzic
+          // czy goein nie wchodzi do wody
           waterSprites.push_back(water);
           // std::cerr << "Water added at (" << x * tileSizeX << ", " << y *
           // tileSizeY << ")" << std::endl;
           break;
         }
-        //Punkty startowe dla graczy gdyby mieli zaczynac w innych miejscach
-        case '1':{
+        // Punkty startowe dla graczy gdyby mieli zaczynac w innych miejscach
+        case '1': {
           sf::Sprite fireStartingTile;
           fireStartingTile.setTexture(textures[11]);
           fireStartingTile.setScale(
@@ -267,8 +268,7 @@ void Level::loadFromFile( std::string& filename) {
           this->fireStartingTile = fireStartingTile;
           break;
         }
-        case '2':
-        {
+        case '2': {
           sf::Sprite waterStartingTile;
           waterStartingTile.setTexture(textures[12]);
           waterStartingTile.setScale(
@@ -280,10 +280,9 @@ void Level::loadFromFile( std::string& filename) {
           this->waterStartingTile = waterStartingTile;
           break;
         }
-        //Tile z kwasem w ktorym gracze giną
-        case 'a':
-        {
-          sf::Sprite acid; 
+        // Tile z kwasem w ktorym gracze giną
+        case 'a': {
+          sf::Sprite acid;
           acid.setTexture(textures[13]);
           acid.setScale(
               tileSizeX / static_cast<float>(textures[13].getSize().x),
@@ -291,13 +290,12 @@ void Level::loadFromFile( std::string& filename) {
           acid.setPosition(x * tileSizeX, y * tileSizeY);
           sprites.push_back(acid);
           acidSprites.push_back(acid);
-          // std::cerr << "Acid added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
+          // std::cerr << "Acid added at (" << x * tileSizeX << ", " << y *
+          // tileSizeY << ")" << std::endl;
           break;
-
         }
 
-        case 'k':
-        {
+        case 'k': {
           sf::Sprite slippery_wall;
           slippery_wall.setTexture(textures[14]);
           slippery_wall.setScale(
@@ -306,14 +304,13 @@ void Level::loadFromFile( std::string& filename) {
           slippery_wall.setPosition(x * tileSizeX, y * tileSizeY);
           sprites.push_back(slippery_wall);
           slippery_wallsSprites.push_back(slippery_wall);
-          // std::cerr << "Slippery wall added at (" << x * tileSizeX << ", " << y * tileSizeY << ")" << std::endl;
+          // std::cerr << "Slippery wall added at (" << x * tileSizeX << ", " <<
+          // y * tileSizeY << ")" << std::endl;
           break;
-          
         }
-        case 'g':
-        {
+        case 'g': {
           sf::Sprite gem;
-          gem.setTexture(textures[15]); 
+          gem.setTexture(textures[15]);
           gem.setScale(
               tileSizeX / static_cast<float>(textures[15].getSize().x),
               tileSizeY / static_cast<float>(textures[15].getSize().y));
@@ -330,7 +327,7 @@ void Level::loadFromFile( std::string& filename) {
     }
     y++;
   }
-  std::cerr << "Finished loading level " << filename<<std::endl;
+  std::cerr << "Finished loading level " << filename << std::endl;
   file.close();
 }
 bool Level::chekGoalReached(Player& player) {
@@ -347,20 +344,18 @@ bool Level::checkGemReached(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
   if (playerBounds.intersects(gemTile.getGlobalBounds())) {
     // std::cout<<"Gem reached"<<std::endl;
-    //player.setTargetReached();
+    // player.setTargetReached();
     return true;
   }
   return false;
 }
 
-
-//Spradza czy gra jest skonczona itd
+// Spradza czy gra jest skonczona itd
 void Level::checkEndGame(std::vector<Player*> players) {
   if (players[0]->getTargetReached() && players[1]->getTargetReached()) {
     setLevelFinished();
-    //Jezeli gra jest skonczona to odpala funkcje konczaca gre
-    //endGame();
-
+    // Jezeli gra jest skonczona to odpala funkcje konczaca gre
+    // endGame();
   }
   // else if(players[0]->getTargetReached()){
   //     std::cout<<"Player 1 reached the goal"<<std::endl;
@@ -374,78 +369,65 @@ void Level::checkEndGame(std::vector<Player*> players) {
   //     //std::cout<<"No player reached the goal"<<std::endl;
   // }
 }
-void Level::setLevelFinished(){
-    this->levelFinished=true;
+void Level::setLevelFinished() { this->levelFinished = true; }
+// Funkcja konczaca gre
+void Level::endGame() {
+  if (this->levelFinished) {
+  }
 }
-//Funkcja konczaca gre
-void Level::endGame(){
-    if(this->levelFinished){
-      
-    }
+bool Level::getLevelFinished() { return levelFinished; }
+// getter do pozycji startowej graczy
+sf::Vector2f Level::getStartingPosition() { return this->startingPosition; }
+// getter do pozycji startowej gracza fire
+sf::Vector2f Level::getFireStartingPosition() {
+  return this->fireStartingPosition;
 }
-bool Level::getLevelFinished(){
-    return levelFinished;
-}
-//getter do pozycji startowej graczy
-sf::Vector2f Level::getStartingPosition(){
-    return this->startingPosition;
-}
-//getter do pozycji startowej gracza fire
-sf::Vector2f Level::getFireStartingPosition(){
-    return this->fireStartingPosition;
-}
-//getter do pozycji startowej gracza water
-sf::Vector2f Level::getWaterStartingPosition(){
-    return this->waterStartingPosition;
+// getter do pozycji startowej gracza water
+sf::Vector2f Level::getWaterStartingPosition() {
+  return this->waterStartingPosition;
 }
 
-std::string Level::getLevelPath(){
-    return this->levelPath;
-}
+std::string Level::getLevelPath() { return this->levelPath; }
 
 void Level::saveBestTime() {
-    std::string levelFilePath = this->getLevelPath();
+  std::string levelFilePath = this->getLevelPath();
 
-    // Extract the base filename from the level path
-    std::filesystem::path levelPath(levelFilePath);
-    std::string filename = levelPath.filename().string();
-    
-    // std::cout << this->arglevelPath << std::endl;
+  // Extract the base filename from the level path
+  std::filesystem::path levelPath(levelFilePath);
+  std::string filename = levelPath.filename().string();
 
-    std::string timeFileName = arglevelPath.substr(arglevelPath.find_last_of("level") + 1);
-     timeFileName = timeFileName[0];
-    // std::cout << timeFileName << std::endl; // Assuming the filename starts with "level" and is followed by a number
+  // std::cout << this->arglevelPath << std::endl;
 
+  std::string timeFileName =
+      arglevelPath.substr(arglevelPath.find_last_of("level") + 1);
+  timeFileName = timeFileName[0];
+  // std::cout << timeFileName << std::endl; // Assuming the filename starts
+  // with "level" and is followed by a number
 
   // arglevelPath == "assets/level" + n +".txt"
-    // Construct the time file path
-    // timeFilePath = "assets/" + timeFileName + ".txt";
-  //Poprwana wersja zapisu czasu do plików z czasami
-    std::string timeFilePath = "assets/Time" + timeFileName + ".txt";
+  // Construct the time file path
+  // timeFilePath = "assets/" + timeFileName + ".txt";
+  // Poprwana wersja zapisu czasu do plików z czasami
+  std::string timeFilePath = "assets/Time" + timeFileName + ".txt";
 
-    
+  // Open the file for appending
+  std::ofstream file;
+  file.open(timeFilePath, std::ios::app);
+  if (!file.is_open()) {
+    throw std::runtime_error("Failed to open best times file: " + timeFilePath);
+  }
 
-    // Open the file for appending
-    std::ofstream file;
-    file.open(timeFilePath, std::ios::app);
-    if (!file.is_open()) {
-        throw std::runtime_error("Failed to open best times file: " + timeFilePath);
-    }
-
-    // Write the new time to the file
-    std::string newTime = this->getFinalTime();
-    std::cerr << "Time to be saved: " << newTime << std::endl;
-    file << newTime << std::endl;
-    if (!file) {
-        throw std::runtime_error("Failed to write to best times file: " + timeFilePath);
-    }
-    file.close();
-    std::cerr << "Time successfully saved" << std::endl;
+  // Write the new time to the file
+  std::string newTime = this->getFinalTime();
+  std::cerr << "Time to be saved: " << newTime << std::endl;
+  file << newTime << std::endl;
+  if (!file) {
+    throw std::runtime_error("Failed to write to best times file: " +
+                             timeFilePath);
+  }
+  file.close();
+  std::cerr << "Time successfully saved" << std::endl;
 }
 
-void Level::setFinalTime(std::string time){
-    this->finalTime=time;
-}
-std::string Level::getFinalTime(){
-    return this->finalTime;
-}
+void Level::setFinalTime(std::string time) { this->finalTime = time; }
+std::string Level::getFinalTime() { return this->finalTime; }
