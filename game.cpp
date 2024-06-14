@@ -1,7 +1,9 @@
 #include "game.h"
+#include <QFile>
+#include <QTextStream>
 #include <vector>
 #include <iostream>
-
+#include <fstream>
 #include "fireplayer.h"
 #include "level.h"
 #include "waterplayer.h"
@@ -139,9 +141,12 @@ void Game::run() {
       gameFinished = true;
       std::cout << "Game finished in " << finalTime << std::endl;
          level.saveBestTime();
+         //Zapisanie ze poziom zostal ukonczony do pliku
+         
          // Print the best time
          finishClock.restart();
          FinishClockStarted = true;
+         saveCompleted();
     }
     if (FinishClockStarted && finishClock.getElapsedTime().asSeconds() > 3) {
     window.close();
@@ -214,5 +219,15 @@ void Game::selectLevel(std::string arglevelPath) {
   if (level.getWaterStartingPosition() != sf::Vector2f(0, 0)) {
     player2.setStartingPosition(level.getWaterStartingPosition() +
                                 sf::Vector2f(0, -25));
+  }
+}
+void Game::saveCompleted() {
+QFile file("assets/completed.txt");
+if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
+    QTextStream stream(&file);
+    stream << QString::fromStdString(levelPath) << "\n";
+    file.close();
+  } else {
+    std::cout << "Failed to save completed level" << std::endl;
   }
 }

@@ -1,3 +1,5 @@
+#include <QStandardItemModel>
+#include <QStandardItem>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "game.h"
@@ -39,18 +41,37 @@ void MainWindow::levelSetup(const QString &levelFilePath){
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QMessageBox::warning(this,"Error","Nie udalo sie otworzyc pliku z poziomami");
     }
+    //Wczytanie ktore poziomy zostaly ukonczone
+    QFile completedFile("assets/completed.txt");
+    int completedLevels = 0;
+    if(completedFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+        QTextStream in(&completedFile);
+        while(!in.atEnd()){
+            in.readLine();
+            completedLevels++;
+        }
+        completedFile.close();
+    }
 
     QTextStream in(&file);
     int levelNumber =1;
+    QStandardItemModel *model = new QStandardItemModel(this);
     while(!in.atEnd())
     {
         QString line = in.readLine();
         if(!line.isEmpty()){
-            QString alias = QString("Level %1").arg(levelNumber++);
-            //To doda do comboboxa nazwe jako Level 1 a w rzeczywistiosci bedzie tam assets/level1.txt
-            ui->level_comboBox->addItem(alias,line);
+            QString alias = QString("Level %1").arg(levelNumber);
+            QStandardItem *item = new QStandardItem(alias);
+            item->setData(line, Qt::UserRole);
+            //Ustawienie na niedostępny, jeśli poziom nie został ukończony i to nie jest pierwszy poziom
+            if(levelNumber > completedLevels + 1){
+                item->setEnabled(false);
+            }
+            model->appendRow(item);
+            levelNumber++;
         }
     }
+    ui->level_comboBox->setModel(model);
 }
 
 void MainWindow::on_authors_pushButton_clicked()
@@ -144,6 +165,13 @@ void MainWindow::on_level_comboBox_currentTextChanged(const QString &arg1)
 
     //Wysweitlenie czasu w labelu
     ui->label->setText(shortestTime);
+
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    levelSetup("assets/levels.txt");
 
 }
 

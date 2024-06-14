@@ -14,7 +14,7 @@ class Game {
   Game(int windowWidth, int windowHeight);
   void run();
   void selectLevel(std::string arglevelPath);
-
+  void saveCompleted();
  private:
   void processEvents();
   void update(sf::Time deltaTime);
