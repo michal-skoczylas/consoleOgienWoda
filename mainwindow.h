@@ -16,14 +16,12 @@ public:
     void levelSetup(const QString &levelFilePath);
 
 private slots:
-
+    // Funkcje obsługujące przyciski
     void on_runPushButton_clicked();
-
+    
     void on_authors_pushButton_clicked();
 
     void on_instructions_pushButton_clicked();
-
-    void on_authors_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
