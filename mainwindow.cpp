@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     //Zaladowanie poziomow do comboboxa
     levelSetup("assets/levels.txt");
+    QIcon icon("assets/logo.png");
+    setWindowIcon(icon);
 }
 
 MainWindow::~MainWindow() {
