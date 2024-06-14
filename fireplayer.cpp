@@ -6,6 +6,7 @@ FirePlayer::FirePlayer(sf::Vector2f position, sf::Color color=sf::Color::Red):Pl
 
 }
 
+  // funkcja obsługująca ruch gracza
 void FirePlayer::handleInput(){
     
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
@@ -25,6 +26,7 @@ void FirePlayer::handleInput(){
   }
 }
 
+  // funkcja obsługująca aktualizację ruchu gracza
 void FirePlayer::update(sf::Time deltaTime){
 
     velocity.y += 981 * deltaTime.asSeconds(); // Gravity
@@ -96,10 +98,12 @@ void FirePlayer::update(sf::Time deltaTime){
     shape.setPosition(position);
 } 
 
+  // funkcja zwracająca granice obiektu gracza
 sf::FloatRect FirePlayer::getBounds() const {
     return shape.getGlobalBounds();
 }
 
+  // funkcja obsługująca kolizję gracza z obiektem typu sprite
 void FirePlayer::handleCollision(const sf::Sprite& sprite){
     sf::FloatRect playerBounds = shape.getGlobalBounds();
     sf::FloatRect spriteBounds = sprite.getGlobalBounds();
@@ -147,6 +151,7 @@ void FirePlayer::handleCollision(const sf::Sprite& sprite){
     }
 }
 
+  // funkcja obsługująca kolizję gracza z obiektem typu platforma
 void FirePlayer::handleCollision(const sf::RectangleShape& platform){
     sf::FloatRect playerBounds = shape.getGlobalBounds();
     sf::FloatRect platformBounds = platform.getGlobalBounds();
@@ -194,6 +199,7 @@ void FirePlayer::handleCollision(const sf::RectangleShape& platform){
     }
 }
 
+  // funkcja obsługująca kolizję gracza z obiektem typu obiekt
 void FirePlayer::handleCollision(const sf::FloatRect& objectBounds){
     sf::FloatRect playerBounds = shape.getGlobalBounds();
     if (playerBounds.intersects(objectBounds)) {
@@ -239,6 +245,8 @@ void FirePlayer::handleCollision(const sf::FloatRect& objectBounds){
         }
     }
 }
+
+  // funkcja obsługująca kolizję gracza z obiektem typu sprite reprezentującym lawę
 void FirePlayer::handleLavaCollision(const sf::Sprite& sprite){
     sf::FloatRect playerBounds = shape.getGlobalBounds();
     sf::FloatRect spriteBounds = sprite.getGlobalBounds();
@@ -248,6 +256,8 @@ void FirePlayer::handleLavaCollision(const sf::Sprite& sprite){
         handleCollision(sprite);
     }
 }
+
+  // funkcja obsługująca kolizję gracza z obiektem typu sprite reprezentującym wodę
 void FirePlayer::handleWaterCollision(const sf::Sprite& sprite){
     sf::FloatRect playerBounds = shape.getGlobalBounds();
     sf::FloatRect spriteBounds = sprite.getGlobalBounds();
@@ -260,7 +270,7 @@ void FirePlayer::handleWaterCollision(const sf::Sprite& sprite){
     }
 }
 
-
+  // funkcja ustawiająca wartość zmiennej isOnSlipperyWall
 void FirePlayer::setSlipperyWall(bool slipperyWall){
     isOnSlipperyWall = slipperyWall;
 }

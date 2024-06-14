@@ -8,6 +8,7 @@
 #include "level.h"
 #include "waterplayer.h"
 
+  // Constructor
 Game::Game(int windowWidth, int windowHeight)
     : window(sf::VideoMode(windowWidth, windowHeight), "Ogień i Woda"),
       player1(sf::Vector2f(0, 0), sf::Color::White),
@@ -93,6 +94,7 @@ Game::Game(int windowWidth, int windowHeight)
   timerBackground.setPosition(timerText.getPosition().x - 5, timerText.getPosition().y - 5);  // Background position
 }
 
+  // Run the game loop
 void Game::run() {
   sf::Clock clock;
   bool gameFinished = false; // Add a flag to track if the game has finished
@@ -154,6 +156,7 @@ void Game::run() {
   }
 }
 
+  // Process events
 void Game::processEvents() {
   sf::Event event;
   while (window.pollEvent(event)) {
@@ -167,6 +170,7 @@ void Game::processEvents() {
   player2.handleInput();
 }
 
+  // Update the game
 void Game::update(sf::Time deltaTime) {
   // Update the players and check for collisions
   player1.update(deltaTime);
@@ -180,6 +184,7 @@ void Game::update(sf::Time deltaTime) {
   level.checkEndGame(players);
 }
 
+  // Render the game
 void Game::render() {
   // Clear the window
   window.clear();
@@ -200,6 +205,8 @@ void Game::render() {
   }
   window.display();
 }
+
+  // Select the level to play
 void Game::selectLevel(std::string arglevelPath) {
   this->levelPath = arglevelPath;
   level.loadFromFile(arglevelPath);
@@ -221,6 +228,8 @@ void Game::selectLevel(std::string arglevelPath) {
                                 sf::Vector2f(0, -25));
   }
 }
+
+  // Save the completed level to a file
 void Game::saveCompleted() {
 QFile file("assets/completed.txt");
 if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {

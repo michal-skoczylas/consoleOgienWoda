@@ -11,6 +11,7 @@
 
 class Game {
  public:
+  // Constructor
   Game(int windowWidth, int windowHeight);
   void run();
   void selectLevel(std::string arglevelPath);

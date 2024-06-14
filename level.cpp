@@ -12,8 +12,10 @@
 
 #include "level.h"
 
+  // Constructor
 Level::Level() { this->loadTextures("assets/textures.txt"); }
 
+  // Rysowanie poziomu
 void Level::draw(sf::RenderWindow& window) {
   for (const auto& platform : platforms) {
     window.draw(platform);
@@ -36,7 +38,8 @@ void Level::draw(sf::RenderWindow& window) {
  
   // std::cerr << "Level drawn" << std::endl;
 }
-//TODO zamienic funkcje zeby przyjmowala wektor graczy
+
+  // Sprawdzenie kolizji
 void Level::checkCollisions(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
     playerBounds.left-=0.3f;
@@ -95,6 +98,7 @@ void Level::checkCollisions(Player& player) {
     //     player.handleCollision(receiverSprite);
     //   }
     // }
+    // Sprawdzenie kolizji z lava, water, acid, slippery walls
     for (const auto& lavaSprite : lavaSprites) {
       if (lavaSprite.getGlobalBounds().intersects(playerBounds)) {
         player.handleLavaCollision(lavaSprite);
@@ -125,6 +129,7 @@ void Level::checkCollisions(Player& player) {
             player.handleMudCollision(mudSprite);
         }
     }
+    // Sprawdzenie czy ktorys z graczy zdobywa gem
     for(auto & gemSprite : gemSprites){
         if(gemSprite.getGlobalBounds().intersects(playerBounds)){
           if(!getGemCollected()){
@@ -157,45 +162,11 @@ void Level::checkCollisions(Player& player) {
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
         player.handleCollision(sprite);
         player.normalSpeedSetter();
-
-    
-    // Sprawdzenie kolizji od gory
-    // if (sprite.getGlobalBounds().intersects(playerBounds)) {
-    //   player.handleCollision(sprite);
-    // }
   }
   }
-  // Check side collisions with sprites
-  // for (const auto& sprite : sprites) {
-  //   sf::FloatRect spriteBounds = sprite.getGlobalBounds();
-  //   // Wylaczenie kolizji dla goalTile i startingTile
-  //   if (spriteBounds == goalTile.getGlobalBounds()) {
-  //     continue;
-  //   }
-    
-  //   if (spriteBounds == startingTile.getGlobalBounds()) {
-  //     continue;
-  //   }
-  //   if (spriteBounds == gemTile.getGlobalBounds()) {
-  //     continue;
-  //   }
-  //   // Sprawdzenie kolizji dla fireStartingTile i waterStartingTile
-  //   if (spriteBounds == fireStartingTile.getGlobalBounds()) {
-  //     continue;
-  //   }
-  //   if (spriteBounds == waterStartingTile.getGlobalBounds()) {
-  //     continue;
-  //   }
-  //   if(spriteBounds == buttonTile.getGlobalBounds()){
-  //       continue;
-  //   }
-  //   if (spriteBounds.intersects(playerBounds)) {
-  //     player.handleCollision(spriteBounds);
-
-  //   }
-  // }
 }
 
+  // Sprawdzenie czy gracz dotarl do celu
 void Level::loadTextures(std::string texture_loader_filepath) {
   std::string line;
   std::ifstream file(texture_loader_filepath);
@@ -216,6 +187,7 @@ void Level::loadTextures(std::string texture_loader_filepath) {
   }
 }
 
+  // Sprawdzenie czy gracz dotarl do celu
 void Level::loadFromFile(std::string& filename) {
   std::ifstream file(filename);
   if (!file.is_open()) {
@@ -464,6 +436,7 @@ bool Level::chekGoalReached(Player& player) {
   return false;
 }
 
+  // Sprawdzenie czy gracz zdobyl gem
 bool Level::checkGemReached(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
   if (playerBounds.intersects(gemTile.getGlobalBounds())) {
