@@ -20,6 +20,8 @@ class Game {
   void update(sf::Time deltaTime);
   void render();
   void setupTimer();
+  sf::Clock finishClock;
+  bool FinishClockStarted = false;
 
   sf::RenderWindow window;
   sf::Texture backgroundTexture;
