@@ -19,6 +19,10 @@ void Level::draw(sf::RenderWindow& window) {
     window.draw(platform);
   }
   for (const auto& sprite : sprites) {
+    //dodac ze nie renderuje gema jak zostanie zdobyty
+    if(isGem(sprite)&&getGemCollected()){
+        continue;
+    }
     window.draw(sprite);
     // std::cout << "Sprite texture address: " << sprite.getTexture() <<
     // std::endl; std::cerr << "Sprite drawn at position (" <<
@@ -478,3 +482,13 @@ void Level::saveBestTime() {
 void Level::setFinalTime(std::string time) { this->finalTime = time; }
 std::string Level::getFinalTime() { return this->finalTime; }
 bool Level::getGemCollected() { return gemCollected; }
+bool Level::isGem(const sf::Sprite& sprite) {
+  // Pobierz teksturę sprite'a
+  const sf::Texture* spriteTexture = sprite.getTexture(); 
+
+  // Pobierz teksturę gemu
+  sf::Texture* gemTexture = &textures[15]; 
+
+  // Sprawdź czy wtekstury są takie same
+  return spriteTexture == gemTexture; 
+}

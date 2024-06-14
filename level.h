@@ -28,6 +28,7 @@ public:
 sf::Vector2f getFireStartingPosition();
 sf::Vector2f getWaterStartingPosition();
 bool getGemCollected();
+bool isGem(const sf::Sprite& sprite);
     private:
     sf::Sprite goalTile;
     sf::Sprite gemTile;
