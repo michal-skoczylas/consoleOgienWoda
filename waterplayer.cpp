@@ -1,7 +1,12 @@
 #include "waterplayer.h"
 #include <iostream>
 WaterPlayer::WaterPlayer(sf::Vector2f position, sf::Color color = sf::Color::Blue):Player(position,color) {
-
+    //Dzwieki gracz
+    if(!jumpBuffer.loadFromFile("assets/jump_sound.mp3")){
+        std::cerr << "Failed to load jump sound" << std::endl;
+    }
+    jumpSound.setBuffer(jumpBuffer);
+    jumpSound.setVolume(50);
 }
 void WaterPlayer::handleInput(){
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
@@ -18,6 +23,7 @@ void WaterPlayer::handleInput(){
   if (onGround && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
     velocity.y = -400;
     onGround = false;
+    jumpSound.play();
   }
 }
 

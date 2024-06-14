@@ -34,7 +34,14 @@ Game::Game(int windowWidth, int windowHeight)
   players.push_back(&player1);
   players.push_back(&player2);
 
-
+  //Ladowanie muzyki tla
+  if (!backgroundMusic.openFromFile("assets/background_music.mp3")) {
+    std::cerr << "Failed to load background music" << std::endl;
+  } else {
+    backgroundMusic.setLoop(true);
+    backgroundMusic.setVolume(25);
+    backgroundMusic.play();
+  }
   if (!player1Texture.loadFromFile("assets/fire_boy.png") ||
       !player2Texture.loadFromFile("assets/water_girl.png")) {
     std::cout << "Failed to load player images" << std::endl;
