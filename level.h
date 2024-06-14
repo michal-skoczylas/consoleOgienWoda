@@ -57,6 +57,7 @@ bool isReceiver(const sf::Sprite& sprite);
     bool levelFinished=false;
     bool gemCollected=false;
     bool isButtonPressed=false;
+    bool isLoaded = false;
     //Pozycje startowe graczy dla obu takie same
     sf::Vector2f startingPosition;
     sf::Sprite startingTile;

@@ -13,10 +13,14 @@
 #include "level.h"
 
   // Constructor
-Level::Level() { this->loadTextures("assets/textures.txt"); }
+Level::Level() { this->loadTextures("assets/textures.txt"); 
+}
 
   // Rysowanie poziomu
 void Level::draw(sf::RenderWindow& window) {
+  if(!isLoaded){
+    return;
+  }
   for (const auto& platform : platforms) {
     window.draw(platform);
   }
@@ -425,6 +429,7 @@ void Level::loadFromFile(std::string& filename) {
   }
   std::cerr << "Finished loading level " << filename << std::endl;
   file.close();
+  isLoaded = true;
 }
 bool Level::chekGoalReached(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
