@@ -3,6 +3,7 @@
 #include "game.h"
 #include "QString"
 #include <QMessageBox>
+#include <QRegularExpression>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -80,4 +81,68 @@ void MainWindow::on_instructions_pushButton_clicked()
     msg.exec();
 }
 
+
+//
+QString MainWindow::findShortestTime(const QString &TimeFilePath){
+    QFile file(TimeFilePath);
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text )){
+        return "Blad podczas otwierania plikow z czasami";
+    }
+
+    QTextStream in(&file);
+    QString shortestTime;
+
+    int shortestTimeMs = std::numeric_limits<int>::max();
+    //Parsowanie linijek pliku z czasami
+    while(!in.atEnd()){
+        QString line = in.readLine();
+        QStringList timeParts = line.split(':');
+        if(timeParts.size() == 3){
+            int minutes = timeParts[0].toInt();
+            int seconds = timeParts[1].toInt();
+            int miliseconds = timeParts[2].toInt();
+
+        //Dodanie wszystkich czasow zeby wyznaczyc czas laczny i porownac z innymi (milisekundy)
+            int totalMs = (minutes * 60*1000) + (seconds *1000) + miliseconds;
+
+            if(totalMs< shortestTimeMs){
+                shortestTimeMs = totalMs;
+                shortestTime =line;
+            }
+        }
+    }
+    file.close();
+    return shortestTime;
+
+}
+
+void MainWindow::on_level_comboBox_currentTextChanged(const QString &arg1)
+{
+    //Indeks obecnego elementu
+    int index = ui->level_comboBox->currentIndex();
+    if(index<0) return;
+
+
+    //Pobranie sciezki plkiu z poziomem na podstawie podstawie obecnego aliasu
+    QString levelFilePath = ui->level_comboBox->itemData(index).toString();
+
+    //Zmiana level1.txt na time1.txt np przy uzyciu regexa
+    QRegularExpression re("level(\\d+)\\.txt");
+    QRegularExpressionMatch match = re.match(levelFilePath);
+    if(!match.hasMatch()){
+        ui->best_time_label->setText("Nie udalo sie odczytac pliku");
+        return;
+    }
+    QString levelNumber = match.captured(1);
+
+    //Tworzenie sciezki do pliku z czasami na podstawie numeru poziomu
+    QString timeFilePath = QString("assets/Time%1.txt").arg(levelNumber);
+
+    //Uzycie funkcji w celu znalezienia najkrotszego czasu zeby znalesc i wyswietlic najelpszy czas dla danego poziomu
+    QString shortestTime = findShortestTime(timeFilePath);
+
+    //Wysweitlenie czasu w labelu
+    ui->label->setText(shortestTime);
+
+}
 
