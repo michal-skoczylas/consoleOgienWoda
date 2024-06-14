@@ -28,6 +28,8 @@ private slots:
 
     void on_level_comboBox_currentTextChanged(const QString &arg1);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
