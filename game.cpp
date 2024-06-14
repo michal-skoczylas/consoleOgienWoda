@@ -3,10 +3,10 @@
 #include <QTextStream>
 #include <vector>
 #include <iostream>
-#include <fstream>
 #include "fireplayer.h"
 #include "level.h"
 #include "waterplayer.h"
+#include <random>
 
   // Constructor
 Game::Game(int windowWidth, int windowHeight)
@@ -15,10 +15,13 @@ Game::Game(int windowWidth, int windowHeight)
       player2(sf::Vector2f(0, 0), sf::Color::White),
       level() {
   window.setFramerateLimit(60);
-  // this->selectLevel(levelPath);
-  // level.loadFromFile(levelPath);
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> distr(0, 2);
+  std::string backgroundPath = (distr(gen) == 0) ? "assets/backgroundtheme.png" : ((distr(gen) == 1) ? "assets/backgroundtheme1.png" : "assets/backgroundtheme2.png");
+
   // Load background texture
-  if (!backgroundTexture.loadFromFile("assets/backgroundtheme.png")) {
+  if (!backgroundTexture.loadFromFile(backgroundPath)) {
     std::cerr << "Failed to load background image" << std::endl;
   } else {
     backgroundSprite.setTexture(backgroundTexture);
