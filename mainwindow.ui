@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>273</height>
+    <width>359</width>
+    <height>360</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,86 +28,88 @@
      <rect>
       <x>60</x>
       <y>60</y>
-      <width>196</width>
-      <height>158</height>
+      <width>231</width>
+      <height>181</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
+    <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="0">
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QLabel" name="select_level_label">
-           <property name="text">
-            <string>Wybierz poziom:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="1" column="0">
+          <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QComboBox" name="level_comboBox"/>
+            <widget class="QLabel" name="select_level_label">
+             <property name="text">
+              <string>Wybierz poziom:</string>
+             </property>
+            </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="runPushButton">
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QComboBox" name="level_comboBox"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="runPushButton">
+               <property name="text">
+                <string>Zagraj</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item row="2" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="best_time_label">
              <property name="text">
-              <string>Zagraj</string>
+              <string>Najlepszy czas:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>CZAS</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
-        </layout>
-       </item>
-       <item row="2" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="best_time_label">
+         <item row="0" column="0">
+          <widget class="QLabel" name="title_label">
            <property name="text">
-            <string>Najlepszy czas:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>CZAS</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:22pt; font-weight:700; color:#e17d19;&quot;&gt;Ogień i Woda&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="title_label">
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="authors_pushButton">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:22pt; font-weight:700; color:#e17d19;&quot;&gt;Ogień i Woda&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Autorzy</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="instructions_pushButton">
+         <property name="text">
+          <string>Instrukcja</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="authors_pushButton">
-       <property name="text">
-        <string>Autorzy</string>
-       </property>
-      </widget>
-     </item>
     </layout>
-   </widget>
-   <widget class="QPushButton" name="instructions_pushButton">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>200</y>
-      <width>93</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Instrukcja</string>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -115,8 +117,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>320</width>
-     <height>21</height>
+     <width>359</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
