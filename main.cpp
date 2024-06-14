@@ -6,17 +6,17 @@
 //     game.run();
 //     return 0;
 
+
 // }
 #include <QApplication>
 #include "mainwindow.h"
 
-int main(int argc, char *argv[])
-{
-  QApplication app(argc, argv);
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
 
-  MainWindow window;
-  window.setWindowTitle("Ogień  i woda");
-  window.show();
+    MainWindow window;
+    window.setWindowTitle("Ogień  i woda");
+    window.show();
 
-  return app.exec();
+    return app.exec();
 }

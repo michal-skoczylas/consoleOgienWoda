@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+#include <SFML/Audio.hpp> 
 #include <vector>
 
 #include "SFML/Audio.hpp"
@@ -10,16 +10,14 @@
 #include "player.h"
 #include "waterplayer.h"
 
-class Game
-{
-public:
+class Game {
+ public:
   // Constructor
   Game(int windowWidth, int windowHeight);
   void run();
   void selectLevel(std::string arglevelPath);
   void saveCompleted();
-
-private:
+ private:
   void processEvents();
   void update(sf::Time deltaTime);
   void render();
@@ -36,7 +34,7 @@ private:
   sf::Texture player1Texture;
   sf::Texture player2Texture;
   Level level;
-  std::vector<Player *> players = {&player1, &player2};
+  std::vector<Player*> players = {&player1, &player2};
   std::string levelPath;
   sf::Text endGameText;
   sf::Font endGameFont;
@@ -50,4 +48,4 @@ private:
   std::string finalTime;
 };
 
-#endif // GAME_H
+#endif  // GAME_H
