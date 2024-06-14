@@ -38,6 +38,7 @@ sf::Vector2f getWaterStartingPosition();
     std::vector<sf::Sprite> acidSprites;
     std::vector<sf::Sprite> slippery_wallsSprites;
     std::vector<sf::Sprite> gemSprites;
+    std::vector<sf::Sprite> mudSprites;
     sf::Vector2f playerStart;
     sf::Vector2f goal;
     sf::Vector2f gem;

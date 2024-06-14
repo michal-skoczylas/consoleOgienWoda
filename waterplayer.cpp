@@ -6,11 +6,11 @@ WaterPlayer::WaterPlayer(sf::Vector2f position, sf::Color color = sf::Color::Blu
 void WaterPlayer::handleInput(){
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 
-    velocity.x = -200;
+    velocity.x = -200-speedBoost;
 
   } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 
-      velocity.x = 200;
+      velocity.x = 200+speedBoost;
 
   } else {
     velocity.x = 0;

@@ -14,3 +14,4 @@ assets/waterdoor.png
 assets/acid.png
 assets/slippery_wall.png
 assets/gem.png
+assets/mud.png

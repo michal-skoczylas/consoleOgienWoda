@@ -100,6 +100,11 @@ void Level::checkCollisions(Player& player) {
       }
 
     }
+    for(const auto & mudSprite : mudSprites){
+        if(mudSprite.getGlobalBounds().intersects(playerBounds)){
+            player.handleMudCollision(mudSprite);
+        }
+    }
     // Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
       player.handleCollision(sprite);
@@ -334,6 +339,20 @@ void Level::loadFromFile(std::string& filename) {
           gemSprites.push_back(gem);
           gemTile = gem;
           break;
+        }
+        case 'm':
+        {
+            //Dodanie blota na kotrym gracz bedzie zwalniac
+            sf::Sprite mud_Sprite;
+            mud_Sprite.setTexture(textures[16]);
+            mud_Sprite.setScale(
+                tileSizeX / static_cast<float>(textures[16].getSize().x),
+                tileSizeY / static_cast<float>(textures[16].getSize().y));
+            mud_Sprite.setPosition(x * tileSizeX, y * tileSizeY);
+            sprites.push_back(mud_Sprite);
+            mudSprites.push_back(mud_Sprite);
+            break;
+
         }
         default:
           // Handle other tile types

@@ -20,6 +20,7 @@ class Player : public sf::Drawable {
   virtual void handleWaterCollision(const sf::Sprite& sprite);
   void handleAcidCollision(const sf::Sprite& sprite);
 void handleSlipperyWallCollision(const sf::Sprite& sprite);
+void handleMudCollision(const sf::Sprite& sprite);
   void dead();
 float speedBoost=0;
   bool getSlipperyWall();

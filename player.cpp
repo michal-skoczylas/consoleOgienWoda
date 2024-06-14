@@ -286,3 +286,21 @@ void Player::handleSlipperyWallCollision(const sf::Sprite& sprite) {
 void Player::normalSpeedSetter(){
     speedBoost = 0;
 }
+void Player::handleMudCollision(const sf::Sprite& sprite) {
+    sf::FloatRect playerBounds = shape.getGlobalBounds();
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    sf::FloatRect bufferedPlayerBounds = playerBounds;
+    //Zbuforowane zeby nie powodowalo bledow
+    bufferedPlayerBounds.left -= 0.1f;
+    bufferedPlayerBounds.top -= 0.1f;
+    bufferedPlayerBounds.width += 0.2f;
+    bufferedPlayerBounds.height += 0.2f;
+
+    if (bufferedPlayerBounds.intersects(spriteBounds)) {
+        speedBoost = -100;
+    } else {
+        speedBoost = 0;
+    }
+    handleCollision(sprite);
+
+}
