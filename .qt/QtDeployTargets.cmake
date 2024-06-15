@@ -1,1 +1,0 @@
-set(__QT_DEPLOY_TARGET_consoleOgienWoda_FILE /Users/michalskoczylas/consoleOgienWoda/consoleOgienWoda)
