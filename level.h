@@ -2,7 +2,9 @@
 #define LEVEL_H
 #include <SFML/Graphics.hpp>
 #include "player.h"
+#include "tiles.h"
 #include <vector>
+#include <memory>
 class Level
 {
 public:
@@ -19,6 +21,7 @@ public:
     bool getLevelFinished();
     void endGame(); 
     void saveBestTime();
+    std::vector<std::shared_ptr<Tiles>> ptr_sprites;
     void setFinalTime(std::string time);
         std::string getLevelPath();
         std::string constructTimeFilePath(const std::string& levelPath);

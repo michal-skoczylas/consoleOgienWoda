@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
-
+#include "tiles.h"
 #include "level.h"
 
   // Constructor
@@ -24,25 +24,29 @@ void Level::draw(sf::RenderWindow& window) {
   for (const auto& platform : platforms) {
     window.draw(platform);
   }
-  for (const auto& sprite : sprites) {
-    //dodac ze nie renderuje gema jak zostanie zdobyty
-    if(isGem(sprite)&&getGemCollected()){
-        continue;
-    }
-    if(isReceiver(sprite)&&isButtonPressed){
-      spritesToRemove.emplace_back(sprite);
-        continue;
-    }
-    window.draw(sprite);
-    // std::cout << "Sprite texture address: " << sprite.getTexture() <<
-    // std::endl; std::cerr << "Sprite drawn at position (" <<
-    // sprite.getPosition().x << ", " << sprite.getPosition().y << ")" <<
-    // std::endl;
+  for(const auto&ptr_sprite:ptr_sprites){
+      window.draw(*ptr_sprite);
   }
- 
-  // std::cerr << "Level drawn" << std::endl;
-}
 
+//   for (const auto& sprite : sprites) {
+//     //dodac ze nie renderuje gema jak zostanie zdobyty
+//     if(isGem(sprite)&&getGemCollected()){
+//         continue;
+//     }
+//     if(isReceiver(sprite)&&isButtonPressed){
+//       spritesToRemove.emplace_back(sprite);
+//         continue;
+//     }
+//     window.draw(sprite);
+//     // std::cout << "Sprite texture address: " << sprite.getTexture() <<
+//     // std::endl; std::cerr << "Sprite drawn at position (" <<
+//     // sprite.getPosition().x << ", " << sprite.getPosition().y << ")" <<
+//     // std::endl;
+//   }
+ 
+//   // std::cerr << "Level drawn" << std::endl;
+// }
+}
   // Sprawdzenie kolizji
 void Level::checkCollisions(Player& player) {
   sf::FloatRect playerBounds = player.getBounds();
@@ -57,6 +61,25 @@ void Level::checkCollisions(Player& player) {
     }
   }
 
+  for(const auto& sprite:ptr_sprites){
+      sf::FloatRect spriteBounds = (*sprite).getGlobalBounds();
+      // Wylaczenie kolizji dla goalTile i startingTile
+      if (spriteBounds == goalTile.getGlobalBounds() ||
+          spriteBounds == gemTile.getGlobalBounds() ||
+          spriteBounds == startingTile.getGlobalBounds() ||
+          spriteBounds == fireStartingTile.getGlobalBounds() ||
+          spriteBounds == waterStartingTile.getGlobalBounds() ||
+          spriteBounds == buttonTile.getGlobalBounds()) {
+          continue;
+      }
+      if(auto derivedPtr = std::dynamic_pointer_cast<LavaTile>(sprite)){
+          player.handleLavaCollision(*derivedPtr);
+      }
+      if(auto derivedPtr = std::dynamic_pointer_cast<WaterTile>(sprite)){
+          player.handleWaterCollision(*derivedPtr);
+      }
+
+  }
   // Check side collisions with walls
   for (const auto& wall : walls) {
     sf::FloatRect wallBounds = wall.getGlobalBounds();
@@ -76,7 +99,9 @@ void Level::checkCollisions(Player& player) {
             spriteBounds == waterStartingTile.getGlobalBounds() ||
             spriteBounds == buttonTile.getGlobalBounds()) {
             continue;
-        } 
+        }
+
+
     // Sprawdzenie kolizji od gory
     if (sprite.getGlobalBounds().intersects(playerBounds)) {
         player.handleCollision(sprite);
@@ -294,7 +319,15 @@ void Level::loadFromFile(std::string& filename) {
           break;
         }
         case 'w': {
+            auto waterSprite = std::make_unique<WaterTile>();
+            waterSprite->setTexture(textures[7]);
+            waterSprite->setScale(tileSizeX / static_cast<float>(textures[7].getSize().x),
+                                  tileSizeY / static_cast<float>(textures[7].getSize().y));
+            waterSprite->setPosition(x*tileSizeX,y*tileSizeY);
+            ptr_sprites.emplace_back(std::move(waterSprite));
+
           sf::Sprite water;
+
           water.setTexture(textures[7]);
           water.setScale(
               tileSizeX / static_cast<float>(textures[7].getSize().x),

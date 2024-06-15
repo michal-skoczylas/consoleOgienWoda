@@ -1,0 +1,9 @@
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/consoleOgienWoda.dir
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/edit_cache.dir
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/rebuild_cache.dir
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/list_install_components.dir
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/install.dir
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/install/local.dir
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/install/strip.dir
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/consoleOgienWoda_autogen_timestamp_deps.dir
+/Users/michalskoczylas/consoleOgienWoda/CMakeFiles/consoleOgienWoda_autogen.dir

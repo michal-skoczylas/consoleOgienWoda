@@ -21,7 +21,8 @@ add_executable(consoleOgienWoda
   game.h game.cpp
   fireplayer.h fireplayer.cpp
   waterplayer.h waterplayer.cpp
-  mainwindow.h mainwindow.cpp mainwindow.ui # Dodaj pliki GUI
+  mainwindow.h mainwindow.cpp mainwindow.ui
+  tiles.h tiles.cpp # Dodaj pliki GUI
 )
 
 # Linkowanie bibliotek Qt GUI
