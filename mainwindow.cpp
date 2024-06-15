@@ -178,12 +178,6 @@ void MainWindow::on_level_comboBox_currentTextChanged(const QString &arg1)
 }
 
 
-void MainWindow::on_pushButton_clicked()
-{
-    levelSetup("assets/levels.txt");
-
-}
-
 void MainWindow::onGameClosed(){
     std::cerr<<"Odebrano"<<std::endl;
     levelSetup("assets/levels.txt");
