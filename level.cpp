@@ -27,25 +27,16 @@ void Level::draw(sf::RenderWindow& window) {
   for(const auto&ptr_sprite:ptr_sprites){
       window.draw(*ptr_sprite);
   }
+  for (const auto& sprite : sprites) {
+    window.draw(sprite);
+  }
 
-//   for (const auto& sprite : sprites) {
-//     //dodac ze nie renderuje gema jak zostanie zdobyty
-//     if(isGem(sprite)&&getGemCollected()){
-//         continue;
-//     }
-//     if(isReceiver(sprite)&&isButtonPressed){
-//       spritesToRemove.emplace_back(sprite);
-//         continue;
-//     }
-//     window.draw(sprite);
-//     // std::cout << "Sprite texture address: " << sprite.getTexture() <<
-//     // std::endl; std::cerr << "Sprite drawn at position (" <<
-//     // sprite.getPosition().x << ", " << sprite.getPosition().y << ")" <<
-//     // std::endl;
-//   }
- 
-//   // std::cerr << "Level drawn" << std::endl;
-// }
+  for (const auto& sprite : sprites) {
+    //dodac ze nie renderuje gema jak zostanie zdobyty
+    if(isGem(sprite)&&getGemCollected()){
+        continue;
+    }
+  }
 }
   // Sprawdzenie kolizji
 void Level::checkCollisions(Player& player) {
