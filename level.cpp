@@ -78,6 +78,12 @@ void Level::checkCollisions(Player& player) {
       if(auto derivedPtr = std::dynamic_pointer_cast<WaterTile>(sprite)){
           player.handleWaterCollision(*derivedPtr);
       }
+      if(auto derivedPtr = std::dynamic_pointer_cast<AcidTile>(sprite)){
+          player.handleAcidCollision(*derivedPtr);
+      }
+      if(auto derivedPtr = std::dynamic_pointer_cast<SlipperyTile>(sprite)){
+          player.handleSlipperyWallCollision(*derivedPtr);
+      }
 
   }
   // Check side collisions with walls
