@@ -18,4 +18,14 @@ class LavaTile:public Tiles{
 
 };
 
+class AcidTile:public Tiles{
+
+};
+class SlipperyTile:public Tiles{
+
+};
+class Mud:public Tiles{
+
+};
+
 #endif // TILES_H

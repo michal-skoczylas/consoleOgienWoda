@@ -368,6 +368,15 @@ void Level::loadFromFile(std::string& filename) {
         }
         // Tile z kwasem w ktorym gracze giną
         case 'a': {
+            //Proba z pointerami
+            auto acidSprite = std::make_unique<AcidTile>();
+            acidSprite->setTexture(textures[13]);
+            acidSprite->setScale(tileSizeX / static_cast<float>(textures[13].getSize().x),
+                                  tileSizeY / static_cast<float>(textures[13].getSize().y));
+            acidSprite->setPosition(x*tileSizeX,y*tileSizeY);
+            ptr_sprites.emplace_back(std::move(acidSprite));
+
+
           sf::Sprite acid;
           acid.setTexture(textures[13]);
           acid.setScale(
@@ -382,6 +391,15 @@ void Level::loadFromFile(std::string& filename) {
         }
 
         case 'k': {
+            auto slipperySprite = std::make_unique<SlipperyTile>();
+            slipperySprite->setTexture(textures[14]);
+            slipperySprite->setScale(
+                tileSizeX / static_cast<float>(textures[14].getSize().x),
+                tileSizeY / static_cast<float>(textures[14].getSize().y));
+            slipperySprite->setPosition(x * tileSizeX, y * tileSizeY);
+            ptr_sprites.push_back(std::move(slipperySprite));
+
+
           sf::Sprite slippery_wall;
           slippery_wall.setTexture(textures[14]);
           slippery_wall.setScale(
